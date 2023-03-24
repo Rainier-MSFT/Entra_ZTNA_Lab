@@ -9,7 +9,7 @@
 </a>
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2FEntra_ZTNA_Lab%2Fmain%2Ftlg-base-config_3-vm%2Fazuredeploy.json" target="_blank">
 <img src="images/visualizebutton.svg"/>
-</a>
+</a><p>
 
 This automation deploys a **3 VM Base Configuration** for setting up a virtual pre-production enviroment that can be used for testing hybrid Identity & Network Access scenarios. It is the starting point for additional ZTNA scenarios that can be found [here](#http://aka.ms/catlgs).
 
