@@ -11,9 +11,9 @@ Last updated 21/03/2023
 <img src="images/visualizebutton.svg"/>
 </a>
 
-This template deploys the **3 VM Base Configuration**, a base configuration that represents a simplified intranet connected to the Internet. This base configuration is the starting point for additional TLGs that can be found [here](http://aka.ms/catlgs).
+This template deploys the **3 VM Base Configuration**, a base configuration that represents a simplified intranet connected to the Internet. This base configuration is the starting point for additional ZTNA scenarios that can be found [here](#http://aka.ms/catlgs).
 
-The **3 VM Base Configuration** provisions a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, an application server running Windows Server 2012 R2, 2016, 2019, 2022, and optionally a Windows 10 or 11 client VM.
+The **3 VM Base Configuration** provisions a Windows Server 2016, 2019, or 2022 Active Directory domain controller using your specified domain name, an application server running Windows Server and optionally a Windows 10 or 11 client VM.
 
 ![alt text](images/tlg-base-config_3-vm.png "Diagram of the base config deployment")
 
