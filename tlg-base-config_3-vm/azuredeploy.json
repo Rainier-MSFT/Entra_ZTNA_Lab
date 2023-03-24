@@ -7,7 +7,7 @@
       "metadata": {
         "description": "The name of the deployment, i.e. BaseConfig01. Do not use spaces or special characters other than _ or -. Used to concatenate resource names for the deployment."
       },
-      "defaultValue": "TlgBaseConfig-01"
+      "defaultValue": "BaseConfig-01"
     },
     "domainName": {
       "type": "string",
@@ -19,7 +19,7 @@
     "serverOS": {
       "type": "string",
       "allowedValues": [
-        "2012-R2-Datacenter", "2016-Datacenter"
+        "2016-Datacenter", "2019-Datacenter", "2022-Datacenter"
       ],
       "metadata": {
         "description": "The OS of application servers in your deployment."
@@ -29,7 +29,7 @@
     "adminUsername": {
       "type": "string",
       "metadata": {
-        "description": "The name of the domain administrator account to create, i.e. globaladmin. This will also be used to create a local admin account on each VMs."
+        "description": "The name of the domain administrator account to create, i.e. entadmin. This will also be used to create a local admin account on each VMs."
       }
     },
     "adminPassword": {
@@ -60,7 +60,7 @@
       "metadata": {
         "description": "Select a VM size for all VMs in your deployment."
       },
-      "defaultValue": "Standard_DS2_v2"
+      "defaultValue": "Standard_B2s"
     },
     "dnsLabelPrefix": {
       "type": "string",
