@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "configName": {
+      "value": "TlgBaseConfig-01"
+    },
+    "domainName": {
+      "value": "corp.contoso.com"
+    },
+    "serverOS": {
+      "value": "2016-Datacenter"
+    },
+    "adminUsername": {
+      "value": ""
+    },
+    "adminPassword": {
+      "value": ""
+    },
+    "deployClientVM": {
+      "value": "yes"
+    },
+    "clientVhdUri": {
+      "value": "yes"
+    },
+    "vmSize": {
+      "value": "Standard_DS2_v2"
+    },
+    "dnsLabelPrefix": {
+      "value": ""
+    },
+    "_artifactsLocation": {
+      "value": "https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm"
+    },
+    "_artifactsLocation": {
+      "value": ""
+    }
+  }
+}

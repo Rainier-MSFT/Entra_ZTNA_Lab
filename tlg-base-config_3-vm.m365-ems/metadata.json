@@ -1,0 +1,7 @@
+﻿{
+  "itemDisplayName": "Simulated intranet for Microsoft 365 Test Lab Guides (v1.0)",
+  "description": "This template deploys the Simulated intranet for Microsoft 365 Test Lab Guides base configuration that represents a a simplified environment for Microsoft 365 Enterprise scenarios.",
+  "summary": "Provisions a Windows Server 2016 Active Directory domain controller, an application server running Windows Server 2016, and a client VM running Windows Server 2016 or Windows 10 Pro.",
+  "githubUsername": "kelleyvice-msft",
+  "dateUpdated": "2018-9-10"
+}
