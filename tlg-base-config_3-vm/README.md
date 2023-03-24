@@ -1,4 +1,4 @@
-﻿# TLG (Test Lab Guide) - 3 VM Base Configuration (v1.0)
+﻿# Entra ZTNA Lab - 3 VM Base Configuration (v1.0)
 
 **Time to deploy**: Approx. 40 minutes
 
