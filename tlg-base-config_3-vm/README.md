@@ -2,7 +2,7 @@
 
 **Time to deploy**: Approx. 40 minutes
 
-Last updated _7/24/2018_
+Last updated 21/03/2023
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2FEntra_ZTNA_Lab%2Fmain%2Ftlg-base-config_3-vm%2Fazuredeploy.json" target="_blank">
 <img src="images/deploytoazure.svg"/>
@@ -13,7 +13,7 @@ Last updated _7/24/2018_
 
 This template deploys the **3 VM Base Configuration**, a base configuration that represents a simplified intranet connected to the Internet. This base configuration is the starting point for additional TLGs that can be found [here](http://aka.ms/catlgs).
 
-The **3 VM Base Configuration** provisions a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, an application server running Windows Server 2012 R2 or 2016, and optionally a client VM running Windows 10.
+The **3 VM Base Configuration** provisions a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, an application server running Windows Server 2012 R2, 2016, 2019, 2022, and optionally a Windows 10 or 11 client VM.
 
 ![alt text](images/tlg-base-config_3-vm.png "Diagram of the base config deployment")
 
@@ -30,7 +30,7 @@ Use of a custom client image is required because the Windows 10 gallery image is
 You can deploy this template in one of two ways:
 
 + Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
-+ Execute the PowerShell script at https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm/scripts/Deploy-TLG.ps1 on your local computer.
++ Execute the PowerShell script at https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/tlg-base-config_3-vm/scripts/Deploy-TLG.ps1 on your local computer.
 
 Prior to deploying the template, have the following information ready:
 
@@ -68,6 +68,4 @@ the JoinDomain extensions for the member VMs. This asymmetric VM deployment proc
 
 `Tags: TLG, Test Lab Guide, Base Configuration`
 ___
-Developed by the **Office 365 Commercial Content Experience team**
-
-Last update: _11/12/2018_
+Developed by the **ZTNA CxP team** and sourced from the **Office 365 Commercial Content Experience team**.
