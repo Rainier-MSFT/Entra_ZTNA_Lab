@@ -95,7 +95,7 @@
     "network": {
       "vnetName": "[concat(parameters('configName'),'-VNET')]",
       "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', concat(parameters('configName'),'-VNET'), 'subnet-01')]",
-      "subnet": "10.0.0.0/8",
+      "subnet": "10.0.0.0/22",
       "nsgName": "[concat(parameters('configName'),'-NSG')]"
     },
 
