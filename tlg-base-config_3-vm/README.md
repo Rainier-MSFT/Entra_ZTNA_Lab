@@ -4,11 +4,11 @@
 
 Last updated _7/24/2018_
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2Ftlg%2Fmaster%2Ftlg-base-config_3-vm%2Fazuredeploy.json" target="_blank">
-<img src="/images/deploytoazure.svg"/>
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2FEntra_ZTNA_Lab%2Fmain%2Ftlg-base-config_3-vm%2Fazuredeploy.json" target="_blank">
+<img src="images/deploytoazure.svg"/>
 </a>
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2Ftlg%2Fmaster%2Ftlg-base-config_3-vm%2Fazuredeploy.json" target="_blank">
-<img src="http://armviz.io/visualizebutton.png"/>
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2FEntra_ZTNA_Lab%2Fmain%2Ftlg-base-config_3-vm%2Fazuredeploy.json" target="_blank">
+<img src="images/visualizebutton.svg"/>
 </a>
 
 This template deploys the **3 VM Base Configuration**, a base configuration that represents a simplified intranet connected to the Internet. This base configuration is the starting point for additional TLGs that can be found [here](http://aka.ms/catlgs).
