@@ -1,4 +1,4 @@
-﻿# Entra ZTNA Lab - 3 VM Base Configuration
+# Entra ZTNA Lab - 3 VM Base Configuration
 
 **Time to deploy**: Approx. 40 minutes
 
