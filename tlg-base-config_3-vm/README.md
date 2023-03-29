@@ -1,8 +1,8 @@
-# Entra ZTNA Lab - 3 VM Topology
+<p dir='rtl' align='right'>Last updated 21/03/2023</p>
+
+# Entra ZTNA Lab - 3 VM Topology                                                                                                       
 
 **Time to deploy**: Approx. 40 minutes (15 mins for VM deployments and nnn )
-
- (v1.0) Last updated 21/03/2023
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2FEntra_ZTNA_Lab%2Fmain%2Ftlg-base-config_3-vm%2Fazuredeploy.json" target="_blank">
 <img src="images/deploytoazure.svg"/>
