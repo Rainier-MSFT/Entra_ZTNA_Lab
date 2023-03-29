@@ -11,9 +11,9 @@
 <img src="images/visualizebutton.svg"/>
 </a><p>
 
-This automation deploys a **3 VM configuration** for setting up a virtual pre-production enviroment that can be used for testing hybrid Identity & Network Access scenarios.
+This automation deploys a **3 VM configuration** for setting up a virtual pre-production enviroment that can be used for simulation testing authentication & authorization to ZTNA protected resources.
 
-The **3 VM Base Configuration** template provisions a choice of Windows Server 2016, 2019, or 2022, as an Active Directory domain controller using your specified domain name, an application server also running Windows Server, and optionally a Windows 10 or 11 client VM. This provides the on-prem enviroment that an Azure AD tenant will synchonise users to and from, for simulation testing authentication & authorization to ZTNA protected resources.
+The **3 VM Base Configuration** template provisions a choice of Windows Server 2016, 2019, or 2022, as an Active Directory domain controller using your specified domain name, an application server also running Windows Server, and optionally a Windows 10 or 11 client VM. This provides the on-prem enviroment that an Azure AD tenant will synchonise users to and from.
 
 ![alt text](images/tlg-base-config_3-vm.png "Diagram of the base config deployment")
 
