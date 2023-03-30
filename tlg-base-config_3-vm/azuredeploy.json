@@ -192,7 +192,7 @@
 		  {
             "name": "AzureBastionSubnet",
             "properties": {
-              "addressPrefix": "10.0.2.0/27",
+              "addressPrefix": "10.0.2.0/27"
             }
           }
         ]
