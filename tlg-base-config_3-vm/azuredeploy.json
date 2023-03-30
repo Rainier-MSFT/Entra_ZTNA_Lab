@@ -5,7 +5,7 @@
     "configName": {
       "type": "string",
       "metadata": {
-        "description": "The name of the deployment, i.e. BaseConfig01. Do not use spaces or special characters other than _ or -. Used to concatenate resource names for the deployment"
+        "description": "A name for the deployment instance, used in resource names. i.e. "BaseConfig-01" would be pre-pended on VM names. E.g. BaseConfig-01-DC . Do not use spaces or special characters other than _ or -. Used to concatenate resource names for the deployment"
       },
       "defaultValue": "BaseConfig-01"
     },
