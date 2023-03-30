@@ -38,6 +38,19 @@
         "description": "The admin account password."
       }
     },
+    "vmSize": {
+      "type": "string",
+      "metadata": {
+        "description": "Select a VM size for all VMs in your deployment."
+      },
+      "defaultValue": "Standard_B2s"
+    },
+    "dnsLabelPrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "DNS label prefix for public IPs. Must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
+      }
+    },
     "deployClientVm": {
       "type": "string",
       "allowedValues": [
@@ -54,19 +67,6 @@
         "description": "The URI of the storage account containing the client VHD. Leave blank if you are not deploying a client VM."
       },
       "defaultValue": ""
-    },
-    "vmSize": {
-      "type": "string",
-      "metadata": {
-        "description": "Select a VM size for all VMs in your deployment."
-      },
-      "defaultValue": "Standard_B2s"
-    },
-    "dnsLabelPrefix": {
-      "type": "string",
-      "metadata": {
-        "description": "DNS label prefix for public IPs. Must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
-      }
     },
     "_artifactsLocation": {
       "type": "string",
