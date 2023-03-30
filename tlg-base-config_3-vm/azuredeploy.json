@@ -173,7 +173,7 @@
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
-            "[variables('network').subnet]"
+            "[parameters('vnetAddressPrefix')]"
           ]
         },
         "dhcpOptions": {
@@ -186,6 +186,12 @@
               "addressPrefix": "[variables('network').subnet]",
               "networkSecurityGroup": {
                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('network').nsgName)]"
+              }
+            }
+          {
+            "name": "AzureBastionSubnet",
+            "properties": {
+              "addressPrefix": "10.0.2.0/27"
               }
             }
           }
