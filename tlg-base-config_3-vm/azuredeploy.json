@@ -96,7 +96,8 @@
       "vnetName": "[concat(parameters('configName'),'-VNET')]",
       "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', concat(parameters('configName'),'-VNET'), 'subnet-01')]",
       "vnet": "10.0.0.0/22",
-	  "Bastionsubnet": "10.0.2.0/27",
+      "Bastionsubnet": "10.0.2.0/27",
+      "BastionSubnetName": "AzureBastionSubnet",
       "nsgName": "[concat(parameters('configName'),'-NSG')]"
     },
 
@@ -191,7 +192,7 @@
             }
           },
 		  {
-            "name": "AzureBastionSubnet",
+            "name": "[variables('BastionsubnetName')]",
             "properties": {
               "addressPrefix": "[variables('network').Bastionsubnet]"
             }
