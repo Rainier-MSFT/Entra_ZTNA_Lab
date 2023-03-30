@@ -95,7 +95,7 @@
     "network": {
       "vnetName": "[concat(parameters('configName'),'-VNET')]",
       "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', concat(parameters('configName'),'-VNET'), 'subnet-01')]",
-      "subnet": "10.0.0.0/22",
+      "vnet": "10.0.0.0/22",
       "nsgName": "[concat(parameters('configName'),'-NSG')]"
     },
 
@@ -173,7 +173,7 @@
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
-            "[variables('network').subnet]"
+            "[variables('network').vnet]"
           ]
         },
         "dhcpOptions": {
@@ -183,10 +183,16 @@
           {
             "name": "subnet-01",
             "properties": {
-              "addressPrefix": "[variables('network').subnet]",
+              "addressPrefix": "[variables('network').vnet]",
               "networkSecurityGroup": {
                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('network').nsgName)]"
               }
+            }
+          },
+		  {
+            "name": "AzureBastionSubnet",
+            "properties": {
+              "addressPrefix": "10.0.2.0/27",
             }
           }
         ]
