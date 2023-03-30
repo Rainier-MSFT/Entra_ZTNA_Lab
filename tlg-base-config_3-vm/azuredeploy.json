@@ -191,8 +191,8 @@
               }
             }
           },
-		  {
-            "name": "[variables('network').BastionsubnetName]",
+	  {
+            "name": "AzureBastionsubnet",
             "properties": {
               "addressPrefix": "[variables('network').Bastionsubnet]"
             }
