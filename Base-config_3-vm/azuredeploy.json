@@ -190,12 +190,6 @@
                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('network').nsgName)]"
               }
             }
-          },
-	  {
-            "name": "AzureBastionsubnet",
-            "properties": {
-              "addressPrefix": "[variables('network').Bastionsubnet]"
-            }
           }
         ]
       }
