@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "configName": {
-      "value": "TlgBaseConfig-01"
+      "value": "BaseConfig-01"
     },
     "domainName": {
       "value": "corp.contoso.com"
@@ -30,7 +30,7 @@
       "value": ""
     },
     "_artifactsLocation": {
-      "value": "https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm"
+      "value": "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/tlg-base-config_3-vm"
     },
     "_artifactsLocation": {
       "value": ""
