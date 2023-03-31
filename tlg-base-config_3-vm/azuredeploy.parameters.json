@@ -24,7 +24,7 @@
       "value": "yes"
     },
     "vmSize": {
-      "value": "Standard_DS2_v2"
+      "value": "Standard_B2s"
     },
     "dnsLabelPrefix": {
       "value": ""
