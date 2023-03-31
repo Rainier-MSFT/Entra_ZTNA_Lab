@@ -73,7 +73,7 @@
       "metadata": {
         "description": "Auto-generated container in staging storage account to receive post-build staging folder upload"
       },
-      "defaultValue": ""
+      "defaultValue": "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/"
     },
     "_artifactsLocationSasToken": {
       "type": "securestring",
