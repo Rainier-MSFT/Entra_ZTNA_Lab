@@ -15,7 +15,7 @@ This automation deploys a **3 VM configuration** for setting up a virtual pre-pr
 
 The **3 VM Base Configuration** template provisions a choice of Windows Server 2016, 2019, or 2022, as an Active Directory domain controller using your specified domain name, an application server also running Windows Server, and optionally a Windows 10 or 11 client VM. This provides the on-prem enviroment that an Azure AD tenant will synchonise users to and from.
 
-![alt text](images/Base-config_3-vm.png "Diagram of the base config deployment")
+![alt text](images/base-config_3-vm.png "Diagram of the base config deployment")
 
 **Note:** Choosing to deploy a client VM requires that you upload a generalized Windows 10/11 VHD to an Azure storage account and provide the account name in the _clientVhdUri_ parameter. Note that SAS tokens are not supported, and the blob container must be configured for public read access. The path to the VHD should resemble the following example:
 
