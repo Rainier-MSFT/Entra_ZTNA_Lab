@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "vnetName": {
-            "defaultValue": "BaseConfig-01-VNET",
+            "defaultValue": "",
             "type": "String",
             "metadata": {
                 "description": "Name of new or existing vnet to which Azure Bastion should be deployed"

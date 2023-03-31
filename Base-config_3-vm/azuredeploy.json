@@ -81,6 +81,16 @@
         "description": "Auto-generated token to access _artifactsLocation"
       },
       "defaultValue": ""
+    },
+    "enableBastion": {
+      "type": "string",
+      "allowedValues": [
+        "No", "Yes"
+      ],
+      "metadata": {
+        "description": "Choose 'Yes to deploy a Bastion for VM management via a browser based RDP conenction"
+      },
+      "defaultValue": "No"
     }
   },
 
@@ -183,7 +193,7 @@
           {
             "name": "subnet-01",
             "properties": {
-              "addressPrefix": "[variables('network').vnet]",
+              "addressPrefix": "10.0.0.0/24",
               "networkSecurityGroup": {
                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('network').nsgName)]"
               }
@@ -432,6 +442,25 @@
           },
           "vhdUri": {
             "value": "[parameters('clientVhdUri')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "Bastion",
+      "condition": "[equals(parameters('enableBastion'),'Yes')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "comments": "This is the deployment resource for the Bastion",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('templates'),'/bastion.json',parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "vnetName": {
+            "value": "[variables('network').vnetName]"
           }
         }
       }
