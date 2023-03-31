@@ -96,7 +96,6 @@
       "vnetName": "[concat(parameters('configName'),'-VNET')]",
       "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', concat(parameters('configName'),'-VNET'), 'subnet-01')]",
       "vnet": "10.0.0.0/22",
-      "subnet1": "10.0.0.0/23",
       "nsgName": "[concat(parameters('configName'),'-NSG')]"
     },
 
@@ -184,7 +183,7 @@
           {
             "name": "subnet-01",
             "properties": {
-              "addressPrefix": "[variables('network').subnet1]",
+              "addressPrefix": "[variables('network').vnet]",
               "networkSecurityGroup": {
                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('network').nsgName)]"
               }
