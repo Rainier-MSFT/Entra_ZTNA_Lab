@@ -115,7 +115,7 @@
         "CreateADPDC": "CreateADPDC.ps1\\CreateADPDC"
       },
       "adNicIP": "10.0.0.10",
-      "adPublicIpName": "[concat(parameters('configName'),'-AD_IP')]",
+      "adPublicIpName": "[concat(parameters('configName'),'-DC_IP')]",
 
       "appVmName": "APP1",
       "appConfigurationFunction": {
@@ -218,7 +218,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').adPublicIpName]",
       "location": "[resourceGroup().location]",
-      "comments": "This is the public IP address for the ADDC VM.",
+      "comments": "The public IP address for the ADDC VM.",
       "properties": {
         "publicIPAllocationMethod": "Static",
         "dnsSettings": {
@@ -231,7 +231,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').appPublicIpName]",
       "location": "[resourceGroup().location]",
-      "comments": "This is the public IP address for the app server VM.",
+      "comments": "The public IP address for the app server VM.",
       "properties": {
         "publicIPAllocationMethod": "Static",
         "dnsSettings": {
@@ -245,7 +245,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').cliPublicIpName]",
       "location": "[resourceGroup().location]",
-      "comments": "This is the public IP address for the client VM.",
+      "comments": "The public IP address for the client VM.",
       "properties": {
         "publicIPAllocationMethod": "Static",
         "dnsSettings": {
@@ -254,14 +254,14 @@
       }
     },
     {
-      "name": "[concat(parameters('configName'),'-AD_NIC')]",
+      "name": "[concat(parameters('configName'),'-DC_NIC')]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
       ],
       "apiVersion": "2018-01-01",
-      "comments": "This is the network interface for the ADDC VM.",
+      "comments": "The network interface for the ADDC VM.",
       "properties": {
         "ipConfigurations": [
           {
@@ -353,7 +353,7 @@
       "apiVersion": "2015-01-01",
       "comments": "This is the deployment resource for the ADDC VM.",
       "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-AD_NIC')]"
+        "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-DC_NIC')]"
       ],
       "properties": {
         "mode": "Incremental",
@@ -369,7 +369,7 @@
             "value": "[variables('VMs').adVmName]"
           },
           "nicName": {
-            "value": "[concat(parameters('configName'),'-AD_NIC')]"
+            "value": "[concat(parameters('configName'),'-DC_NIC')]"
           },
           "modulesURL": {
             "value": "[variables('assetLocation')]"
