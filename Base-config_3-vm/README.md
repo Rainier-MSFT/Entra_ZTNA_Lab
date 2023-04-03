@@ -60,7 +60,7 @@ Test clients can be deployed thru either of the following options of options, pr
 
 * For more information about how to prepare a generalized VHD, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/prepare-for-upload-vhd-image.
         
-## Solution notes
+## Additional notes
 <details>
   <summary>Expand</summary>
 
