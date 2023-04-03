@@ -68,13 +68,8 @@ the JoinDomain extensions for the member VMs. This asymmetric VM deployment proc
   <summary>## Known issues</summary>
   
   ## Heading
-  1. A numbered
-  2. list
-     * With some
-     * Sub bullets
 * When the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected, and then may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
 </details>
 
-`Tags: TLG, Test Lab Guide, Base Configuration`
 ___
 Developed by the **ZTNA CxP team** and sourced from the **Office 365 Commercial Content Experience team**.
