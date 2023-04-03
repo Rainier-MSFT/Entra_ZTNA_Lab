@@ -58,13 +58,13 @@ The following resources are deployed as part of the solution:
   <summary>Click to expand</summary>
 
 <p><p>
-<li>* All guest OS configuration is executed with DSC, using the resources CreateADPDC.ps1.zip and AppConfig.ps1.zip</li>
-* The domain user *User1* is created in the domain and added to the Domain Admins group. User1's password is the one you provide in the *adminPassword* parameter
-* The *App server* and *Client* VM resources depend on the **ADDC** resource deployment in order to ensure that the AD domain exists prior to execution of 
+<li>All guest OS configuration is executed with DSC, using the resources CreateADPDC.ps1.zip and AppConfig.ps1.zip</li>
+<li>The domain user *User1* is created in the domain and added to the Domain Admins group. User1's password is the one you provide in the *adminPassword* parameter
+<li> The *App server* and *Client* VM resources depend on the **ADDC** resource deployment in order to ensure that the AD domain exists prior to execution of 
 the JoinDomain extensions for the member VMs. This asymmetric VM deployment process adds several minutes to the overall deployment time
-* The private IP address of the **ADDC** VM is always *10.0.0.10*. This IP is set as the DNS IP for the virtual network and all member NICs
-* The default VM size for all VMs in the deployment is Standard_B2s
-* Deployment outputs include public IP address and FQDN for each VM
+<li> The private IP address of the **ADDC** VM is always *10.0.0.10*. This IP is set as the DNS IP for the virtual network and all member NICs
+<li> The default VM size for all VMs in the deployment is Standard_B2s
+<li> Deployment outputs include public IP address and FQDN for each VM
 </details>
      
 ## Known Issues
