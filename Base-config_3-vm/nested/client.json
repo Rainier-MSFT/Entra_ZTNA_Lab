@@ -149,6 +149,31 @@
         },
         "protectedSettings": null
       }
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('vmName'),'/Powershell.DSC')]",
+      "apiVersion": "2017-03-30",
+      "location": "[parameters('SharedVmConfig').location]",
+      "dependsOn": [
+        "[parameters('vmName')]"
+      ],
+      "properties": {
+        "publisher": "Microsoft.Powershell",
+        "type": "DSC",
+        "typeHandlerVersion": "2.9",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "modulesUrl": "[concat(parameters('modulesURL'),'/CommonConfigs.ps1.zip')]",
+          "sasToken": "[parameters('SharedVmConfig').SasToken]",
+          "wmfVersion": "latest",
+          "configuration": {
+            "script": "Common_Configs.ps1",
+            "function": ""
+          }
+        },
+        "protectedSettings": null
+      }
     }
   ],
   "outputs": {}
