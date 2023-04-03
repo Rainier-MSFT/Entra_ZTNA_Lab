@@ -72,6 +72,8 @@ the JoinDomain extensions for the member VMs. This asymmetric VM deployment proc
 <li> The private IP address of the **ADDC** VM is always *10.0.0.10*. This IP is set as the DNS IP for the virtual network and all member NICs
 <li> The default VM size for all VMs in the deployment is Standard_B2s
 <li> Deployment outputs include public IP address and FQDN for each VM
-<li When the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected, and then may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
+<li> When the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected, and then may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
 
 </details>
+
+### Developed by the **ZTNA CxP team** and sourced from the **Office 365 Commercial Content Experience team**
