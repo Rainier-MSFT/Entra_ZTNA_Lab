@@ -24,9 +24,9 @@ The following ARM resources are deployed as part of the solution:
 + **AD DC VM**: Windows Server 2016, 2019, or 2022 VM configured as a domain controller and DNS with static private IP address
 + **App Server VM**: Windows Server 2016, 2019, or 2022 VM joined to the domain. IIS 10 and .NET 4.5 are installed, and the directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for the User1 domain account
 + **Client VM**: Optional Windows 10 or 11 client joined to the AD domain
-+ **Storage account**: Diagnostics storage account, and client VM storage account if indicated. ADDC and App Server VMs in the deployment use managed disks, so no storage accounts are created for VHDs.
++ **Storage account**: Diagnostics storage account, and client VM storage account if indicated. AD DC and App Server VMs in the deployment use managed disks, so no storage accounts are created for VHDs.
 + **NSG**: Network security group configured to allow inbound RDP on 3389
-+ **Virtual network**: Azure VNet for internal traffic, configured with custom DNS pointing to the AD DC's private IP address and tenant subnet 10.0.0.0/8 for a total of 1024 available IP addresses
++ **Virtual network**: Azure VNet for internal traffic, configured as 10.0.0.0/22 and with custom DNS pointing to the AD DC's private IP address. Internnal Subnet is defined as 10.0.0.0/24 for a total of 249 available IP addresses and Bastion subnet as 10.0.1.0/26
 + **Network interfaces**: 1 NIC per VM
 + **Public IP addresses**: 1 static public IP per VM. Note that some subscriptions may have limits on the number of static IPs that can be deployed for a given region
 + **JoinDomain**: Each member VM uses the **JsonADDomainExtension** extension to join the domain
