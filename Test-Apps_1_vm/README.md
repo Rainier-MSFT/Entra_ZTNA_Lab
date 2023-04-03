@@ -8,7 +8,7 @@
 <img src="https://aka.ms/deploytoazurebutton"/>
 </a>
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2FEntra_ZTNA_Lab%2Fmain%2FBase-config_3-vm%2Fazuredeploy.json" target="_blank">
-<img src="https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/images/visualizebutton.svg"/>
+<img src="https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_1-vm/images/visualizebutton.svg"/>
 </a><p>
 
 This Azure automation deploys a **3 VM base configuration** for setting up a virtual pre-production enviroment that can be used for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources.
