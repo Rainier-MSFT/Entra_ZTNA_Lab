@@ -26,7 +26,7 @@ Use of a custom client image is required because the Windows 10 gallery image is
 * For more information about eligible subscriptions, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/client-images#subscription-eligibility.
 * For more information about how to prepare a generalized VHD, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/prepare-for-upload-vhd-image.
 
-## Usage
+## Deployment
 
 You can deploy this template in one of two ways:
 
