@@ -5,17 +5,17 @@
 **Time to deploy**: Approx. 15 minutes
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2FEntra_ZTNA_Lab%2Fmain%2FBase-config_3-vm%2Fazuredeploy.json" target="_blank">
-<img src="images/deploytoazure.svg"/>
+<img src="https://aka.ms/deploytoazurebutton"/>
 </a>
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2FEntra_ZTNA_Lab%2Fmain%2FBase-config_3-vm%2Fazuredeploy.json" target="_blank">
-<img src="images/visualizebutton.svg"/>
+<img src="https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/images/visualizebutton.svg"/>
 </a><p>
 
 This Azure automation deploys a **3 VM base configuration** for setting up a virtual pre-production enviroment that can be used for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources.
 
 The template provisions an Active Directory domain controller and application server on your prefered version of Windows Server, both on an Azure VNet with optional Bastion capability for secure morete management. This provides a baseline on-prem enviroment that an Azure AD tenant will synchonise users to and from. An optional Windows 10 or 11 client VM is also provisioned and domain joined too, before being moved to a seperate VNet to simulate remote client connectivity.
 
-![alt text](images/base-config_3-vm.png "Diagram of the base config deployment")
+![alt text](images/Test-Apps_1-vm.png "Diagram of the base config deployment")
 
 ## Azure Resources
 
