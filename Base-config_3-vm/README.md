@@ -38,7 +38,7 @@ The following ARM resources are deployed as part of the solution:
 You can deploy this template in one of two ways:
 
 + Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
-+ Execute the PowerShell script at https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/scripts/Deploy-TLG.ps1 on your local computer.
++ Execute the PowerShell script at https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/scripts/Deploy-Base-config_3-vm.ps1 on your local computer
 
 Prior to deploying the template, have the following information ready:
 
