@@ -57,8 +57,8 @@ The following resources are deployed as part of the solution:
 <details>
   <summary>Click to expand</summary>
 
-<p>
-<p><li>* All guest OS configuration is executed with DSC, using the resources CreateADPDC.ps1.zip and AppConfig.ps1.zip</li<
+<p><p>
+<li>* All guest OS configuration is executed with DSC, using the resources CreateADPDC.ps1.zip and AppConfig.ps1.zip</li>
 * The domain user *User1* is created in the domain and added to the Domain Admins group. User1's password is the one you provide in the *adminPassword* parameter
 * The *App server* and *Client* VM resources depend on the **ADDC** resource deployment in order to ensure that the AD domain exists prior to execution of 
 the JoinDomain extensions for the member VMs. This asymmetric VM deployment process adds several minutes to the overall deployment time
@@ -73,15 +73,6 @@ the JoinDomain extensions for the member VMs. This asymmetric VM deployment proc
 
 <p>
 <p>* When the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected, and then may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
-</details>
-     
-<details open="">
-    <summary><b>click</b></summary>
-<ul dir="auto">
-<li>item 1</li>
-<li>item 2</li>
-<li>item 3</li>
-</ul>
 </details>
 
 ___
