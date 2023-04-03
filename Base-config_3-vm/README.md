@@ -63,8 +63,9 @@ the JoinDomain extensions for the member VMs. This asymmetric VM deployment proc
 * The default VM size for all VMs in the deployment is Standard_B2s
 * Deployment outputs include public IP address and FQDN for each VM
 
+## Known Issues
 <details>
-  <summary>## ## Know issues</summary>
+  <summary>Click to expand</summary>
 
 * When the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected, and then may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
 </details>
