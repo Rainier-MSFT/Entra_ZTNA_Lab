@@ -30,18 +30,18 @@ Use of a custom client image is required because the Windows 10 gallery image is
 
 The following ARM resources are deployed as part of the solution:
 
-+ **ADDC VM**: Windows Server 2016, 2019, or 2022 VM configured as a domain controller and DNS with static private IP address
-+ **App Server VM**: Windows Server 2016, 2019, or 2022 VM joined to the domain. IIS 10 and .NET 4.5 are installed, and the directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for the User1 domain account.
-+ **Client VM**: Windows 10 or 11 client joined to the domain
++ **AD DC VM**: Windows Server 2016, 2019, or 2022 VM configured as a domain controller and DNS with static private IP address
++ **App Server VM**: Windows Server 2016, 2019, or 2022 VM joined to the domain. IIS 10 and .NET 4.5 are installed, and the directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for the User1 domain account
++ **Client VM**: Optional Windows 10 or 11 client joined to the AD domain
 + **Storage account**: Diagnostics storage account, and client VM storage account if indicated. ADDC and App Server VMs in the deployment use managed disks, so no storage accounts are created for VHDs.
 + **NSG**: Network security group configured to allow inbound RDP on 3389
-+ **Virtual network**: Virtual network for internal traffic, configured with custom DNS pointing to the ADDC's private IP address and tenant subnet 10.0.0.0/8 for a total of 16,777,214 available IP addresses.
++ **Virtual network**: Azure VNet for internal traffic, configured with custom DNS pointing to the AD DC's private IP address and tenant subnet 10.0.0.0/8 for a total of 1024 available IP addresses
 + **Network interfaces**: 1 NIC per VM
-+ **Public IP addresses**: 1 static public IP per VM. Note that some subscriptions may have limits on the number of static IPs that can be deployed for a given region.
-+ **JoinDomain**: Each member VM uses the **JsonADDomainExtension** extension to join the domain.
-+ **BGInfo**: The **BGInfo** extension is applied to all VMs.
-+ **Antimalware**: The **iaaSAntimalware** extension is applied to all VMs with basic scheduled scan and exclusion settings.
-
++ **Public IP addresses**: 1 static public IP per VM. Note that some subscriptions may have limits on the number of static IPs that can be deployed for a given region
++ **JoinDomain**: Each member VM uses the **JsonADDomainExtension** extension to join the domain
++ **BGInfo**: The **BGInfo** extension is applied to all VMs, but will not over RDP sessions
++ **Antimalware**: The **iaaSAntimalware** extension is applied to all VMs with basic scheduled scan and exclusion settings
+     
 ## Deployment
 
 You can deploy this template in one of two ways:
