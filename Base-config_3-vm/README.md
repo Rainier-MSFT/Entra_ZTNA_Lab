@@ -76,4 +76,4 @@ the JoinDomain extensions for the member VMs. This asymmetric VM deployment proc
 
 </details>
 
-### Developed by the **ZTNA CxP team** and sourced from the **Office 365 Commercial Content Experience team**
+Developed by the **ZTNA CxP team** and sourced from the **Office 365 Commercial Content Experience team**.
