@@ -11,7 +11,7 @@ Azure Resource Manager (ARM) templates are pre-configured prescriptive deploymen
 | Template                     | Name                                                    | Description
 | :-------------------         | :-------------------                                    | :-------------------
 | [](https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/tree/main/Base-config_3-vm) [<img src="https://aka.ms/deploytoazurebutton">](https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/tree/main/Base-config_3-vm)        | 3 VM Base Configuration | This template deploys a 3 VM server & client environment that can be used for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources
-| [](https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/tree/main/App-vm) [<img src="https://aka.ms/deploytoazurebutton">](https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/tree/main/App-vm)        | Test Apps VM | This template deploys a Windows Server VM pre-configured with several test applications & services for testing a variety of authN, authZ and SSO scenarios
+| [](https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/tree/main/Test-Apps_1_vm) [<img src="https://aka.ms/deploytoazurebutton">](https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/tree/main/Test-Apps_1_vm)        | Test Apps VM | This template deploys a Windows Server VM pre-configured with several test applications & services for testing a variety of authN, authZ and SSO scenarios
 
 ## Prerequisites
 
