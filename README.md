@@ -23,7 +23,7 @@ Before you deploy an ARM template in this repository, you need to have:
   + 1 storage account
 
   **Note:** Trial subscriptions do not have sufficient available resources for deployment of these templates
-+ A supported browser for access to the Azure portal (https://portal.azure.com). See [Supported browsers and devices for the Azure portal](https://docs.microsoft.com/en-us/azure/azure-preview-portal-supported-browsers-devices)
++ A supported browser for access to the Entra or Azure portals (https://entra.microsoft.com  /  https://portal.azure.com). See [Supported browsers and devices](https://docs.microsoft.com/en-us/azure/azure-preview-portal-supported-browsers-devices)
 + A public domain name and administrative access to the domain's DNS records
 
 Some templates may have additional requirements specified in the template's README.
