@@ -1,6 +1,6 @@
 <p dir='rtl' align='right'>Last updated 21/03/2023</p>
 
-# Entra ZTNA Lab - 3 VM Topology                                                                                                       
+# Entra ZTNA Lab - Test App VM                                                                                                       
 
 **Time to deploy**: Approx. 15 minutes
 
@@ -21,9 +21,7 @@ The template provisions an Active Directory domain controller and application se
 
 The following ARM resources are deployed as part of the solution:
 
-+ **AD DC VM**: Windows Server 2016, 2019, or 2022 VM configured as a domain controller and DNS with static private IP address
 + **App Server VM**: Windows Server 2016, 2019, or 2022 VM joined to the domain. IIS 10 and .NET 4.5 are installed, and the directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for the User1 domain account
-+ **Client VM**: Optional Windows 10 or 11 client joined to the AD domain
 + **Storage account**: Diagnostics storage account, and client VM storage account if indicated. AD DC and App Server VMs in the deployment use managed disks, so no storage accounts are created for VHDs.
 + **NSG**: Network security group configured to allow inbound RDP on 3389
 + **Virtual network**: Azure VNet for internal traffic, configured as 10.0.0.0/22 and with custom DNS pointing to the AD DC's private IP address. Internnal Subnet is defined as 10.0.0.0/24 for a total of 249 available IP addresses and Bastion subnet as 10.0.1.0/26
