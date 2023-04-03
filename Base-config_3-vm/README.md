@@ -30,20 +30,31 @@ The following ARM resources are deployed as part of the solution:
 + **Network interfaces**: 1 NIC per VM
 + **Public IP addresses**: 1 static public IP per VM. Note that some subscriptions may have limits on the number of static IPs that can be deployed for a given region
 + **JoinDomain**: Each member VM uses the **JsonADDomainExtension** extension to join the domain
-+ **BGInfo**: The **BGInfo** extension is applied to all VMs, but will not over RDP sessions
++ **BGInfo**: The **BGInfo** extension is applied to all VMs, but will not display over RDP sessions that have the wallpaper disabled
 + **Antimalware**: The **iaaSAntimalware** extension is applied to all VMs with basic scheduled scan and exclusion settings
      
 ## Deployment
 
-You can deploy this template in one of two ways:
+You can deploy the environment in one of two ways:
 
 + Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
 + Execute the PowerShell script at https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/scripts/Deploy-Base-config_3-vm.ps1 on your local computer
 
+### Pre-requisites
 Prior to deploying the template, have the following information ready:
 
-+ A DNS label prefix for the URLs of the public IP addresses of your virtual machines. These URLs are generated for each virtual machine in your deployment in the format _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. Enter this label in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button or for the value of the __dnsLabelPrefix__ variable in the template parameters file
++ A DNS label prefix for the URLs of the public IP addresses of your virtual machines. These FQDNs are generated for each virtual machine in your deployment using format _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. Enter this label in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button or for the value of the __dnsLabelPrefix__ variable in the template parameters file
 
+### Client machine
++ Physical computer:
+On a personal computer, install Windows 10 Enterprise. You can download the Windows 10 Enterprise trial here.
+
++ Virtual machine
+Use the hypervisor of your choice to create a virtual machine, and then install Windows 10 Enterprise on it. You can download the Windows 10 Enterprise trial here.
+
++ Virtual machine in Azure
+To create a Windows 10 virtual machine in Microsoft Azure, you must have a Visual Studio-based subscription, which has access to the image for Windows 10 Enterprise. Other types of Azure subscriptions, such as trial and paid subscriptions, do not have access to this image. For the latest information, see Use Windows client in Azure for dev/test scenarios.
+     
 **Note:** Choosing to deploy a client VM requires that you upload a generalized Windows 10/11 VHD to an Azure storage account and provide the account name in the _clientVhdUri_ parameter. Note that SAS tokens are not supported, and the blob container must be configured for public read access. The path to the VHD should resemble the following example:
 
      https://<storage account name>.blob.core.windows.net/vhds/<vhdName>.vhd
