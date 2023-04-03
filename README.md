@@ -22,9 +22,9 @@ Before you deploy an ARM template in this repository, you need to have:
   + 12 cores (4 cores per VM)
   + 1 storage account
 
-  **Note:** Trial subscriptions do not have sufficient available resources for deployment of these templates.
-+ A supported browser for access to the Azure portal (https://portal.azure.com). For more information, see [Supported browsers and devices for the Azure portal](https://docs.microsoft.com/en-us/azure/azure-preview-portal-supported-browsers-devices).
-+ A public domain name and administrative access to the domain's DNS records.
+  **Note:** Trial subscriptions do not have sufficient available resources for deployment of these templates
++ A supported browser for access to the Azure portal (https://portal.azure.com). See [Supported browsers and devices for the Azure portal](https://docs.microsoft.com/en-us/azure/azure-preview-portal-supported-browsers-devices)
++ A public domain name and administrative access to the domain's DNS records
 
 Some templates may have additional requirements specified in the template's README.
 
@@ -41,6 +41,6 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 ___
 
-Developed by the **ZTNA CxP team** and sourced from the **Office 365 Commercial Content Experience team**.
+Developed by the **Microsoft ZTNA CxP team**
 
-Last update: _11/12/2018_
+Last update: _11/02/2023_
