@@ -37,9 +37,9 @@ Prior to deploying the template, have the following information ready:
 
 + A DNS label prefix for the URLs of the public IP addresses of your virtual machines. These URLs are generated for each virtual machine in your deployment in the format _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. Enter this label in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button or for the value of the __dnsLabelPrefix__ variable in the template parameters file.
 
-## Solution overview and deployed resources
+## Solution overview
 
-The following resources are deployed as part of the solution:
+The following ARM resources are deployed as part of the solution:
 
 + **ADDC VM**: Windows Server 2016, 2019, or 2022 VM configured as a domain controller and DNS with static private IP address
 + **App Server VM**: Windows Server 2016, 2019, or 2022 VM joined to the domain. IIS 10 and .NET 4.5 are installed, and the directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for the User1 domain account.
@@ -65,6 +65,7 @@ the JoinDomain extensions for the member VMs. This asymmetric VM deployment proc
 <li> The private IP address of the **ADDC** VM is always *10.0.0.10*. This IP is set as the DNS IP for the virtual network and all member NICs
 <li> The default VM size for all VMs in the deployment is Standard_B2s
 <li> Deployment outputs include public IP address and FQDN for each VM
++ test
 </details>
      
 ## Known Issues
