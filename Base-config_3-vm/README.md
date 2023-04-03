@@ -21,20 +21,26 @@ The template provisions an Active Directory domain controller and application se
 
 The following ARM resources are deployed as part of the solution:
 
+### VMs
 + **AD DC VM**: Windows Server 2016, 2019, or 2022 VM configured as a domain controller and DNS with static private IP address
 + **App Server VM**: Windows Server 2016, 2019, or 2022 VM joined to the domain. IIS 10 and .NET 4.5 are installed, and the directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for the User1 domain account
 + **Client VM**: Optional Windows 10 or 11 client joined to the AD domain
-+ **Storage account**: Diagnostics storage account, and client VM storage account if indicated. AD DC and App Server VMs in the deployment use managed disks, so no storage accounts are created for VHDs.
+
+### Storage
++ **Storage account**: Diagnostics storage account, and client VM storage account if indicated. AD DC and App Server VMs in the deployment use managed disks, so no storage accounts are created for VHDs
+
+### Networking
 + **NSG**: Network security group configured to allow inbound RDP on 3389
 + **Virtual network**: Azure VNet for internal traffic, configured as 10.0.0.0/22 and with custom DNS pointing to the AD DC's private IP address. Internnal Subnet is defined as 10.0.0.0/24 for a total of 249 available IP addresses and Bastion subnet as 10.0.1.0/26
 + **Network interfaces**: 1 NIC per VM
 + **Public IP addresses**: 1 static public IP per VM. Note that some subscriptions may have limits on the number of static IPs that can be deployed for a given region
+
+### Extensions
 + **JoinDomain**: Each member VM uses the **JsonADDomainExtension** extension to join the domain
 + **BGInfo**: The **BGInfo** extension is applied to all VMs, but will not display over RDP sessions that have the wallpaper disabled
 + **Antimalware**: The **iaaSAntimalware** extension is applied to all VMs with basic scheduled scan and exclusion settings
      
 ## Deployment
-
 You can deploy the environment in one of two ways:
 
 + Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
@@ -58,7 +64,7 @@ Test clients can be deployed thru either of the following options of options, pr
 
      https://<storage account name>.blob.core.windows.net/vhds/<vhdName>.vhd
 
-* For more information about how to prepare a generalized VHD, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/prepare-for-upload-vhd-image.
+For more information about how to prepare a generalized VHD, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/prepare-for-upload-vhd-image.
         
 ## Additional notes
 <details>
@@ -75,5 +81,3 @@ the JoinDomain extensions for the member VMs. This asymmetric VM deployment proc
 <li> When the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected, and then may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
 
 </details>
-
-Developed by the **ZTNA CxP team** and sourced from the **Office 365 Commercial Content Experience team**.
