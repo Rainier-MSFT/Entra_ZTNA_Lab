@@ -26,18 +26,7 @@ Use of a custom client image is required because the Windows 10 gallery image is
 * For more information about eligible subscriptions, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/client-images#subscription-eligibility.
 * For more information about how to prepare a generalized VHD, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/prepare-for-upload-vhd-image.
 
-## Deployment
-
-You can deploy this template in one of two ways:
-
-+ Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
-+ Execute the PowerShell script at https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/scripts/Deploy-TLG.ps1 on your local computer.
-
-Prior to deploying the template, have the following information ready:
-
-+ A DNS label prefix for the URLs of the public IP addresses of your virtual machines. These URLs are generated for each virtual machine in your deployment in the format _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. Enter this label in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button or for the value of the __dnsLabelPrefix__ variable in the template parameters file.
-
-## Solution overview
+## Azure Resources
 
 The following ARM resources are deployed as part of the solution:
 
@@ -53,6 +42,17 @@ The following ARM resources are deployed as part of the solution:
 + **BGInfo**: The **BGInfo** extension is applied to all VMs.
 + **Antimalware**: The **iaaSAntimalware** extension is applied to all VMs with basic scheduled scan and exclusion settings.
 
+## Deployment
+
+You can deploy this template in one of two ways:
+
++ Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
++ Execute the PowerShell script at https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/scripts/Deploy-TLG.ps1 on your local computer.
+
+Prior to deploying the template, have the following information ready:
+
++ A DNS label prefix for the URLs of the public IP addresses of your virtual machines. These URLs are generated for each virtual machine in your deployment in the format _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. Enter this label in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button or for the value of the __dnsLabelPrefix__ variable in the template parameters file.
+     
 ## Solution notes
 <details>
   <summary>Expand</summary>
