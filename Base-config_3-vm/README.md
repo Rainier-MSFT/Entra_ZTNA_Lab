@@ -65,7 +65,6 @@ the JoinDomain extensions for the member VMs. This asymmetric VM deployment proc
 <li> The private IP address of the **ADDC** VM is always *10.0.0.10*. This IP is set as the DNS IP for the virtual network and all member NICs
 <li> The default VM size for all VMs in the deployment is Standard_B2s
 <li> Deployment outputs include public IP address and FQDN for each VM
-+ test
 </details>
      
 ## Known Issues
