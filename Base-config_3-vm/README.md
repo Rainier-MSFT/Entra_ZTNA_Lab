@@ -11,9 +11,9 @@
 <img src="images/visualizebutton.svg"/>
 </a><p>
 
-This Azure automation deploys a **3 VM configuration** for setting up a virtual pre-production enviroment that can be used for testing various authentication & authorization scenarios to ZTNA protected resources.
+This Azure automation deploys a **3 VM base configuration** for setting up a virtual pre-production enviroment that can be used for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources.
 
-The **3 VM Base Configuration** template provisions a choice of Windows Server 2016, 2019, or 2022, as an Active Directory domain controller using your specified domain name, an application server also running Windows Server, and optionally a Windows 10 or 11 client VM. This provides the on-prem enviroment that an Azure AD tenant will synchonise users to and from.
+The template provisions an Active Directory domain controller and application server on your prefered version of Windows Server, both on an Azure VNet with optional Bastion capability for secure morete management. This provides a baseline on-prem enviroment that an Azure AD tenant will synchonise users to and from. An optional Windows 10 or 11 client VM is also provisioned and domain joined too, before being moved to a seperate VNet to simulate remote client connectivity.
 
 ![alt text](images/base-config_3-vm.png "Diagram of the base config deployment")
 
