@@ -55,7 +55,7 @@ The following resources are deployed as part of the solution:
 
 ## Solution notes
 <details>
-  <summary>Click to expand</summary>
+  <summary>Expand</summary>
 
 <p><p>
 <li>All guest OS configuration is executed with DSC, using the resources CreateADPDC.ps1.zip and AppConfig.ps1.zip</li>
@@ -69,7 +69,7 @@ the JoinDomain extensions for the member VMs. This asymmetric VM deployment proc
      
 ## Known Issues
 <details>
-  <summary>Click to expand</summary>
+  <summary>Expand</summary>
 
 <p>
 <p>* When the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected, and then may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
