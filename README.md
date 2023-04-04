@@ -2,7 +2,9 @@
 
 ![TL logo](https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/images/tlg.png "Rainier-MSFT")
 
-This repository contains ARM templates used to deploy test lab environments for testing & learning about Microsoft Identity & Network Access capabilities away from production services. They're great for situations where you need to evaluate a technology or configuration before deciding whether to roll out at scale. The "I built it out myself and it works" hands-on experience helps you understand the deployment requirements of a new product or solution so you can better plan for hosting it in production. Some templates have been developed for specific target use cases that aren't available elsewhere, whilst others leverage the work of more well know sources such as [TLGs](http://aka.ms/catlgs).
+This repository offers a variety of resources for quickly deploying test lab environments that aid testing & learning about Microsoft Identity & Network Access capabilities. They're great for situations where you need to evaluate a solution or configuration before deciding whether or how to deploy to production, and having that "_I built it myself and it works_" hands-on experience also helps validate the deployment requirements, before rolling out at scale. 
+
+Some templates have been developed for specific scenarios that whilst others leverage resources from other sources such as [TLGs](http://aka.ms/catlgs).
 
 Azure Resource Manager (ARM) templates are pre-configured prescriptive deployment packages that enable you to provision complex test/pilot environments in minutes that would otherwise require extensive PowerShell scripting or many hours of manual configuration. With little or no Azure experience, you can provision a standardized base environment for hands-on learning or to pilot integrated solutions.
 
