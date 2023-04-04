@@ -351,7 +351,7 @@
       "name": "ADDC",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "comments": "This is the deployment resource for the ADDC VM.",
+      "comments": "This is the deployment resource for the AD DC VM.",
       "dependsOn": [
         "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-DC_NIC')]"
       ],
