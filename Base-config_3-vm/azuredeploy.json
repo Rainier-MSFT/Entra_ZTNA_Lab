@@ -88,7 +88,7 @@
         "No", "Yes"
       ],
       "metadata": {
-        "description": "Choose 'Yes to deploy a Bastion for VM management via a browser based RDP connection"
+        "description": "Choose 'Yes to deploy a Bastion for VM management via a browser based RDP connection instead of exposing RDP directly to the WWW"
       },
       "defaultValue": "No"
     }
