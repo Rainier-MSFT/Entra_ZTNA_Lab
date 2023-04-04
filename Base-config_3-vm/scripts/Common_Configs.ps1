@@ -1,4 +1,9 @@
-## Enable TLS1.2
+<#  Common_Configs.ps1
+    Rainier Amara 9/1/2023
+    This script applies a bunch of pre-configurations to each VM, post ARM deployment.
+#>
+
+## Enable TLS1.2 (Connectivity - Critical)
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols" -Name "TLS 1.2"
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2" -Name "Client"
 New-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client" -Name "DisabledByDefault" -Value 00000000 -PropertyType "DWord"
@@ -9,7 +14,7 @@ New-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHAN
 New-ItemProperty "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -Name "SchUseStrongCrypto" -Value 00000001 -PropertyType "Dword"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-## Disable IE Enhanced Security Config
+## Disable IE Enhanced Security Config (Internet access - Optional)
 Write-Host "Disabling IE Enhanced Security Configuration (ESC)..."
 $AdminKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}"
 $UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}"
@@ -17,10 +22,10 @@ Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 0
 Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
 #Stop-Process -Name Explorer
 
-## Relax UAC
+## Relax UAC (Optional)
 Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 00000000
 
-## Check for Microsoft Edge
+## Install Microsoft Edge (Only for 2016 - Optional)
 $MSEdgeExe = (Get-ChildItem -Path "C:\Program Files\Microsoft\Edge\Application\msedge.exe","C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ErrorAction SilentlyContinue)
 If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
     ## Download & install Edge Browser
@@ -31,7 +36,7 @@ If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
     dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
 }
 
-## Drop Azure AD Connect portal link on desktop
+## Drop Azure AD Connect portal link on desktop (Optional)
 $ShortcutPath = "$env:USERPROFILE\Desktop\Sync Portal.lnk"
 $WScriptObj = New-Object -ComObject ("WScript.Shell")
 $shortcut = $WscriptObj.CreateShortcut($ShortcutPath)
@@ -42,6 +47,6 @@ $ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238";
 $ShortCut.Hotkey = "CTRL+SHIFT+T";
 $shortcut.Save()
 
-## Download Azure AD Connect
+## Download Azure AD Connect (Optional)
 Import-Module BitsTransfer
 Start-BitsTransfer -Source "https://download.microsoft.com/download/B/0/0/B00291D0-5A83-4DE7-86F5-980BC00DE05A/AzureADConnect.msi" -Destination "$env:PUBLIC\Desktop\Install Azure AD Connect.msi"
