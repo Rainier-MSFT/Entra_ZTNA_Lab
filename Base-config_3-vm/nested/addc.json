@@ -154,25 +154,22 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'/Powershell.DSC')]",
-      "apiVersion": "2017-03-30",
+      "name": "[concat(parameters('vmName'),'/CommonConfigs')]",
+      "apiVersion": "2019-03-01",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]"
       ],
       "properties": {
-        "publisher": "Microsoft.Powershell",
-        "type": "DSC",
-        "typeHandlerVersion": "2.9",
+        "publisher": "Microsoft.Compute",
+        "type": "CustomScriptExtension",
+        "typeHandlerVersion": "1.10",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "modulesUrl": "[concat(parameters('modulesURL'),'/CommonConfigs.ps1.zip')]",
-          "sasToken": "[parameters('SharedVmConfig').SasToken]",
-          "wmfVersion": "latest",
-          "configuration": {
-            "script": "Common_Configs.ps1",
-            "function": ""
-          }
+          "fileUris": [
+                "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/scripts/Common_Configs.ps1"
+              ],
+              "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File Common_Configs.ps1"
         },
         "protectedSettings": null
       }
