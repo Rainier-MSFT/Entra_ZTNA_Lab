@@ -25,7 +25,7 @@ Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
 ## Relax UAC (Optional)
 Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 00000000
 
-## Install Microsoft Edge (Only for 2016 - Optional)
+## Install Microsoft Edge (If server 2016 - Optional)
 $MSEdgeExe = (Get-ChildItem -Path "C:\Program Files\Microsoft\Edge\Application\msedge.exe","C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ErrorAction SilentlyContinue)
 If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
     ## Download & install Edge Browser
@@ -34,10 +34,16 @@ If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
     MsiExec.exe /i "$env:USERPROFILE\Downloads\MicrosoftEdgeEnterpriseX64.msi" /qn
     ## Disable Internet Explorer (Disable only to retain IE legacy mode in Edge)
     dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
+    stop-process -name explorer –force
 }
 
+## Download Azure AD Connect (If DC - Optional)
+If ( Get-WmiObject -Query "select * from Win32_OperatingSystem where ProductType='2'" ) {
+Import-Module BitsTransfer
+Start-BitsTransfer -Source "https://download.microsoft.com/download/B/0/0/B00291D0-5A83-4DE7-86F5-980BC00DE05A/AzureADConnect.msi" -Destination "$env:PUBLIC\Desktop\Install Azure AD Connect.msi"
+
 ## Drop Azure AD Connect portal link on desktop (Optional)
-$ShortcutPath = "$env:USERPROFILE\Desktop\Sync Portal.lnk"
+$ShortcutPath = "$env:USERPROFILE\Desktop\AAD Sync Portal.lnk"
 $WScriptObj = New-Object -ComObject ("WScript.Shell")
 $shortcut = $WscriptObj.CreateShortcut($ShortcutPath)
 $shortcut.TargetPath = $MSEdgeExe
@@ -46,7 +52,4 @@ $shortcut.WindowStyle = 1
 $ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238";
 $ShortCut.Hotkey = "CTRL+SHIFT+T";
 $shortcut.Save()
-
-## Download Azure AD Connect (Optional)
-Import-Module BitsTransfer
-Start-BitsTransfer -Source "https://download.microsoft.com/download/B/0/0/B00291D0-5A83-4DE7-86F5-980BC00DE05A/AzureADConnect.msi" -Destination "$env:PUBLIC\Desktop\Install Azure AD Connect.msi"
+}
