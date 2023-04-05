@@ -66,9 +66,8 @@ Test clients can be deployed thru either of the following options of options, pr
 
 For more information about how to prepare a generalized VHD, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/prepare-for-upload-vhd-image.
         
-## Additional notes
 <details>
-  <summary>Expand</summary>
+<summary><b><u><font size="+1">Additional Notes</font></u></b></summary>
 
 <p><p>
 <li> All guest OS configuration is executed with DSC, using the resources CreateADPDC.ps1.zip and AppConfig.ps1.zip</li>
