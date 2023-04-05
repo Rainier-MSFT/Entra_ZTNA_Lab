@@ -36,7 +36,7 @@ The following ARM resources are deployed as part of the solution:
 + **NSG**: Network security group configured to allow inbound RDP on 3389
 + **Virtual network**: Azure VNet for internal traffic, configured as 10.0.0.0/22 and with custom DNS pointing to the AD DC's private IP address. Internnal Subnet is defined as 10.0.0.0/24 for a total of 249 available IP addresses and Bastion subnet as 10.0.1.0/26
 + **Network interfaces**: 1 NIC per VM, all with static private IPs
-+ **Public IP addresses**: 1 static public IP per VM
++ **Public IP addresses**: VMs are only provisioned with an optional static public IP for remote management, if selected during deployment 
 
 ### Extensions
 + Each member VM uses the **JsonADDomainExtension** extension to join the domain post Azure deployment
@@ -44,9 +44,9 @@ The following ARM resources are deployed as part of the solution:
 + The **Antimalware** extension is applied to all VMs with basic scheduled scan and exclusion settings
 + A **CustomExtension** is used to apply a set of common configs to such as enabling TLS1.2 & .Net connectivity, disabling IE ESC, relaxing UAC, and a bunch of extras to help complete the hybrid setup  
 
-### Remote Management
-+ **RDP** is enabled on all VMs
-+ **Azure Bastion** basic is also offered as part of the deployment for scenarios where RDP cannot be used to manage the VMs diretcly  
+### Management
++ **RDP** is enabled on all VMs. Can only be used remotely if machiens were provisioned with a public IP 
++ **Azure Bastion** basic is also offered as an alternative to managing the VMs via a direct RDP connection 
 
 <br>
 
