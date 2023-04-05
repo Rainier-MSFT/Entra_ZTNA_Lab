@@ -64,10 +64,11 @@ Test clients can be deployed thru either of the following options of options, pr
      
 **Note:** Enabling the option to deploy a client VM via this template requires that you upload a generalized Windows 10/11 VHD to an Azure storage account and provide the account name in the _clientVhdUri_ parameter. Note that SAS tokens are not supported, and the blob container must be configured for public read access. The path to the VHD should resemble the following example:
 
-     https://<storage account name>.blob.core.windows.net/vhds/<vhdName>.vhd
+https://<storage account name>.blob.core.windows.net/vhds/<vhdName>.vhd
 
 For more information about how to prepare a generalized VHD, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/prepare-for-upload-vhd-image.
-        
+<p><p>
+     
 <details>
 <summary><b><u><font size="+4">Additional Notes</font></u></b></summary>
 
