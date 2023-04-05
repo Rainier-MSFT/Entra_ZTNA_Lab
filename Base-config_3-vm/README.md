@@ -15,7 +15,7 @@ This template deploys a 3 VM enviroment that can be used for testing various aut
 
 <table class="images" width="100%" style="border:0px solid white; width:100%;">
     <tr style="border:0px;">
-        <td width="50%" style="border:0px; width:33.33%">
+        <td width="100%" style="border:0px; width:100%">
             <img src="images/Temp2.svg"/> 
         </td>
     </tr>
