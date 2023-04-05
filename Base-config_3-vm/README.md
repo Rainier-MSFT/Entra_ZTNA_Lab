@@ -15,7 +15,6 @@ This template deploys a 3 VM enviroment that can be used for testing various aut
 
 <a><img src="images/ready.svg"/></a>
 
-        
 ## Azure Resources
 The following ARM resources are deployed as part of the solution:
 
