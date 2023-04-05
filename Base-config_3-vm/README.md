@@ -15,10 +15,10 @@ This template deploys a 3 VM enviroment that can be used for testing various aut
 
 The template provisions an Active Directory domain controller and application server on your prefered version of Windows Server, both on an Azure VNet with optional Bastion capability for secure morete management. This provides a baseline on-prem enviroment that an Azure AD tenant will synchonise users to and from. An optional Windows 10 or 11 client VM is also provisioned and domain joined too, before being moved to a seperate VNet to simulate remote client connectivity.
 
-<p><img src="images/base-config_3-vmII.png" width=45% /><br></p>
+<p><img src="images/base-config_3-vmII.png" width=45% /></p>
+<br>
 
 ## Azure Resources
-
 The following ARM resources are deployed as part of the solution:
 
 ### VMs
