@@ -13,7 +13,7 @@
 
 This template deploys a 3 VM enviroment that can be used for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources.
 
-<a><img src="images/Temp2.svg"/></a>
+<a><img src="images/ready.svg"/></a>
 
         
 ## Azure Resources
