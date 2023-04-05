@@ -40,6 +40,7 @@ The following ARM resources are deployed as part of the solution:
 + **BGInfo**: The **BGInfo** extension is applied to all VMs, but will not display over RDP sessions that have the wallpaper disabled
 + **Antimalware**: The **iaaSAntimalware** extension is applied to all VMs with basic scheduled scan and exclusion settings
 
+
 ## Deployment
 You can deploy the environment in one of two ways:
 
