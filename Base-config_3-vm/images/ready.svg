@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="106.203 286.614 1128.982 339.753" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg viewBox="66.075 59.254 1128.241 401.137" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
     <clipPath id="clipPath18" clipPathUnits="userSpaceOnUse">
       <path style="clip-rule:evenodd" id="path16" d="M 0,1.2207e-4 H 960 V 540.00012 H 0 Z"/>
@@ -283,8 +283,14 @@
     <clipPath id="clipPath1120" clipPathUnits="userSpaceOnUse">
       <path style="clip-rule:evenodd" id="path1118" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z"/>
     </clipPath>
+    <clipPath id="clipPath1132" clipPathUnits="userSpaceOnUse">
+      <path style="clip-rule:evenodd" id="path1130" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z"/>
+    </clipPath>
+    <clipPath id="clipPath1144" clipPathUnits="userSpaceOnUse">
+      <path style="clip-rule:evenodd" id="path1142" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z"/>
+    </clipPath>
   </defs>
-  <g transform="matrix(1.333333, 0, 0, -1.333333, 39.903985, 885.564968)" id="g10">
+  <g transform="matrix(1.333333, 0, 0, -1.333333, 0, 720.000021)" id="g10">
     <g id="g12">
       <g clip-path="url(#clipPath18)" id="g14">
         <path id="path20" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none" d="M 0,6.1035e-5 H 960 V 540.00006 H 0 Z"/>
@@ -362,397 +368,407 @@
     </g>
     <g id="g178">
       <g clip-path="url(#clipPath184)" id="g180">
-        <text id="text188" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,438.1)"><tspan id="tspan186" y="0" x="0 7.8000202 16.20652">The</tspan></text>
+        <text id="text188" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,437.5)"><tspan id="tspan186" y="0" x="0 9.7515602 18.62532">The</tspan></text>
       </g>
     </g>
     <g id="g190">
       <g clip-path="url(#clipPath196)" id="g192">
-        <text id="text200" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,86.472,438.1)"><tspan id="tspan198" y="0" x="0 5.2827601 13.23084 25.919041 34.298038 38.01672 45.454079 50.736839">template</tspan></text>
+        <text id="text200" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,85.872,437.5)"><tspan id="tspan198" y="0" x="0 4.4368801 13.31064 26.60532 35.47908 39.102001 47.975761 52.41264">template</tspan></text>
       </g>
     </g>
     <g id="g202">
       <g clip-path="url(#clipPath208)" id="g204">
-        <text id="text212" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,156.91,438.1)"><tspan id="tspan210" y="0" x="0 8.3789997 13.8054 22.21632 29.430241 33.10104 39.3414 43.076038 51.486961 59.865959">provisions</tspan></text>
+        <text id="text212" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,154.99,437.5)"><tspan id="tspan210" y="0" x="0 8.9854803 14.364 23.237761 31.26564 34.744919 42.7728 46.3638 55.23756 63.999599">provisions</tspan></text>
       </g>
     </g>
     <g id="g214">
       <g clip-path="url(#clipPath220)" id="g216">
-        <text id="text224" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,234.79,438.1)"><tspan id="tspan222" y="0" x="0 7.6800399">an</tspan></text>
+        <text id="text224" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,234.91,437.5)"><tspan id="tspan222" y="0" x="0 8.8800001">an</tspan></text>
       </g>
     </g>
     <g id="g226">
       <g clip-path="url(#clipPath232)" id="g228">
-        <text id="text236" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,262.66,438.1)"><tspan id="tspan234" y="0" x="0 9.24084 15.99192 21.33852 24.961439 32.04768">Active</tspan></text>
+        <text id="text236" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,260.5,437.5)"><tspan id="tspan234" y="0" x="0 10.64532 18.70512 23.142 26.621281 34.649158">Active</tspan></text>
       </g>
     </g>
     <g id="g238">
       <g clip-path="url(#clipPath244)" id="g240">
-        <text id="text248" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,314.5,438.1)"><tspan id="tspan246" y="0" x="0 9.8154001 13.55004 18.944521 26.892599 33.579842 38.862598 47.369282 52.987202">Directory</tspan></text>
+        <text id="text248" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,311.86,437.5)"><tspan id="tspan246" y="0" x="0 11.52312 15.09816 20.41284 29.2866 37.266602 41.70348 50.57724 56.003639">Directory</tspan></text>
       </g>
     </g>
     <g id="g250">
       <g clip-path="url(#clipPath256)" id="g252">
-        <text id="text260" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,386.5,438.1)"><tspan id="tspan258" y="0" x="0 8.5066795 17.013359 29.7654 37.41024 41.112961">domain</tspan></text>
+        <text id="text260" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,383.62,437.5)"><tspan id="tspan258" y="0" x="0 8.8737602 17.74752 31.0422 39.915958 43.538879">domain</tspan></text>
       </g>
     </g>
     <g id="g262">
       <g clip-path="url(#clipPath268)" id="g264">
-        <text id="text272" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,418.9)"><tspan id="tspan270" y="0" x="0 6.60744 15.01836 23.285641 28.66416 34.05864 42.469559 46.140362 49.875 57.823078">controller</tspan></text>
+        <text id="text272" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,418.3)"><tspan id="tspan270" y="0" x="0 8.0278797 16.90164 25.7754 30.21228 35.526958 44.400719 47.94384 51.566761 60.440521">controller</tspan></text>
       </g>
     </g>
     <g id="g274">
       <g clip-path="url(#clipPath280)" id="g276">
-        <text id="text284" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,118.27,418.9)"><tspan id="tspan282" y="0" x="0 7.6448398 16.07172">and</tspan></text>
+        <text id="text284" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,126.07,418.3)"><tspan id="tspan282" y="0" x="0 8.8800001 17.76">and</tspan></text>
       </g>
     </g>
     <g id="g286">
       <g clip-path="url(#clipPath292)" id="g288">
-        <text id="text296" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,147.07,418.9)"><tspan id="tspan294" y="0" x="0 7.6448398 16.07172 24.354959 27.96192 31.66464 38.272079 45.83712 51.119881 54.822601 63.233521">application</tspan></text>
+        <text id="text296" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,162.43,418.3)"><tspan id="tspan294" y="0" x="0 8.8737602 17.74752 26.621281 30.1644 33.70752 41.751362 50.625118 55.062 58.55724 67.431">application</tspan></text>
       </g>
     </g>
     <g id="g298">
       <g clip-path="url(#clipPath304)" id="g300">
-        <text id="text308" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,223.03,418.9)"><tspan id="tspan306" y="0" x="0 6.2403598 14.18844 19.75848 26.972401 35.016239">server</tspan></text>
+        <text id="text308" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,248.47,418.3)"><tspan id="tspan306" y="0" x="0 8.0438404 16.917601 22.232281 30.276119 39.149879">server</tspan></text>
       </g>
     </g>
     <g id="g310">
       <g clip-path="url(#clipPath316)" id="g312">
-        <text id="text320" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,267.94,418.9)"><tspan id="tspan318" y="0" x="0 8.4000196">on</tspan></text>
+        <text id="text320" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,302.62,418.3)"><tspan id="tspan318" y="0" x="0 8.8800001">on</tspan></text>
       </g>
     </g>
     <g id="g322">
       <g clip-path="url(#clipPath328)" id="g324">
-        <text id="text332" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,289.18,418.9)"><tspan id="tspan330" y="0" x="0 7.0862398 15.49716 23.87616">your</tspan></text>
+        <text id="text332" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,330.22,418.3)"><tspan id="tspan330" y="0" x="0 7.80444 16.6782 25.55196">your</tspan></text>
       </g>
     </g>
     <g id="g334">
       <g clip-path="url(#clipPath340)" id="g336">
-        <text id="text344" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,322.9,418.9)"><tspan id="tspan342" y="0" x="0 8.5066795 13.90116 21.705601 26.270161 34.218239 39.78828 45.23064 53.178719">preferred</tspan></text>
+        <text id="text344" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,370.78,418.3)"><tspan id="tspan342" y="0" x="0 8.9854803 14.30016 23.253719 27.690599 36.564362 41.958839 47.273521 56.147282">preferred</tspan></text>
       </g>
     </g>
     <g id="g346">
       <g clip-path="url(#clipPath352)" id="g348">
-        <text id="text356" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,388.78,418.9)"><tspan id="tspan354" y="0" x="0 7.2139201 15.162 20.524561 26.764919 30.46764 38.878559">version</tspan></text>
+        <text id="text356" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,399.1)"><tspan id="tspan354" y="0" x="0 8.0278797 16.90164 22.21632 30.19632 33.819241 42.693001">version</tspan></text>
       </g>
     </g>
     <g id="g358">
       <g clip-path="url(#clipPath364)" id="g360">
-        <text id="text368" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,399.7)"><tspan id="tspan366" y="0" x="0 8.4000196">of</tspan></text>
+        <text id="text368" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,109.75,399.1)"><tspan id="tspan366" y="0" x="0 8.8800001">of</tspan></text>
       </g>
     </g>
     <g id="g370">
       <g clip-path="url(#clipPath376)" id="g372">
-        <text id="text380" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,69.552,399.7)"><tspan id="tspan378" y="0" x="0 14.2044 17.8752 26.2542 34.633202 43.044121 54.35976">Windows</tspan></text>
+        <text id="text380" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,130.63,399.1)"><tspan id="tspan378" y="0" x="0 15.09816 18.689159 27.56292 36.43668 45.31044 56.72184">Windows</tspan></text>
       </g>
     </g>
     <g id="g382">
       <g clip-path="url(#clipPath388)" id="g384">
-        <text id="text392" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,135.79,399.7)"><tspan id="tspan390" y="0" x="0 7.3256402 15.33756 21.08316 28.169399 36.197281 40.39476">Server,</tspan></text>
+        <text id="text392" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,202.99,399.1)"><tspan id="tspan390" y="0" x="0 10.64532 19.519079 24.833759 32.861641 41.735401 46.299961">Server,</tspan></text>
       </g>
     </g>
     <g id="g394">
       <g clip-path="url(#clipPath400)" id="g396">
-        <text id="text404" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,185.71,399.7)"><tspan id="tspan402" y="0" x="0 8.5066795 16.917601 22.2642">both</tspan></text>
+        <text id="text404" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,261.46,399.1)"><tspan id="tspan402" y="0" x="0 8.8737602 17.74752 22.29612">both</tspan></text>
       </g>
     </g>
     <g id="g406">
       <g clip-path="url(#clipPath412)" id="g408">
-        <text id="text416" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,222.07,399.7)"><tspan id="tspan414" y="0" x="0 8.4000196">on</tspan></text>
+        <text id="text416" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,300.22,399.1)"><tspan id="tspan414" y="0" x="0 8.8800001">on</tspan></text>
       </g>
     </g>
     <g id="g418">
       <g clip-path="url(#clipPath424)" id="g420">
-        <text id="text428" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,244.51,399.7)"><tspan id="tspan426" y="0" x="0 7.7040401">an</tspan></text>
+        <text id="text428" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,325.54,399.1)"><tspan id="tspan426" y="0" x="0 8.8800001">an</tspan></text>
       </g>
     </g>
     <g id="g430">
       <g clip-path="url(#clipPath436)" id="g432">
-        <text id="text440" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,266.14,399.7)"><tspan id="tspan438" y="0" x="0 9.24084 15.4812 23.987881 29.38236">Azure</tspan></text>
+        <text id="text440" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,350.98,399.1)"><tspan id="tspan438" y="0" x="0 10.64532 18.70512 27.57888 32.893559">Azure</tspan></text>
       </g>
     </g>
     <g id="g442">
       <g clip-path="url(#clipPath448)" id="g444">
-        <text id="text452" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,309.1,399.7)"><tspan id="tspan450" y="0" x="0 9.0972004 19.519079 27.323521">VNet</tspan></text>
+        <text id="text452" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,400.42,399.1)"><tspan id="tspan450" y="0" x="0 10.64532 22.16844 31.0422">VNet</tspan></text>
       </g>
     </g>
     <g id="g454">
       <g clip-path="url(#clipPath460)" id="g456">
-        <text id="text464" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,347.5,399.7)"><tspan id="tspan462" y="0" x="0 11.4114 15.0822 20.5086">with</tspan></text>
+        <text id="text464" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,379.9)"><tspan id="tspan462" y="0" x="0 11.39544 14.98644 19.423321">with</tspan></text>
       </g>
     </g>
     <g id="g466">
       <g clip-path="url(#clipPath472)" id="g468">
-        <text id="text476" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,382.06,399.7)"><tspan id="tspan474" y="0" x="0 8.4109201 16.6782 22.056721 25.759439 34.170361 42.549358 50.194199">optional</tspan></text>
+        <text id="text476" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,89.592,379.9)"><tspan id="tspan474" y="0" x="0 8.8737602 17.85924 22.29612 25.887119 34.76088 43.63464 52.5084">optional</tspan></text>
       </g>
     </g>
     <g id="g478">
       <g clip-path="url(#clipPath484)" id="g480">
-        <text id="text488" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,380.5)"><tspan id="tspan486" y="0" x="0 8.6822395 16.32708 22.43976 27.818279 31.521 39.931919">Bastion</tspan></text>
+        <text id="text488" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,156.43,379.9)"><tspan id="tspan486" y="0" x="0 10.64532 19.519079 27.57888 32.015759 35.606758 44.480518">Bastion</tspan></text>
       </g>
     </g>
     <g id="g490">
       <g clip-path="url(#clipPath496)" id="g492">
-        <text id="text500" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,107.23,380.5)"><tspan id="tspan498" y="0" x="0 6.60744 14.25228 22.56744 30.21228 38.527439 42.23016 45.83712 49.539841 54.918362">capability</tspan></text>
+        <text id="text500" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,220.51,379.9)"><tspan id="tspan498" y="0" x="0 8.0278797 16.90164 25.7754 34.649158 43.522919 47.06604 50.513401 54.104401 58.541279">capability</tspan></text>
       </g>
     </g>
     <g id="g502">
       <g clip-path="url(#clipPath508)" id="g504">
-        <text id="text512" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,177.55,380.5)"><tspan id="tspan510" y="0" x="0 4.5645599 12.97548">for</tspan></text>
+        <text id="text512" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,297.7,379.9)"><tspan id="tspan510" y="0" x="0 4.4368801 13.42236">for</tspan></text>
       </g>
     </g>
     <g id="g514">
       <g clip-path="url(#clipPath520)" id="g516">
-        <text id="text524" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,204.31,380.5)"><tspan id="tspan522" y="0" x="0 6.3361201 14.2842 20.971439 29.478121 34.872601">secure</tspan></text>
+        <text id="text524" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,327.22,379.9)"><tspan id="tspan522" y="0" x="0 8.0278797 16.90164 24.92952 33.80328 39.117962">secure</tspan></text>
       </g>
     </g>
     <g id="g526">
       <g clip-path="url(#clipPath532)" id="g528">
-        <text id="text536" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,255.58,380.5)"><tspan id="tspan534" y="0" x="0 5.2827601 13.31064 26.062679 34.537441 39.820202">remote</tspan></text>
+        <text id="text536" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,386.14,379.9)"><tspan id="tspan534" y="0" x="0 5.3146801 14.26824 27.56292 36.43668 40.873562">remote</tspan></text>
       </g>
     </g>
     <g id="g538">
       <g clip-path="url(#clipPath544)" id="g540">
-        <text id="text548" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,311.62,380.5)"><tspan id="tspan546" y="0" x="0 12.75204 20.396879 28.775881 36.35688 43.794239 51.742321 64.430519 72.378601 80.629921">management</tspan></text>
+        <text id="text548" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,360.7)"><tspan id="tspan546" y="0" x="0 13.29468 22.16844 31.0422 39.915958 48.82164 57.6954 70.990082 79.863838 88.737602">management</tspan></text>
       </g>
     </g>
     <g id="g550">
       <g clip-path="url(#clipPath556)" id="g552">
-        <text id="text560" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,397.66,380.5)"><tspan id="tspan558" y="0" x="0">.</tspan></text>
+        <text id="text560" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,143.95,360.7)"><tspan id="tspan558" y="0" x="0">.</tspan></text>
       </g>
     </g>
     <g id="g562">
       <g clip-path="url(#clipPath568)" id="g564">
-        <text id="text572" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,409.9,380.5)"><tspan id="tspan570" y="0" x="0 7.7725201 16.183439 19.88616">This</tspan></text>
+        <text id="text572" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,162.19,360.7)"><tspan id="tspan570" y="0" x="0 9.8313599 18.70512 22.29612">This</tspan></text>
       </g>
     </g>
     <g id="g574">
       <g clip-path="url(#clipPath580)" id="g576">
-        <text id="text584" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,361.3)"><tspan id="tspan582" y="0" x="0 8.3789997 13.8054 22.08864 29.302561 32.973358 41.400242 49.34832">provides</tspan></text>
+        <text id="text584" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,206.35,360.7)"><tspan id="tspan582" y="0" x="0 8.8737602 14.18844 23.062201 31.0422 34.58532 43.45908 52.33284">provides</tspan></text>
       </g>
     </g>
     <g id="g586">
       <g clip-path="url(#clipPath592)" id="g588">
-        <text id="text596" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,109.75,361.3)"><tspan id="tspan594" y="0" x="0">a</tspan></text>
+        <text id="text596" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,280.54,360.7)"><tspan id="tspan594" y="0" x="0">a</tspan></text>
       </g>
     </g>
     <g id="g598">
       <g clip-path="url(#clipPath604)" id="g600">
-        <text id="text608" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,121.03,361.3)"><tspan id="tspan606" y="0" x="0 8.3789997 16.07172 22.407841 30.355921 34.026718 37.745399 46.028641">baseline</tspan></text>
+        <text id="text608" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,303.1,360.7)"><tspan id="tspan606" y="0" x="0 8.8737602 17.74752 25.791361 34.665119 38.144402 41.735401 50.609161">baseline</tspan></text>
       </g>
     </g>
     <g id="g610">
       <g clip-path="url(#clipPath616)" id="g612">
-        <text id="text620" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,178.75,361.3)"><tspan id="tspan618" y="0" x="0 8.4000196">on</tspan></text>
+        <text id="text620" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,376.42,360.7)"><tspan id="tspan618" y="0" x="0 8.8800001">on</tspan></text>
       </g>
     </g>
     <g id="g622">
       <g clip-path="url(#clipPath628)" id="g624">
-        <text id="text632" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,195.55,361.3)"><tspan id="tspan630" y="0" x="0">-</tspan></text>
+        <text id="text632" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,394.18,360.7)"><tspan id="tspan630" y="0" x="0">-</tspan></text>
       </g>
     </g>
     <g id="g634">
       <g clip-path="url(#clipPath640)" id="g636">
-        <text id="text644" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,200.47,361.3)"><tspan id="tspan642" y="0" x="0 8.3789997 13.8054 21.753481">prem</tspan></text>
+        <text id="text644" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,399.46,360.7)"><tspan id="tspan642" y="0" x="0 8.8737602 14.18844 23.062201">prem</tspan></text>
       </g>
     </g>
     <g id="g646">
       <g clip-path="url(#clipPath652)" id="g648">
-        <text id="text656" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,238.63,361.3)"><tspan id="tspan654" y="0" x="0 7.9480801 16.135559 23.34948 27.068159 32.462639 40.873562 49.412159 62.1642 70.112282 78.411484">environment</tspan></text>
+        <text id="text656" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,341.5)"><tspan id="tspan654" y="0" x="0 8.887104 17.774208 25.766209 29.378592 34.701263 43.540417 52.427521 65.742195 74.629295 83.516403">environment</tspan></text>
       </g>
     </g>
     <g id="g658">
       <g clip-path="url(#clipPath664)" id="g660">
-        <text id="text668" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,325.9,361.3)"><tspan id="tspan666" y="0" x="0 5.37852 13.75752 21.33852">that</tspan></text>
+        <text id="text668" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,143.83,341.5)"><tspan id="tspan666" y="0" x="0 4.443552 13.330656 22.29768">that</tspan></text>
       </g>
     </g>
     <g id="g670">
       <g clip-path="url(#clipPath676)" id="g672">
-        <text id="text680" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,356.26,361.3)"><tspan id="tspan678" y="0" x="0 7.6800399">an</tspan></text>
+        <text id="text680" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,175.99,341.5)"><tspan id="tspan678" y="0" x="0 8.8800039">an</tspan></text>
       </g>
     </g>
     <g id="g682">
       <g clip-path="url(#clipPath688)" id="g684">
-        <text id="text692" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,375.94,361.3)"><tspan id="tspan690" y="0" x="0 9.24084 15.4812 23.860201 29.2866">Azure</tspan></text>
+        <text id="text692" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,199.03,341.5)"><tspan id="tspan690" y="0" x="0 10.661328 18.701281 27.588385 32.863106">Azure</tspan></text>
       </g>
     </g>
     <g id="g694">
       <g clip-path="url(#clipPath700)" id="g696">
-        <text id="text704" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,416.74,361.3)"><tspan id="tspan702" y="0" x="0 9.3598404">AD</tspan></text>
+        <text id="text704" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,246.07,341.5)"><tspan id="tspan702" y="0" x="0 10.704028">AD</tspan></text>
       </g>
     </g>
     <g id="g706">
       <g clip-path="url(#clipPath712)" id="g708">
-        <text id="text716" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,342.1)"><tspan id="tspan714" y="0" x="0 5.2747202 13.234752 21.626352 29.282688 37.562401">tenant</tspan></text>
+        <text id="text716" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,273.58,341.5)"><tspan id="tspan714" y="0" x="0 4.443552 13.42656 22.313663 31.200768 40.087872">tenant</tspan></text>
       </g>
     </g>
     <g id="g718">
       <g clip-path="url(#clipPath724)" id="g720">
-        <text id="text728" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,101.59,342.1)"><tspan id="tspan726" y="0" x="0 11.42856 14.992992 18.589392">will</tspan></text>
+        <text id="text728" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,323.5,341.5)"><tspan id="tspan726" y="0" x="0 11.396592 14.977008 18.461519">will</tspan></text>
       </g>
     </g>
     <g id="g730">
       <g clip-path="url(#clipPath736)" id="g732">
-        <text id="text740" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,131.95,342.1)"><tspan id="tspan738" y="0" x="0 5.994 13.234752 21.626352 28.307665 36.587376 41.989967 50.413536 58.805138 62.481457 68.507423">synchronize</tspan></text>
+        <text id="text740" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,350.86,341.5)"><tspan id="tspan738" y="0" x="0 8.0239677 15.82416 24.711264 32.703262 41.590366 46.91304 55.896049 64.78315 68.331596 76.323601">synchronize</tspan></text>
       </g>
     </g>
     <g id="g742">
       <g clip-path="url(#clipPath748)" id="g744">
-        <text id="text752" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,216.43,342.1)"><tspan id="tspan750" y="0" x="0 8.3915997 14.641344 22.601376 27.844128">users</tspan></text>
+        <text id="text752" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,322.27)"><tspan id="tspan750" y="0" x="0 8.8737602 16.90164 25.7754 31.09008">users</tspan></text>
       </g>
     </g>
     <g id="g754">
       <g clip-path="url(#clipPath760)" id="g756">
-        <text id="text764" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,258.58,342.1)"><tspan id="tspan762" y="0" x="0 5.4000401">to</tspan></text>
+        <text id="text764" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,103.87,322.27)"><tspan id="tspan762" y="0" x="0 4.4400001">to</tspan></text>
       </g>
     </g>
     <g id="g766">
       <g clip-path="url(#clipPath772)" id="g768">
-        <text id="text776" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,280.42,342.1)"><tspan id="tspan774" y="0" x="0 7.6563358 16.047935">and</tspan></text>
+        <text id="text776" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,131.35,322.27)"><tspan id="tspan774" y="0" x="0 8.8800001 17.76">and</tspan></text>
       </g>
     </g>
     <g id="g778">
       <g clip-path="url(#clipPath784)" id="g780">
-        <text id="text788" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,312.94,342.1)"><tspan id="tspan786" y="0" x="0 4.8751202 10.197792 18.621361">from</tspan></text>
+        <text id="text788" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,172.27,322.27)"><tspan id="tspan786" y="0" x="0 4.4368801 9.7515602 18.70512">from</tspan></text>
       </g>
     </g>
     <g id="g790">
       <g clip-path="url(#clipPath796)" id="g792">
-        <text id="text800" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,344.26,342.1)"><tspan id="tspan798" y="0" x="0">.</tspan></text>
+        <text id="text800" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,204.31,322.27)"><tspan id="tspan798" y="0" x="0">.</tspan></text>
       </g>
     </g>
     <g id="g802">
       <g clip-path="url(#clipPath808)" id="g804">
-        <text id="text812" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,356.38,342.1)"><tspan id="tspan810" y="0" x="0 9.240036">An</tspan></text>
+        <text id="text812" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,222.91,322.27)"><tspan id="tspan810" y="0" x="0 10.68002">An</tspan></text>
       </g>
     </g>
     <g id="g814">
       <g clip-path="url(#clipPath820)" id="g816">
-        <text id="text824" style="font-variant: normal; font-weight: normal; font-size: 15.984px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,382.06,342.1)"><tspan id="tspan822" y="0" x="0 8.4235678 16.687296 22.041937 25.798176 34.221745 42.613342 50.26968">optional</tspan></text>
+        <text id="text824" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,256.66,322.27)"><tspan id="tspan822" y="0" x="0 8.8737602 17.85924 22.29612 25.887119 34.76088 43.63464 52.5084">optional</tspan></text>
       </g>
     </g>
     <g id="g826">
       <g clip-path="url(#clipPath832)" id="g828">
-        <text id="text836" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,322.87)"><tspan id="tspan834" y="0" x="0 8.3789997 16.789921 29.54196 37.186798 40.905479">domain</tspan></text>
+        <text id="text836" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,326.98,322.27)"><tspan id="tspan834" y="0" x="0 8.8737602 17.74752 31.0422 39.915958 43.538879">domain</tspan></text>
       </g>
     </g>
     <g id="g838">
       <g clip-path="url(#clipPath844)" id="g840">
-        <text id="text848" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,111.07,322.87)"><tspan id="tspan846" y="0" x="0 3.81444 12.22536 15.94404 24.32304 32.271118">joined</tspan></text>
+        <text id="text848" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,393.46,322.27)"><tspan id="tspan846" y="0" x="0 3.5910001 12.35304 15.83232 24.706079 33.579842">joined</tspan></text>
       </g>
     </g>
     <g id="g850">
       <g clip-path="url(#clipPath856)" id="g852">
-        <text id="text860" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,162.91,322.87)"><tspan id="tspan858" y="0" x="0 14.2044 17.8752 26.2542 34.633202 42.964321 54.375721">Windows</tspan></text>
+        <text id="text860" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,303.07)"><tspan id="tspan858" y="0" x="0 15.09816 18.689159 27.56292 36.43668 45.31044 56.72184">Windows</tspan></text>
       </g>
     </g>
     <g id="g862">
       <g clip-path="url(#clipPath868)" id="g864">
-        <text id="text872" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,234.67,322.87)"><tspan id="tspan870" y="0" x="0 8.1600199">10</tspan></text>
+        <text id="text872" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,122.71,303.07)"><tspan id="tspan870" y="0" x="0 8.8800001">10</tspan></text>
       </g>
     </g>
     <g id="g874">
       <g clip-path="url(#clipPath880)" id="g876">
-        <text id="text884" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,262.18,322.87)"><tspan id="tspan882" y="0" x="0 8.5199203">or</tspan></text>
+        <text id="text884" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,147.79,303.07)"><tspan id="tspan882" y="0" x="0 8.9997597">or</tspan></text>
       </g>
     </g>
     <g id="g886">
       <g clip-path="url(#clipPath892)" id="g888">
-        <text id="text896" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,287.5,322.87)"><tspan id="tspan894" y="0" x="0 8.04002">11</tspan></text>
+        <text id="text896" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,169.63,303.07)"><tspan id="tspan894" y="0" x="0 7.6837602">11</tspan></text>
       </g>
     </g>
     <g id="g898">
       <g clip-path="url(#clipPath904)" id="g900">
-        <text id="text908" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,314.86,322.87)"><tspan id="tspan906" y="0" x="0 9.00002">VM</tspan></text>
+        <text id="text908" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,193.51,303.07)"><tspan id="tspan906" y="0" x="0 10.68002">VM</tspan></text>
       </g>
     </g>
     <g id="g910">
       <g clip-path="url(#clipPath916)" id="g912">
-        <text id="text920" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,348.7,322.87)"><tspan id="tspan918" y="0" x="0 6.60744 14.25228">can</tspan></text>
+        <text id="text920" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,224.95,303.07)"><tspan id="tspan918" y="0" x="0 8.0278797 16.90164">can</tspan></text>
       </g>
     </g>
     <g id="g922">
       <g clip-path="url(#clipPath928)" id="g924">
-        <text id="text932" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,382.54,322.87)"><tspan id="tspan930" y="0" x="0 7.6448398 11.31564 17.556">also</tspan></text>
+        <text id="text932" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,258.22,303.07)"><tspan id="tspan930" y="0" x="0 8.8737602 12.46476 20.49264">also</tspan></text>
       </g>
     </g>
     <g id="g934">
       <g clip-path="url(#clipPath940)" id="g936">
-        <text id="text944" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,419.62,322.87)"><tspan id="tspan942" y="0" x="0 8.3999996">be</tspan></text>
+        <text id="text944" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,294.82,303.07)"><tspan id="tspan942" y="0" x="0 8.8800001">be</tspan></text>
       </g>
     </g>
     <g id="g946">
       <g clip-path="url(#clipPath952)" id="g948">
-        <text id="text956" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,303.67)"><tspan id="tspan954" y="0" x="0 8.3789997 13.8054 22.08864 29.302561 32.973358 39.213718 42.94836 51.35928 59.738281 67.686363">provisioned</tspan></text>
+        <text id="text956" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,320.02,303.07)"><tspan id="tspan954" y="0" x="0 8.9854803 14.30016 23.17392 31.153919 34.77684 42.693001 46.284 55.157761 64.031517 72.905281">provisioned</tspan></text>
       </g>
     </g>
     <g id="g958">
       <g clip-path="url(#clipPath964)" id="g960">
-        <text id="text968" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,130.63,303.67)"><tspan id="tspan966" y="0" x="0 5.2827601 13.78944 21.945">too,</tspan></text>
+        <text id="text968" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,409.18,303.07)"><tspan id="tspan966" y="0" x="0 4.4400001 13.31688 22.19376">too,</tspan></text>
       </g>
     </g>
     <g id="g970">
       <g clip-path="url(#clipPath976)" id="g972">
-        <text id="text980" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,160.51,303.67)"><tspan id="tspan978" y="0" x="0 8.5066795 16.311119 20.875681 29.38236 34.77684">before</tspan></text>
+        <text id="text980" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,283.87)"><tspan id="tspan978" y="0" x="0 8.8737602 17.74752 22.184401 31.058161 36.372841">before</tspan></text>
       </g>
     </g>
     <g id="g982">
       <g clip-path="url(#clipPath988)" id="g984">
-        <text id="text992" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,207.19,303.67)"><tspan id="tspan990" y="0" x="0 8.5066795 16.45476 20.125561 28.50456">being</tspan></text>
+        <text id="text992" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,103.39,283.87)"><tspan id="tspan990" y="0" x="0 8.8737602 17.74752 21.33852 30.21228">being</tspan></text>
       </g>
     </g>
     <g id="g994">
       <g clip-path="url(#clipPath1000)" id="g996">
-        <text id="text1004" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,247.27,303.67)"><tspan id="tspan1002" y="0" x="0 12.75204 21.051241 28.26516 36.324959">moved</tspan></text>
+        <text id="text1004" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,149.95,283.87)"><tspan id="tspan1002" y="0" x="0 13.29468 22.29612 30.323999 39.197762">moved</tspan></text>
       </g>
     </g>
     <g id="g1006">
       <g clip-path="url(#clipPath1012)" id="g1008">
-        <text id="text1016" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,295.9,303.67)"><tspan id="tspan1014" y="0" x="0 5.2800002">to</tspan></text>
+        <text id="text1016" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,205.51,283.87)"><tspan id="tspan1014" y="0" x="0 4.4400001">to</tspan></text>
       </g>
     </g>
     <g id="g1018">
       <g clip-path="url(#clipPath1024)" id="g1020">
-        <text id="text1028" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,313.54,303.67)"><tspan id="tspan1026" y="0" x="0">a</tspan></text>
+        <text id="text1028" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,226.27,283.87)"><tspan id="tspan1026" y="0" x="0">a</tspan></text>
       </g>
     </g>
     <g id="g1030">
       <g clip-path="url(#clipPath1036)" id="g1032">
-        <text id="text1040" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,325.18,303.67)"><tspan id="tspan1038" y="0" x="0 6.2403598 14.18844 22.56744 30.33996 35.495041 43.060081 48.342838">separate</tspan></text>
+        <text id="text1040" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,242.71,283.87)"><tspan id="tspan1038" y="0" x="0 8.0438404 16.917601 25.839239 34.713001 40.027679 49.029121 53.466">separate</tspan></text>
       </g>
     </g>
     <g id="g1042">
       <g clip-path="url(#clipPath1048)" id="g1044">
-        <text id="text1052" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,385.54,303.67)"><tspan id="tspan1050" y="0" x="0 9.00144 19.423321 27.22776">VNet</tspan></text>
+        <text id="text1052" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,312.46,283.87)"><tspan id="tspan1050" y="0" x="0 10.64532 22.16844 31.0422">VNet</tspan></text>
       </g>
     </g>
     <g id="g1054">
       <g clip-path="url(#clipPath1060)" id="g1056">
-        <text id="text1064" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,422.14,303.67)"><tspan id="tspan1062" y="0" x="0 5.2800002">to</tspan></text>
+        <text id="text1064" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,355.54,283.87)"><tspan id="tspan1062" y="0" x="0 4.4400001">to</tspan></text>
       </g>
     </g>
     <g id="g1066">
       <g clip-path="url(#clipPath1072)" id="g1068">
-        <text id="text1076" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,284.47)"><tspan id="tspan1074" y="0" x="0 6.2403598 9.9430799 22.69512 31.07412 34.744919 42.389759 47.624641">simulate</tspan></text>
+        <text id="text1076" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,376.42,283.87)"><tspan id="tspan1074" y="0" x="0 8.0278797 11.61888 24.913561 33.787319 37.330441 46.204201 50.641079">simulate</tspan></text>
       </g>
     </g>
     <g id="g1078">
       <g clip-path="url(#clipPath1084)" id="g1080">
-        <text id="text1088" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,109.51,284.47)"><tspan id="tspan1086" y="0" x="0 5.2827601 13.23084 25.919041 34.32996 39.59676">remote</tspan></text>
+        <text id="text1088" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,264.67)"><tspan id="tspan1086" y="0" x="0 5.3146801 14.18844 27.48312 36.35688 40.793758">remote</tspan></text>
       </g>
     </g>
     <g id="g1090">
       <g clip-path="url(#clipPath1096)" id="g1092">
-        <text id="text1100" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,160.99,284.47)"><tspan id="tspan1098" y="0" x="0 6.75108 10.42188 14.14056 22.08864 30.33996">client</tspan></text>
+        <text id="text1100" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,104.95,264.67)"><tspan id="tspan1098" y="0" x="0 8.0278797 11.61888 15.20988 24.083639 32.957401">client</tspan></text>
       </g>
     </g>
     <g id="g1102">
       <g clip-path="url(#clipPath1108)" id="g1104">
-        <text id="text1112" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,200.23,284.47)"><tspan id="tspan1110" y="0" x="0 6.60744 15.01836 23.39736 31.77636 39.724442 46.475521 51.822121 55.556759 62.770679 66.441483 71.867882">connectivity</tspan></text>
+        <text id="text1112" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,146.71,264.67)"><tspan id="tspan1110" y="0" x="0 8.0278797 16.90164 25.7754 34.649158 43.522919 51.566761 56.003639 59.594639 67.62252 71.213516 75.650398">connectivity</tspan></text>
       </g>
     </g>
     <g id="g1114">
       <g clip-path="url(#clipPath1120)" id="g1116">
-        <text id="text1124" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: Calibri; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,278.26,284.47)"><tspan id="tspan1122" y="0" x="0">.</tspan></text>
+        <text id="text1124" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(0, 0, 0); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,229.03,264.67)"><tspan id="tspan1122" y="0" x="0">.</tspan></text>
+      </g>
+    </g>
+    <g id="g1126">
+      <g clip-path="url(#clipPath1132)" id="g1128">
+        <text id="text1136" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(31, 35, 40); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,487.66)"><tspan id="tspan1134" y="0" x="0 9.7515602 18.62532 22.16844 30.228239 34.665119 39.102001 47.975761 61.270439 70.144203 73.76712 82.640877 87.077759 95.951523 100.3884 109.26216 118.13592 127.00968 130.6326 139.50636 147.31081 155.33868 159.88728 168.76105 173.30965 182.1834 186.62029 197.26559 210.60815 215.15675 224.03052 232.90428 240.94812 244.53912 249.85381 258.72757 267.60132 280.896 289.76974 298.64352 303.08041 307.64496 312.08185 320.9556 329.82935 334.26624 338.83081 346.85867 355.73245 364.6062 369.04309 377.91684 386.79059 391.35516 400.22891 408.25681 417.13055 426.00433 430.44119 434.87808 443.75183 449.06653 453.59915 458.03604 466.90979 474.93768 479.37457 482.96555 491.83932 500.71307 505.26169 513.28955 522.16333 527.47803 531.02112 539.8949 548.76862 556.82843 561.15363 570.02734 578.90112 583.33801 592.21173 601.08551 609.95929 614.39618 618.0191 626.04694 634.92072 639.3576 642.94861 651.82239 660.69611 665.133 675.81024 680.24713 689.12085 697.99463 702.43152 711.3053 720.17902 725.49371 729.06879 737.09662 745.9704 750.40729 753.99829 762.87207 771.74579">This template deploys a 3 VM environment that can be used for testing various authentication &amp; authorization </tspan></text>
+      </g>
+    </g>
+    <g id="g1138">
+      <g clip-path="url(#clipPath1144)" id="g1140">
+        <text id="text1148" style="font-variant: normal; font-weight: normal; font-size: 15.96px; font-family: ArialMT; writing-mode: lr-tb; fill: rgb(31, 35, 40); fill-opacity: 1; fill-rule: nonzero; stroke: none; white-space: pre;" transform="matrix(1,0,0,-1,50.568,468.94)"><tspan id="tspan1146" y="0" x="0 8.0278797 16.055759 24.92952 33.80328 42.67704 47.991718 51.53484 60.4086 68.48436 72.809517 77.246399 86.120163 91.434837 96.079201 105.83076 114.70452 119.95536 128.82912 133.15428 142.26744 147.58212 156.45589 164.43588 168.87276 173.565 185.08812 193.96188 198.39876 209.81017 218.68391 223.9986 231.97861 235.7292 246.37453 254.43433 262.46219 271.33597 279.36383 287.39172 291.71689 297.03156 306.71927 316.47083 327.99396 338.63928 343.95395 348.58237 353.01923 361.89301 366.44159 375.31537 380.63004 389.50381 393.94067 402.81445 410.79443 415.26324 424.13699 433.01077 437.68704 443.00171 451.87549 459.85547 468.72925 477.603 482.91769 490.94556 499.81931 507.8472">scenarios for Zero Trust Network Access (ZTNA) to protected resources.</tspan></text>
       </g>
     </g>
   </g>
