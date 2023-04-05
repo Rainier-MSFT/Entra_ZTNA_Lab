@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="73.322 114.245 1124.831 353.819" height="720" width="1280" id="svg2" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs id="defs6">
+<svg viewBox="73.322 114.245 1124.831 353.819" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
     <clipPath id="clipPath18" clipPathUnits="userSpaceOnUse">
       <path style="clip-rule:evenodd" id="path16" d="M 0,1.2207e-4 H 960 V 540.00012 H 0 Z"/>
     </clipPath>
@@ -284,7 +284,7 @@
       <path style="clip-rule:evenodd" id="path1118" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z"/>
     </clipPath>
   </defs>
-  <g transform="matrix(1.333333, 0, 0, -1.333333, 0, 720)" id="g10">
+  <g transform="matrix(1.333333, 0, 0, -1.333333, 0, 720.000021)" id="g10">
     <g id="g12">
       <g clip-path="url(#clipPath18)" id="g14">
         <path id="path20" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none" d="M 0,6.1035e-5 H 960 V 540.00006 H 0 Z"/>
