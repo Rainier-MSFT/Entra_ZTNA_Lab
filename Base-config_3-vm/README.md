@@ -36,9 +36,14 @@ The following ARM resources are deployed as part of the solution:
 + **Public IP addresses**: 1 static public IP per VM
 
 ### Extensions
-+ **JoinDomain**: Each member VM uses the **JsonADDomainExtension** extension to join the domain
-+ **BGInfo**: The **BGInfo** extension is applied to all VMs, but will not display over RDP sessions that have the wallpaper disabled
-+ **Antimalware**: The **iaaSAntimalware** extension is applied to all VMs with basic scheduled scan and exclusion settings
++ Each member VM uses the **JsonADDomainExtension** extension to join the domain post Azure deployment
++ The **BGInfo** extension is applied to all VMs, but will not display over RDP sessions that have the wallpaper disabled
++ The **Antimalware** extension is applied to all VMs with basic scheduled scan and exclusion settings
++ A **CustomExtension** is used to apply a set of common configs to such as enabling TLS1.2 & .Net connectivity, disabling IE ESC, relaxing UAC, and a bunch of extras to help complete the hybrid setup  
+
+### Remote Management
++ **RDP** is enabled on all VMs
++ **Azure Bastion** basic is also offered as part of the deployment for scenarios where RDP cannot be used to manage the VMs diretcly  
 
 <br>
 
