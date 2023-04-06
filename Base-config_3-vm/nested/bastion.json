@@ -34,7 +34,7 @@
     "variables": {
         "publicIpAddressName": "[format('{0}-pip', parameters('bastionHostName'))]",
         "bastionSubnetName": "AzureBastionSubnet",
-        "nsgName": "[format('{0}-nsg', parameters('bastionHostName'))]"
+        "bastionNsgName": "[format('{0}-NSG', parameters('bastionHostName'))]"
     },
     "resources": [
         {
@@ -52,7 +52,7 @@
         {
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2022-07-01",
-            "name": "[variables('nsgName')]",
+            "name": "[variables('bastionNsgName')]",
             "location": "[parameters('location')]",
             "properties": {
                 "securityRules": [
@@ -206,12 +206,12 @@
             "apiVersion": "2022-07-01",
             "name": "[format('{0}/{1}', parameters('vnetName'), variables('bastionSubnetName'))]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsgName'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('bastionNsgName'))]"
             ],
             "properties": {
                 "addressPrefix": "[parameters('bastionSubnetIpPrefix')]",
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsgName'))]"
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('bastionNsgName'))]"
                 }
             }
         },
@@ -221,6 +221,7 @@
             "name": "[parameters('bastionHostName')]",
             "location": "[parameters('location')]",
             "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
                 "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), variables('bastionSubnetName'))]"
             ],
