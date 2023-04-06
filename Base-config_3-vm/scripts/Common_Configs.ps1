@@ -3,6 +3,9 @@
     This script applies a bunch of pre-configurations to each VM, post ARM deployment.
 #>
 
+# Relax PSH signing policy
+Set-ExecutionPolicy -ExecutionPolicy unrestricted -force
+
 ## Enable TLS1.2 (Connectivity - Critical)
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols" -Name "TLS 1.2"
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2" -Name "Client"
@@ -52,4 +55,46 @@ $shortcut.WindowStyle = 1
 $ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238";
 #$ShortCut.Hotkey = 'CTRL+SHIFT+T';
 $shortcut.Save()
+}
+
+## Instanstiate test apps on App VM
+if ($env:computername -like "*APP*") {
+## Can be customized ensure the folder path has trailing "\" 
+$destinationDirectory ="c:\AppDemov1\"
+if ([int]$PSVersionTable.PSVersion.Major -lt 5)
+{
+    Write-Host "Minimum required version is PowerShell 5.0"
+    Write-Host "Refer https://aka.ms/wmf5download"
+    Write-Host "Program will terminate now .."
+    exit
+}
+#[string] $AppProxyConnector =  Read-Host "AppProxy Connector Machine Netbios Name ( used for KCD Config )" 
+[string] $AppProxyConnector = "Ignore"
+##Donot Modify 
+function Invoke-Script
+{
+    param
+    (
+        [Parameter(Mandatory = $true)]
+        [string]
+        $Script,
+
+        [Parameter(Mandatory = $false)]
+        [object[]]
+        $ArgumentList
+    )
+
+    $ScriptBlock = [Scriptblock]::Create((Get-Content $Script -Raw))
+    Invoke-Command -NoNewScope -ArgumentList $ArgumentList -ScriptBlock $ScriptBlock -Verbose
+}
+[string]$kickStartFolder = $destinationDirectory + "DemoSuite-master\Website\"
+[string]$kickStartScript = $kickStartFolder + "install.ps1"
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+Import-Module BitsTransfer
+Start-BitsTransfer -Source 'https://github.com/jeevanbisht/DemoSuite/archive/master.zip' -Destination "$env:TEMP\master.zip";
+New-Item -Force -ItemType directory -Path $destinationDirectory
+Expand-Archive  "$env:TEMP\master.zip" -DestinationPath $destinationDirectory -Force 
+$args = @()
+$args += ("$kickStartFolder", "$AppProxyConnector")
+Invoke-Script $kickStartScript $args
 }
