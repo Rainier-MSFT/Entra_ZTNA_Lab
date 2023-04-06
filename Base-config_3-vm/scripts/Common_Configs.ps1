@@ -53,15 +53,15 @@ $shortcut.TargetPath = $MSEdgeExe
 $ShortCut.Arguments = "https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/AzureADConnect"
 $shortcut.WindowStyle = 1
 $ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238";
-#$ShortCut.Hotkey = 'CTRL+SHIFT+T';
+$ShortCut.Hotkey = 'CTRL+SHIFT+T';
 $shortcut.Save()
 }
 
 ## Install AD Certificate Services on DC
-if ($env:computername -like "*DC*") {
-Install-WindowsFeature AD-Certificate,ADCS-Cert-Authority,ADCS-Web-Enrollment -IncludeManagementTools
-Install-AdcsCertificationAuthority -CAType EnterpriseRootCa -Force
-}
+#if ($env:computername -like "*DC*") {
+#Install-WindowsFeature AD-Certificate,ADCS-Cert-Authority,ADCS-Web-Enrollment -IncludeManagementTools
+#Install-AdcsCertificationAuthority -CAType EnterpriseRootCa -Force
+#}
 
 ## Instanstiate test apps on App VM
 if ($env:computername -like "*APP*") {
