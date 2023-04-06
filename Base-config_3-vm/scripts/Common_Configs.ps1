@@ -37,7 +37,7 @@ If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
     MsiExec.exe /i "C:\Users\Public\Downloads\MicrosoftEdgeEnterpriseX64.msi" /qn
     ## Disable Internet Explorer (Disable only to retain IE legacy mode in Edge)
     dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
-    stop-process -name explorer -force
+    #stop-process -name explorer -force
 }
 
 ## Download Azure AD Connect (If DC - Optional)
