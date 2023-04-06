@@ -4,7 +4,7 @@
 #>
 
 # Relax PSH signing policy
-Set-ExecutionPolicy -ExecutionPolicy unrestricted -force
+#Set-ExecutionPolicy -ExecutionPolicy unrestricted -force
 
 ## Enable TLS1.2 (Connectivity - Critical)
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols" -Name "TLS 1.2"
