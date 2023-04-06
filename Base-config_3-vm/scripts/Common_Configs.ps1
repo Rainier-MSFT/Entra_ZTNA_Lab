@@ -95,7 +95,6 @@ function Invoke-Script
 }
 [string]$kickStartFolder = $destinationDirectory + "DemoSuite-master\Website\"
 [string]$kickStartScript = $kickStartFolder + "install.ps1"
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Import-Module BitsTransfer
 Start-BitsTransfer -Source 'https://github.com/jeevanbisht/DemoSuite/archive/master.zip' -Destination "$env:TEMP\master.zip";
 New-Item -Force -ItemType directory -Path $destinationDirectory
