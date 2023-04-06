@@ -30,8 +30,8 @@ $MSEdgeExe = (Get-ChildItem -Path "C:\Program Files\Microsoft\Edge\Application\m
 If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
     ## Download & install Edge Browser
     Import-Module BitsTransfer
-    Start-BitsTransfer -Source "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/68c5e2fb-3fa9-493b-a593-69ab63bd2651/MicrosoftEdgeEnterpriseX64.msi" -Destination "$env:USERPROFILE\Downloads\MicrosoftEdgeEnterpriseX64.msi"
-    MsiExec.exe /i "$env:USERPROFILE\Downloads\MicrosoftEdgeEnterpriseX64.msi" /qn
+    Start-BitsTransfer -Source "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/68c5e2fb-3fa9-493b-a593-69ab63bd2651/MicrosoftEdgeEnterpriseX64.msi" -Destination "C:\Users\Public\Downloads\MicrosoftEdgeEnterpriseX64.msi"
+    MsiExec.exe /i "C:\Users\Public\Downloads\MicrosoftEdgeEnterpriseX64.msi" /qn
     ## Disable Internet Explorer (Disable only to retain IE legacy mode in Edge)
     dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
     stop-process -name explorer -force
@@ -40,16 +40,16 @@ If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
 ## Download Azure AD Connect (If DC - Optional)
 If ( Get-WmiObject -Query "select * from Win32_OperatingSystem where ProductType='2'" ) {
 Import-Module BitsTransfer
-Start-BitsTransfer -Source "https://download.microsoft.com/download/B/0/0/B00291D0-5A83-4DE7-86F5-980BC00DE05A/AzureADConnect.msi" -Destination "$env:PUBLIC\Desktop\Install Azure AD Connect.msi"
+Start-BitsTransfer -Source "https://download.microsoft.com/download/B/0/0/B00291D0-5A83-4DE7-86F5-980BC00DE05A/AzureADConnect.msi" -Destination "C:\Users\Public\Desktop\Install Azure AD Connect.msi"
 
 ## Drop Azure AD Connect portal link on desktop (Optional)
-$ShortcutPath = "$env:USERPROFILE\Desktop\AAD Sync Portal.lnk"
+$ShortcutPath = "C:\Users\Public\Desktop\AAD Sync Portal.lnk"
 $WScriptObj = New-Object -ComObject ("WScript.Shell")
 $shortcut = $WscriptObj.CreateShortcut($ShortcutPath)
 $shortcut.TargetPath = $MSEdgeExe
 $ShortCut.Arguments = "https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/AzureADConnect"
 $shortcut.WindowStyle = 1
 $ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238";
-$ShortCut.Hotkey = 'CTRL+SHIFT+T';
+#$ShortCut.Hotkey = 'CTRL+SHIFT+T';
 $shortcut.Save()
 }
