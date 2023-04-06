@@ -57,6 +57,12 @@ $ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238";
 $shortcut.Save()
 }
 
+## Install AD Certificate Services on DC
+if ($env:computername -like "*DC*") {
+Install-WindowsFeature AD-Certificate,ADCS-Cert-Authority,ADCS-Web-Enrollment -IncludeManagementTools
+Install-AdcsCertificationAuthority -CAType EnterpriseRootCa -Force
+}
+
 ## Instanstiate test apps on App VM
 if ($env:computername -like "*APP*") {
 ## Can be customized ensure the folder path has trailing "\" 
