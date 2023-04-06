@@ -32,7 +32,7 @@
         }
     },
     "variables": {
-        "publicIpAddressName": "[format('{0}-pip', parameters('bastionHostName'))]",
+        "publicIpAddressName": "[format('{0}-PIP', parameters('bastionHostName'))]",
         "bastionSubnetName": "AzureBastionSubnet",
         "bastionNsgName": "[format('{0}-NSG', parameters('bastionHostName'))]"
     },
