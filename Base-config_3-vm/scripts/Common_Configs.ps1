@@ -96,9 +96,9 @@ function Invoke-Script
 [string]$kickStartFolder = $destinationDirectory + "DemoSuite-master\Website\"
 [string]$kickStartScript = $kickStartFolder + "install.ps1"
 Import-Module BitsTransfer
-Start-BitsTransfer -Source 'https://github.com/jeevanbisht/DemoSuite/archive/master.zip' -Destination "$env:TEMP\master.zip";
+Start-BitsTransfer -Source 'https://github.com/jeevanbisht/DemoSuite/archive/master.zip' -Destination "C:\Users\Public\Downloads\master.zip";
 New-Item -Force -ItemType directory -Path $destinationDirectory
-Expand-Archive  "$env:TEMP\master.zip" -DestinationPath $destinationDirectory -Force 
+Expand-Archive  "C:\Users\Public\Downloads\master.zip" -DestinationPath $destinationDirectory -Force 
 $args = @()
 $args += ("$kickStartFolder", "$AppProxyConnector")
 Invoke-Script $kickStartScript $args
