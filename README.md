@@ -1,4 +1,4 @@
-# Identity & Network Access Labs
+# Rapid Labs - Identity & Network Access
 
 ![TL logo](https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/images/tlg.png "Rainier-MSFT")
 
