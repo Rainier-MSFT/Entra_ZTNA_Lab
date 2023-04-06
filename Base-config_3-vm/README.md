@@ -49,8 +49,9 @@ You can deploy the environment in one of two ways:
 + Execute the PowerShell script at https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/scripts/Deploy-Base-config_3-vm.ps1 on your local computer
 
 ### Pre-requisites
-Prior to deploying the template, have the following information ready:
+Prior to deploying the template, have the following ready:
 
++ An Azure resource group within the target subscription being deploying to
 + A DNS label prefix for the URLs of the public IP addresses of your virtual machines. These FQDNs are generated for each virtual machine in your deployment using format _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. Enter this label in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button or for the value of the __dnsLabelPrefix__ variable in the template parameters file
 
 ### Client machine
