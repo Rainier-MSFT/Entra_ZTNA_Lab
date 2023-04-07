@@ -96,7 +96,7 @@ function Invoke-Script
 [string]$kickStartFolder = $destinationDirectory + "DemoSuite-master\Website\"
 [string]$kickStartScript = $kickStartFolder + "install.ps1"
 Import-Module BitsTransfer
-Start-BitsTransfer -Source 'https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_1-vm/Resources/DemoSuite.zip' -Destination "C:\Users\Public\Downloads\master.zip"
+Start-BitsTransfer -Source 'https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_VM/Resources/DemoSuite.zip' -Destination "C:\Users\Public\Downloads\master.zip"
 New-Item -Force -ItemType directory -Path $destinationDirectory
 Expand-Archive  "C:\Users\Public\Downloads\master.zip" -DestinationPath $destinationDirectory -Force 
 $args = @()
