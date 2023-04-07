@@ -15,7 +15,6 @@
 </a><p>
 
 <a><img src="images/ready3.svg"/></a>
-
 ## Azure Resources
 The following ARM resources are deployed as part of the solution:
 
