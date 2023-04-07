@@ -95,10 +95,10 @@ function Invoke-Script
 }
 [string]$kickStartFolder = $destinationDirectory + "DemoSuite-master\Website\"
 [string]$kickStartScript = $kickStartFolder + "install.ps1"
-Import-Module BitsTransfer
-Start-BitsTransfer -Source 'https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_VM/Resources/DemoSuite.zip' -Destination "C:\Users\Public\Downloads\master.zip"
+Invoke-WebRequest -Uri "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_VM/Resources/DemoSuite.zip"
+(New-Object Net.WebClient).DownloadFile('https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_VM/Resources/DemoSuite.zip','C:\Users\Public\Downloads\master.zip')
 New-Item -Force -ItemType directory -Path $destinationDirectory
-Expand-Archive  "C:\Users\Public\Downloads\master.zip" -DestinationPath $destinationDirectory -Force 
+Expand-Archive 'C:\Users\Public\Downloads\master.zip' -DestinationPath $destinationDirectory -Force 
 $args = @()
 $args += ("$kickStartFolder", "$AppProxyConnector")
 Invoke-Script $kickStartScript $args
