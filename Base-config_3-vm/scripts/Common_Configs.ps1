@@ -41,7 +41,7 @@ If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
 }
 
 ## Download Azure AD Connect (If DC - Optional)
-If ( Get-WmiObject -Query "select * from Win32_OperatingSystem where ProductType='2'" ) {
+If ($env:computername -like "*APP*") {
 Import-Module BitsTransfer
 Start-BitsTransfer -Source "https://download.microsoft.com/download/B/0/0/B00291D0-5A83-4DE7-86F5-980BC00DE05A/AzureADConnect.msi" -Destination "C:\Users\Public\Desktop\Install Azure AD Connect.msi"
 
@@ -52,8 +52,8 @@ $shortcut = $WscriptObj.CreateShortcut($ShortcutPath)
 $shortcut.TargetPath = $MSEdgeExe
 $ShortCut.Arguments = "https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/AzureADConnect"
 $shortcut.WindowStyle = 1
-$ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238";
-$ShortCut.Hotkey = 'CTRL+SHIFT+T';
+$ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238"
+$ShortCut.Hotkey = 'CTRL+SHIFT+T'
 $shortcut.Save()
 }
 
@@ -96,7 +96,7 @@ function Invoke-Script
 [string]$kickStartFolder = $destinationDirectory + "DemoSuite-master\Website\"
 [string]$kickStartScript = $kickStartFolder + "install.ps1"
 Import-Module BitsTransfer
-Start-BitsTransfer -Source 'https://github.com/jeevanbisht/DemoSuite/archive/refs/heads/master.zip' -Destination "C:\Users\Public\Downloads\master.zip";
+Start-BitsTransfer -Source 'https://github.com/jeevanbisht/DemoSuite/archive/refs/heads/master.zip' -Destination "C:\Users\Public\Downloads\master.zip"
 New-Item -Force -ItemType directory -Path $destinationDirectory
 Expand-Archive  "C:\Users\Public\Downloads\master.zip" -DestinationPath $destinationDirectory -Force 
 $args = @()
