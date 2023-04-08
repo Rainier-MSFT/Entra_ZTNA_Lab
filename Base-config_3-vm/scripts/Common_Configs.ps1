@@ -20,7 +20,7 @@ New-ItemProperty "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -Name "SchU
 ## Relax UAC (Optional)
 Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 00000000
 
-## Install Microsoft Edge (If server 2016 - Optional)
+## Install Microsoft Edge (If server 2016)
 $MSEdgeExe = (Get-ChildItem -Path "C:\Program Files\Microsoft\Edge\Application\msedge.exe","C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ErrorAction SilentlyContinue)
 If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
     ## Download & install Edge Browser
@@ -56,6 +56,16 @@ $shortcut.Save()
 
 ## Instanstiate test apps on App VM
 if ($env:computername -like "*APP*") {
+# Deploy iPerf
+Import-Module BitsTransfer
+Start-BitsTransfer -Source "https://iperf.fr/download/windows/iperf-3.1.3-win64.zip" -Destination "C:\Users\Public\Downloads\iperf-3.1.3-win64.zip"
+Expand-Archive "C:\Users\Public\Downloads\iperf-3.1.3-win64.zip" -DestinationPath "C:\iPerf" -Force
+## Allow inbound traffic
+New-NetFirewallRule -DisplayName 'iPerf-Server-Inbound-TCP' -Direction Inbound -Protocol TCP -LocalPort 5201 -Action Allow | Enable-NetFirewallRule
+New-NetFirewallRule -DisplayName 'iPerf-Server-Inbound-UDP' -Direction Inbound -Protocol UDP -LocalPort 5201 -Action Allow | Enable-NetFirewallRule
+## Create iPerf starter on desktop
+Set-Content "C:\Users\Public\Desktop\RuniPerf.bat" 'C:\iPerf\iperf-3.1.3-win64\iperf3.exe -s' -Encoding Ascii
+# Deploy IIS apps
 ## Can be customized ensure the folder path has trailing "\" 
 $destinationDirectory ="c:\AppDemov1\"
 if ([int]$PSVersionTable.PSVersion.Major -lt 5)
@@ -65,7 +75,7 @@ if ([int]$PSVersionTable.PSVersion.Major -lt 5)
     Write-Host "Program will terminate now .."
     exit
 }
-#[string] $AppProxyConnector =  Read-Host "AppProxy Connector Machine Netbios Name ( used for KCD Config )" 
+#[string] $AppProxyConnector =  Read-Host "AppProxy Connector Machine Netbios Name (For KCD Config)" 
 [string] $AppProxyConnector = "Ignore"
 ##Donot Modify 
 function Invoke-Script
@@ -95,7 +105,7 @@ $args += ("$kickStartFolder", "$AppProxyConnector")
 Invoke-Script $kickStartScript $args
 }
 
-## Disable IE Enhanced Security Config (Internet access - Optional)
+## Disable IE Enhanced Security Config (Internet access)
 Write-Host "Disabling IE Enhanced Security Configuration (ESC)..."
 $AdminKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}"
 $UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}"
