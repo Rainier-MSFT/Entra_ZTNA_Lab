@@ -17,14 +17,6 @@ New-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHAN
 New-ItemProperty "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -Name "SchUseStrongCrypto" -Value 00000001 -PropertyType "Dword"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-## Disable IE Enhanced Security Config (Internet access - Optional)
-Write-Host "Disabling IE Enhanced Security Configuration (ESC)..."
-$AdminKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}"
-$UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}"
-Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 0
-Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
-#Stop-Process -Name Explorer
-
 ## Relax UAC (Optional)
 Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 00000000
 
@@ -41,7 +33,7 @@ If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
 }
 
 ## Download Azure AD Connect (If DC - Optional)
-If ($env:computername -like "*APP*") {
+If ($env:computername -like "*DC*") {
 Import-Module BitsTransfer
 Start-BitsTransfer -Source "https://download.microsoft.com/download/B/0/0/B00291D0-5A83-4DE7-86F5-980BC00DE05A/AzureADConnect.msi" -Destination "C:\Users\Public\Desktop\Install Azure AD Connect.msi"
 
@@ -103,3 +95,11 @@ $args = @()
 $args += ("$kickStartFolder", "$AppProxyConnector")
 Invoke-Script $kickStartScript $args
 }
+
+## Disable IE Enhanced Security Config (Internet access - Optional)
+Write-Host "Disabling IE Enhanced Security Configuration (ESC)..."
+$AdminKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}"
+$UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}"
+Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 0
+Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
+#Stop-Process -Name Explorer
