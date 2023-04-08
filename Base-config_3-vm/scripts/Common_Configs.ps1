@@ -36,7 +36,6 @@ If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
 If ($env:computername -like "*DC*") {
 Import-Module BitsTransfer
 Start-BitsTransfer -Source "https://download.microsoft.com/download/B/0/0/B00291D0-5A83-4DE7-86F5-980BC00DE05A/AzureADConnect.msi" -Destination "C:\Users\Public\Desktop\Install Azure AD Connect.msi"
-
 ## Drop Azure AD Connect portal link on desktop (Optional)
 $ShortcutPath = "C:\Users\Public\Desktop\AAD Sync Portal.lnk"
 $WScriptObj = New-Object -ComObject ("WScript.Shell")
@@ -87,7 +86,7 @@ function Invoke-Script
 }
 [string]$kickStartFolder = $destinationDirectory + "DemoSuite-master\Website\"
 [string]$kickStartScript = $kickStartFolder + "install.ps1"
-Invoke-WebRequest -Uri "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_VM/Resources/DemoSuite.zip"
+Invoke-WebRequest -Uri "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_VM/Resources/DemoSuite.zip" -UseBasicParsing
 (New-Object Net.WebClient).DownloadFile('https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_VM/Resources/DemoSuite.zip','C:\Users\Public\Downloads\master.zip')
 New-Item -Force -ItemType directory -Path $destinationDirectory
 Expand-Archive 'C:\Users\Public\Downloads\master.zip' -DestinationPath $destinationDirectory -Force 
