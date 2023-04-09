@@ -20,6 +20,16 @@ New-ItemProperty "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -Name "SchU
 ## Relax UAC (Optional)
 Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 00000000
 
+## Disable IE Enhanced Security Config (Relax Internet access)
+Write-Host "Disabling IE Enhanced Security Configuration (ESC)..."
+$AdminKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}"
+$UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}"
+Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 0
+Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
+
+# Disable IE first run to allow downloads
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize" -Value 2
+
 ## Install Microsoft Edge (If server 2016)
 $MSEdgeExe = (Get-ChildItem -Path "C:\Program Files\Microsoft\Edge\Application\msedge.exe","C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ErrorAction SilentlyContinue)
 If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
@@ -27,9 +37,6 @@ If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
     Import-Module BitsTransfer
     Start-BitsTransfer -Source "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/68c5e2fb-3fa9-493b-a593-69ab63bd2651/MicrosoftEdgeEnterpriseX64.msi" -Destination "C:\Users\Public\Downloads\MicrosoftEdgeEnterpriseX64.msi"
     MsiExec.exe /i "C:\Users\Public\Downloads\MicrosoftEdgeEnterpriseX64.msi" /qn
-    ## Disable Internet Explorer (Disable only to retain IE legacy mode in Edge)
-    dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
-    #stop-process -name explorer -force
 }
 
 ## Download Azure AD Connect (If DC - Optional)
@@ -96,8 +103,7 @@ function Invoke-Script
 }
 [string]$kickStartFolder = $destinationDirectory + "DemoSuite-master\Website\"
 [string]$kickStartScript = $kickStartFolder + "install.ps1"
-Invoke-WebRequest -Uri "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_VM/Resources/DemoSuite.zip" -UseBasicParsing
-(New-Object Net.WebClient).DownloadFile('https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_VM/Resources/DemoSuite.zip','C:\Users\Public\Downloads\master.zip')
+Start-BitsTransfer -Source 'https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_VM/Resources/DemoSuite.zip?raw=true' -Destination 'C:\Users\Public\Downloads\master.zip'
 New-Item -Force -ItemType directory -Path $destinationDirectory
 Expand-Archive 'C:\Users\Public\Downloads\master.zip' -DestinationPath $destinationDirectory -Force 
 $args = @()
@@ -105,10 +111,6 @@ $args += ("$kickStartFolder", "$AppProxyConnector")
 Invoke-Script $kickStartScript $args
 }
 
-## Disable IE Enhanced Security Config (Internet access)
-Write-Host "Disabling IE Enhanced Security Configuration (ESC)..."
-$AdminKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}"
-$UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}"
-Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 0
-Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
-#Stop-Process -Name Explorer
+## Disable Internet Explorer (Disable only to retain IE legacy mode in Edge)
+dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
+#stop-process -name explorer -force
