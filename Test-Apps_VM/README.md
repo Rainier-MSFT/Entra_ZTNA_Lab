@@ -1,6 +1,6 @@
 <p dir='rtl' align='right'>Last updated 21/03/2023</p>
 
-# Entra ZTNA Lab - Test App VM                                                                                                       
+# Entra ZTNA Lab - Test Apps VM                                                                                                       
 
 **Time to deploy**: Approx. 15 minutes
 
@@ -11,7 +11,7 @@
 <img src="images/deploytoazuregov.svg"/>
 <a/>
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2FEntra_ZTNA_Lab%2Fmain%2FBase-config_3-vm%2Fazuredeploy.json" target="_blank">
-<img src="https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_1-vm/images/visualizebutton.svg"/>
+<img src="https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_vm/images/visualizebutton.svg"/>
 </a><p>
 
 This Azure automation deploys a **Test App VM** that's pre-configured with a variety of services for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources. The template provisions a single VM with your prefered version of Windows Server, to an existing Azure VNet.
