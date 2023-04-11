@@ -16,8 +16,6 @@
 
 This Azure automation deploys a **Test App VM** that's pre-configured with a variety of services for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources. The template provisions a single VM with your prefered version of Windows Server, to an existing Azure VNet.
 
-![alt text](images/Test-Apps_1-vm.png "Diagram of the base config deployment")
-
 ## Azure Resources
 
 The following ARM resources are deployed as part of the solution:
