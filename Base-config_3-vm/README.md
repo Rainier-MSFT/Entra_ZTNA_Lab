@@ -56,7 +56,8 @@ Enviroment can be deploy'd in one of two ways:
 ### Pre-requisites
 Prior to deploying the template, have the following ready:
 
-+ A DNS label prefix for the URLs of the public IP addresses of your virtual machines. These FQDNs are generated for each virtual machine in your deployment using format _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. Enter this label in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button or for the value of the __dnsLabelPrefix__ variable in the template parameters file
++ Access to an Azure subscription with sufficient resources to deploy the VM and associated resources
++ A DNS label prefix for the URL of the public IP addresse of your virtual machine. The FQDN will be formated as _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. You'll enter this in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button
 
 ### Client machine
 Test clients can be deployed thru either of the following options of options, providing the machine is Hybrid Azure AD joined (HAADJ) or Azure AD Joined (AADJ) to the test Azure AD tenant:  

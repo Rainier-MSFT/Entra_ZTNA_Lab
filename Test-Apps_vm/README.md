@@ -48,7 +48,8 @@ You can deploy the VM in one of two ways:
 ### Pre-requisites
 Prior to deploying the template, have the following information ready:
 
-+ A DNS label prefix for the URL of the public IP addresse of your virtual machine. The FQDN will be formated as _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. You will enter this in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button or for the value of the __dnsLabelPrefix__ variable in the template parameters file
++ Access to an Azure subscription with sufficient resources to deploy the VM
++ A DNS label prefix for the URL of the public IP addresse of your virtual machine. The FQDN will be formated as _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. You'll enter this in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button
 + An existing Azure VNet & SubNet for deploying the the VM into
 + An existing Active Directory Domain to join the VM to
 
