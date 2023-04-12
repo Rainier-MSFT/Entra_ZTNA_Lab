@@ -1,6 +1,6 @@
 <p dir='rtl' align='right'>Last updated 21/03/2023</p>
 
-# Entra ZTNA Lab - Test Apps VM                                                                                                       
+# Test Apps VM                                                                                                       
 
 **Time to deploy**: Approx. 15 minutes
 
