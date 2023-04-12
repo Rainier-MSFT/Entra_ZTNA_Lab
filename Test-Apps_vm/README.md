@@ -40,7 +40,7 @@ Once deployed, the VM can be administered thru either of the following:
 **Note:** Don't forget to log into the VM using a domain account. I.e. username@domain
 
 ## Deployment
-You can deploy the environment in one of two ways:
+You can deploy the VM in one of two ways:
 
 + Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
 + Execute the "Test-Apps_vm.ps1" powershell script in the 'Resources folder from any computer
