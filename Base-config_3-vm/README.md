@@ -24,7 +24,7 @@ The following ARM resources are deployed as part of the solution:
 + **Client VM**: Optional Windows 10 or 11 client joined to the AD domain
 
 ### Storage
-+ **Storage account**: Diagnostics storage account and client VM storage account if indicated. AD DC and App Server VMs in the deployment use managed disks, so no storage accounts are created for VHDs
++ **Storage account**: For diagnostics and client VM if needed, but AD DC and App Server VMs use managed disks, so otherwise not required
 
 ### Networking
 + **NSG**: Network security group is configured to deny all inbound connectivity with the exception of RDP 3389, but allows outbound Internet connectivity without restrictions
