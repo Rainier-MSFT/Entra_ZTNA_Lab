@@ -23,7 +23,7 @@ Before you deploy an ARM template in this repository, you need to have:
 
 + Access to an Azure subscription with sufficient resources to deploy the template. Most templates in this repository require the following available resources:
 
-  + 12 cores (4 cores per VM)
+  + 4 cores per VM
   + 1 storage account
 
   **Note:** Trial subscriptions do not have sufficient available resources for deployment of these templates
