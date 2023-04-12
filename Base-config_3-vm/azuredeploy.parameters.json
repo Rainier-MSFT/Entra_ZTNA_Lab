@@ -32,7 +32,10 @@
     "_artifactsLocation": {
       "value": "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/"
     },
-    "_artifactsLocation": {
+    "_artifactsLocationSasToken": {
+      "value": ""
+    },
+    "enableBastion": {
       "value": ""
     }
   }

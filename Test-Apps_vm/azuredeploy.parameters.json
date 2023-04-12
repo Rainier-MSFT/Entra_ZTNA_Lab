@@ -30,9 +30,12 @@
       "value": ""
     },
     "_artifactsLocation": {
-      "value": "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/"
+      "value": "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Test-Apps_vm/"
     },
-    "_artifactsLocation": {
+    "_artifactsLocationSasToken": {
+      "value": ""
+    },
+    "privateIPAddress": {
       "value": ""
     }
   }
