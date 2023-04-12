@@ -4,7 +4,7 @@
 	Version: 1.0
 	This PowerShell script installs IIS & a bunch of sample Websites 
     configured for various authentication schemes such as Integrated Windows
-    Authentication (IWA), Headers, and Forms. iPerf is also installed for 
+    Authentication (IWA), Headers, and Forms. iPerf is also included for 
     testing network performance, along with an SMB network file share.  
 .DISCLAIMER
 	THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF

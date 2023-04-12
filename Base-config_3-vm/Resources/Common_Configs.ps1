@@ -3,9 +3,6 @@
     This script applies a bunch of pre-configurations to each VM, post ARM deployment.
 #>
 
-# Relax PSH signing policy
-#Set-ExecutionPolicy -ExecutionPolicy unrestricted -force
-
 ## Enable TLS1.2 (Connectivity - Critical)
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols" -Name "TLS 1.2"
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2" -Name "Client"
