@@ -68,9 +68,30 @@
     "privateIPAddress": {
       "type": "string",
       "metadata": {
-        "description": "Static IP Address to allocate VM, in CIDR notation. I.e. 10.0.0.0/22"
+        "description": "Static IP Address to allocate VM. Must be within range of Subnet"
       },
-      "defaultValue": "10.0.0.11/22"
+      "defaultValue": "10.0.0.11"
+    },
+	"VnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of Azure VNet the VM Subnet belongs to, within the same Resource Group"
+      },
+      "defaultValue": "BaseConfig-01-VNET"
+    },
+	"subnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of Subnet the VM will be connected to, within the same Resource Group"
+      },
+      "defaultValue": "subnet-01"
+    },
+  "DNSip": {
+      "type": "string",
+      "metadata": {
+        "description": "IP of internal DNS server"
+      },
+      "defaultValue": "10.0.0.10"
     }
   },
 
@@ -83,10 +104,7 @@
     "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
 
     "network": {
-      "vnetName": "[concat(parameters('configName'),'-VNET')]",
-      "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', concat(parameters('configName'),'-VNET'), 'subnet-01')]",
-      "vnet": "10.0.0.0/22",
-      "nsgName": "[concat(parameters('configName'),'-NSG')]"
+	"subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('VNetName'), parameters('subnetName'))]"
     },
 
     "VMs": {
@@ -94,7 +112,7 @@
       "appConfigurationFunction": {
         "AppConfig": "AppConfig.ps1\\AppConfig"
       },
-      "appNicIP": "10.0.0.11",
+      "appNicIP": "[parameters('privateIPAddress')]",
       "appPublicIpName": "[concat(parameters('configName'),'-APP_IP')]"
     },
 
@@ -130,9 +148,6 @@
       "name": "[concat(parameters('configName'),'-APP_NIC')]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[resourceGroup().location]",
-      "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
-      ],
       "apiVersion": "2018-01-01",
       "comments": "This is the network interface for the app server VM.",
       "properties": {
@@ -153,7 +168,7 @@
         ],
         "dnsSettings": {
           "dnsServers": [
-            "[variables('VMs').adNicIP]"
+            "[parameters('DNSip')]"
           ],
           "internalDomainNameSuffix": "[parameters('domainName')]"
         }
@@ -195,14 +210,6 @@
   ],
 
   "outputs": {
-    "DcPublicIpAddress": {
-      "type": "string",
-      "value": "[reference(variables('VMs').adPublicIpName).ipAddress]"
-    },
-    "DcFqdn": {
-      "type": "string",
-      "value": "[reference(variables('VMs').adPublicIpName).dnsSettings.fqdn]"
-    },
     "AppPublicIpAddress": {
       "type": "string",
       "value": "[reference(variables('VMs').appPublicIpName).ipAddress]"
