@@ -44,7 +44,7 @@ Once deployed, the VM can be administered thru either of the following:
 You can deploy the VM in one of two ways:
 
 + Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
-+ Execute the "Test-Apps_vm.ps1" powershell script in the 'Resources folder from any computer
++ From any computer, execute the "Test-Apps_vm.ps1" powershell script found in the 'Resources folder
 
 ### Pre-requisites
 Prior to deploying the template, have the following information ready:
