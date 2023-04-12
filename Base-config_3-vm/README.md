@@ -36,7 +36,7 @@ The following ARM resources are deployed as part of the solution:
 + Each member VM uses the **JsonADDomainExtension** extension to join the domain post Azure deployment
 + **BGInfo** is applied to all VMs but will not display over RDP sessions that have the wallpaper disabled
 + **Antimalware** is applied to all VMs with basic scheduled scan and exclusion settings
-+ A **CustomExtension** is used to apply a set of common configs to such as enabling TLS1.2 & .Net connectivity, disabling IE ESC, relaxing UAC, and a bunch of extras to help complete the hybrid setup  
++ A **CustomExtension** is used to apply a set of common configs such as enabling TLS1.2 for .Net, disabling IE ESC, relaxing UAC, plus a bunch of extras specific to each VM's role. E.g. IIS & test services ont the App VM, Azure AD Connect links on DC VM, etc
 
 ### Management
 Once deployed, VMs can be administered thru either of the following:
