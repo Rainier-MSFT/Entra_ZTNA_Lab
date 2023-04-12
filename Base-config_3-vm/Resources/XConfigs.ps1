@@ -1,6 +1,6 @@
-<#  Common_Configs.ps1
+<#  XConfigs.ps1
     Rainier Amara 9/1/23
-    This script applies a bunch of pre-configurations to each VM, post ARM deployment.
+    This script applies a bunch of additional configurations to a deployed VM
 DISCLAIMER
 	THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
 	ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
