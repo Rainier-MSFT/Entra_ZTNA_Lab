@@ -1,12 +1,14 @@
-﻿<#  Deploy-TL.ps1
+﻿<#  Deploy_Base-config_3-vm.ps1
     Rainier Amara 9/1/23
-
     This script deploys the 3 VM Base configuration lab to your Azure RM subscription.
     You must have the AzureRM PowerShell module installed on your computer to run this script.
     To install the AzureRM module, execute the following command from an elevated PowerShell prompt:
-
     Install-Module AzureRM
-
+DISCLAIMER
+    THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+    ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+    THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+    PARTICULAR PURPOSE. Copyright (c) Microsoft Corporation.
 #>
 
 # Provide parameter values

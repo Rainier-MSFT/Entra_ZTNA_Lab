@@ -1,12 +1,10 @@
-
-<# 
-.DESCRIPTION
-	Version: 1.0
-	This PowerShell script installs IIS & a bunch of sample Websites 
-    configured for various authentication schemes such as Integrated Windows
+<#TestApps.ps1
+    Rainier Amara 9/1/23
+	This script installs IIS & a bunch of sample Websites configured for 
+    various authentication schemes such as Integrated Windows
     Authentication (IWA), Headers, and Forms. iPerf is also included for 
     testing network performance, along with an SMB network file share.  
-.DISCLAIMER
+DISCLAIMER
 	THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
 	ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 	THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A

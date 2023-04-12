@@ -1,6 +1,11 @@
 <#  Common_Configs.ps1
     Rainier Amara 9/1/23
     This script applies a bunch of pre-configurations to each VM, post ARM deployment.
+DISCLAIMER
+	THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+	ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+	THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+	PARTICULAR PURPOSE. Copyright (c) Microsoft Corporation.
 #>
 
 ## Enable TLS1.2 (Connectivity - Critical)
@@ -58,5 +63,5 @@ $shortcut.Save()
 #Install-AdcsCertificationAuthority -CAType EnterpriseRootCa -Force
 #}
 
-## Disable Internet Explorer (Disable only to retain IE legacy mode in Edge)
+## Disable Internet Explorer (Disabled only to retain IE legacy mode in Edge)
 dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
