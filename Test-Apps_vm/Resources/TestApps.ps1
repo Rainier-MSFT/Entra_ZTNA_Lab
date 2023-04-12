@@ -1,17 +1,16 @@
 
 <# 
- .SYNOPSIS
-	Kickstart.ps1 is a Windows PowerShell script to install/configure IIS and Website Samples
 .DESCRIPTION
-	Version: 2.0.0
-	Kickstart.ps1 is a Windows PowerShell script to install/configure IIS and Website Samples.
-    It relies on bootstrap.ps1 to supply the requred 2 mandatory parmeters.
+	Version: 1.0
+	This PowerShell script installs IIS & a bunch of sample Websites 
+    configured for various authentication schemes such as Integrated Windows
+    Authentication (IWA), Headers, and Forms. iPerf is also installed for 
+    testing network performance, along with an SMB network file share.  
 .DISCLAIMER
 	THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
 	ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 	THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-	PARTICULAR PURPOSE.
-	Copyright (c) Microsoft Corporation. All rights reserved.
+	PARTICULAR PURPOSE. Copyright (c) Microsoft Corporation.
 #>
 
 # Install iPerf
