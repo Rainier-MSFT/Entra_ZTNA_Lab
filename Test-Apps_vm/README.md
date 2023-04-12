@@ -17,49 +17,53 @@
 This Azure automation deploys a **Test App VM** that's pre-configured with a mix of services for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources. The template provisions a single VM with your prefered version of Windows Server, to an existing Azure VNet. IIS & a bunch of sample Websites configured for various authentication schemes such as Integrated Windows Authentication (IWA), Headers, and Forms. iPerf is also installed for testing network performance, along with an SMB network file share.
 
 ## Azure Resources
-
 The following ARM resources are deployed as part of the solution:
 
 + **App Server VM**: Windows Server 2016, 2019, or 2022 VM joined to the domain. IIS 10 and .NET 4.5 are installed and several test apps are pre-configured for IWA, forms, and header based authentication. The directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for domain accounts
 + **Storage account**: Diagnostics storage account, and client VM storage account if indicated. The App Server VM uses managed disks, so no storage account is created for VHD
-+ **NSG**: Network security group configured to allow inbound RDP on 3389
 + **Virtual network**: Azure VNet for internal traffic, configured as 10.0.0.0/22 and with custom DNS pointing to the AD DC's private IP address. Internal Subnet is defined as 10.0.0.0/24 for a total of 249 available IP addresses and Bastion subnet as 10.0.1.0/26
 + **Network interfaces**: 1 NIC per VM
 + **Public IP addresses**: 1 static public IP
-+ **JoinDomain**: extension is used to join a specified domain
-+ **BGInfo**: The **BGInfo** extension is applied to the VM but will not display over RDP sessions that have the wallpaper disabled
-+ **Antimalware**: The **iaaSAntimalware** extension is applied with basic scheduled scan and exclusion settings
-     
-## Deployment
-You can deploy the environment in one of two ways:
 
-+ Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
-+ Execute the PowerShell script at https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/scripts/Deploy-Base-config_3-vm.ps1 on your local computer
-
-### Pre-requisites
-Prior to deploying the template, have the following information ready:
-
-+ A DNS label prefix for the URL of the public IP addresse of your virtual machine. The FQDN will be formated as _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. You will enter this in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button or for the value of the __dnsLabelPrefix__ variable in the template parameters file
-+ 
+### Extensions
++ **JoinDomain** is used to join a specified domain
++ **BGInfo** is applied to the VM but will not display over RDP sessions that have the wallpaper disabled
++ **iaaSAntimalware** is applied with basic scheduled scan and exclusion settings
++ A **CustomExtension** is used to apply a set of common configs to such as enabling TLS1.2 & .Net connectivity, disabling IE ESC, relaxing UAC, and deploying the test apps
 
 ### Management
 Once deployed, the VM can be administered thru either of the following:
 
 + **RDP** is enabled, but can only be used for direct remote management if VM is provisioned with a public IP either during or after deployment
 + **Azure Bastion** basic is also offered as an alternative to managing the VMs via a direct RDP connection 
-        
+
+**Note:** Don't forget to log into the VM using a domain account. I.e. username@domain
+
+## Deployment
+You can deploy the environment in one of two ways:
+
++ Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
++ Execute the "Test-Apps_vm.ps1" powershell script in the 'Resources folder from any computer
+
+### Pre-requisites
+Prior to deploying the template, have the following information ready:
+
++ A DNS label prefix for the URL of the public IP addresse of your virtual machine. The FQDN will be formated as _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. You will enter this in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button or for the value of the __dnsLabelPrefix__ variable in the template parameters file
++ An exsiting VNet & SubNet for deploying the the VM into
+
+
 ## Additional notes
 <details>
   <summary>Expand</summary>
 
 <p><p>
-<li> Guest OS configuration is executed with DSC using the AppConfig.ps1.zip resource</li>
-<li> The domain user *User1* is created in the domain and added to the Domain Admins group. User1's password is the one you provide in the *adminPassword* parameter
+<li> Guest OS configuration is executed using DSC & custom extensions thru AppConfig.ps1.zip & Common_Configs.ps1 resources</li>
+<li> A *User1* domain account is created and added to the Domain Admins group. The password is the same as provided in the *adminPassword* parameter during deployment
 <li> The *App server* and *Client* VM resources depend on the **ADDC** resource deployment in order to ensure that the AD domain exists prior to execution of 
-the JoinDomain extensions for the member VMs. This asymmetric VM deployment process adds several minutes to the overall deployment time
+the JoinDomain extensions for the member VMs. This asymmetric VM deployment process adds several extra minutes to the overall deployment time
 <li> The private IP address of the **ADDC** VM is always *10.0.0.10*. This IP is set as the DNS IP for the virtual network and all member NICs
-<li> The default VM size for the VM in the deployment is Standard_B2s
 <li> Deployment outputs include public IP address and FQDN for each VM
+<li> The default VM size for the VM in the deployment is Standard_B2s, but can be changed
 <li> When the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected, and then may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
 
 </details>

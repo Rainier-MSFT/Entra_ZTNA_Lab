@@ -24,32 +24,34 @@ The following ARM resources are deployed as part of the solution:
 + **Client VM**: Optional Windows 10 or 11 client joined to the AD domain
 
 ### Storage
-+ **Storage account**: Diagnostics storage account, and client VM storage account if indicated. AD DC and App Server VMs in the deployment use managed disks, so no storage accounts are created for VHDs
++ **Storage account**: Diagnostics storage account and client VM storage account if indicated. AD DC and App Server VMs in the deployment use managed disks, so no storage accounts are created for VHDs
 
 ### Networking
-+ **NSG**: Network security group configured to allow inbound RDP on 3389
++ **NSG**: Network security group is configured to deny all inbound connectivity with the exception of RDP 3389, but allows outbound Internet connectivity without restrictions
 + **Virtual network**: Azure VNet for internal traffic, configured as 10.0.0.0/22 and with custom DNS pointing to the AD DC's private IP address. Internal Subnet is defined as 10.0.0.0/24 for a total of 249 available IP addresses and Bastion subnet as 10.0.1.0/26
 + **Network interfaces**: 1 NIC per VM, all with static private IPs
 + **Public IP addresses**: VMs are only provisioned with an optional static public IP for remote management, if selected during deployment
-+ The NSG all in bound connectivity but allows outbound connectivity to the Internet without restrictions
 
 ### Extensions
 + Each member VM uses the **JsonADDomainExtension** extension to join the domain post Azure deployment
-+ The **BGInfo** extension is applied to all VMs, but will not display over RDP sessions that have the wallpaper disabled
-+ The **Antimalware** extension is applied to all VMs with basic scheduled scan and exclusion settings
++ **BGInfo** is applied to all VMs but will not display over RDP sessions that have the wallpaper disabled
++ **Antimalware** is applied to all VMs with basic scheduled scan and exclusion settings
 + A **CustomExtension** is used to apply a set of common configs to such as enabling TLS1.2 & .Net connectivity, disabling IE ESC, relaxing UAC, and a bunch of extras to help complete the hybrid setup  
 
 ### Management
 + **RDP** is enabled on all VMs, but can only be used for direct remote management if provisioned with a public IP either during or after deployment
 + **Azure Bastion** basic is also offered as an alternative to managing the VMs via a direct RDP connection 
 
+**Note:** Don't forget to log into the VM using a domain account. I.e. username@domain
+
+
 <br>
 
 ## Deployment
-You can deploy the environment in one of two ways:
+Enviroment can be deploy'd in one of two ways:
 
 + Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
-+ Execute the PowerShell script at https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/scripts/Deploy-Base-config_3-vm.ps1 on your local computer
++ Execute the Base-config_3-vm.ps1 powershell script in the 'Resources folder from any computer
 
 ### Pre-requisites
 Prior to deploying the template, have the following ready:
@@ -75,14 +77,13 @@ For more information about how to prepare a generalized VHD, see https://docs.mi
 <summary><b><u><font size="+4">Additional Notes</font></u></b></summary>
 
 <p><p>
-<li> All guest OS configuration is executed with DSC, using the resources CreateADPDC.ps1.zip and AppConfig.ps1.zip</li>
-<li> *User1* domain user is created in AD and added to the Domain Admins group. User1's password is the one you provide in the *adminPassword* parameter
-<li> Local admin for App1 & optional client are the same as the domain admin credentials 
+<li> Guest OS configuration is executed using DSC & custom extensions thru AppConfig.ps1.zip & Common_Configs.ps1 resources</li>
+<li> A *User1* domain account is created and added to the Domain Admins group. The password is the same as provided in the *adminPassword* parameter during deployment
 <li> The *App server* and *Client* VM resources depend on the **ADDC** resource deployment in order to ensure that the AD domain exists prior to execution of 
-the JoinDomain extensions for the member VMs. This asymmetric VM deployment process adds several minutes to the overall deployment time
+the JoinDomain extensions for the member VMs. This asymmetric VM deployment process adds several extra minutes to the overall deployment time
 <li> The private IP address of the **ADDC** VM is always *10.0.0.10*. This IP is set as the DNS IP for the virtual network and all member NICs
-<li> The default VM size for all VMs in the deployment is Standard_B2s
 <li> Deployment outputs include public IP address and FQDN for each VM
+<li> The default VM size for the VM in the deployment is Standard_B2s, but can be changed
 <li> When the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected, and then may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
 
 </details>
