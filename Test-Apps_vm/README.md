@@ -31,7 +31,6 @@ The following ARM resources are deployed as part of the solution:
 + **Antimalware**: The **iaaSAntimalware** extension is applied with basic scheduled scan and exclusion settings
      
 ## Deployment
-
 You can deploy the environment in one of two ways:
 
 + Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
@@ -44,7 +43,9 @@ Prior to deploying the template, have the following information ready:
 + 
 
 ### Management
-+ **RDP** is enabled on all VMs. Can only be used remotely if machiens were provisioned with a public IP 
+Once deployed, the VM can be administered thru either of the following:
+
++ **RDP** is enabled & RDP traffic allowed thru the NSG, but can only be used if the machine is provisioned with a public IP 
 + **Azure Bastion** basic is also offered as an alternative to managing the VMs via a direct RDP connection 
         
 ## Additional notes
