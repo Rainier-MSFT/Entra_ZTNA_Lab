@@ -19,7 +19,10 @@ This Azure automation deploys a **Test App VM** that's pre-configured with a mix
 ## Azure Resources
 The following ARM resources are deployed as part of the solution:
 
+### VMs
 + **App Server VM**: Windows Server 2016, 2019, or 2022 VM joined to the domain. IIS 10 and .NET 4.5 are installed and several test apps are pre-configured for IWA, forms, and header based authentication. The directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for domain accounts
+
+### Networking
 + **Network interfaces**: 1 NIC per VM
 + **Public IP addresses**: 1 static public IP if chosen during deployment
 
