@@ -154,7 +154,7 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'/CommonConfigs')]",
+      "name": "[concat(parameters('vmName'),'/XConfigs')]",
       "apiVersion": "2019-03-01",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
@@ -167,9 +167,9 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": [
-                "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/scripts/Common_Configs.ps1"
+                "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/resources/XConfigs.ps1"
               ],
-              "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File Common_Configs.ps1"
+              "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1"
         },
         "protectedSettings": null
       }

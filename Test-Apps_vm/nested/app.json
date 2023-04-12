@@ -191,9 +191,9 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": [
-                "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Test-Apps_vm/Resources/Common_Configs.ps1"
+                "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Test-Apps_vm/Resources/XConfigs.ps1"
               ],
-              "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File Common_Configs.ps1"
+              "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1"
         },
         "protectedSettings": null
       }
