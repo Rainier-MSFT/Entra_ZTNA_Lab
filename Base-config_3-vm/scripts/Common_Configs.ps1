@@ -61,56 +61,5 @@ $shortcut.Save()
 #Install-AdcsCertificationAuthority -CAType EnterpriseRootCa -Force
 #}
 
-## Instanstiate test apps on App VM
-if ($env:computername -like "*APP*") {
-# Deploy iPerf
-Import-Module BitsTransfer
-Start-BitsTransfer -Source "https://iperf.fr/download/windows/iperf-3.1.3-win64.zip" -Destination "C:\Users\Public\Downloads\iperf-3.1.3-win64.zip"
-Expand-Archive "C:\Users\Public\Downloads\iperf-3.1.3-win64.zip" -DestinationPath "C:\iPerf" -Force
-## Allow inbound traffic
-New-NetFirewallRule -DisplayName 'iPerf-Server-Inbound-TCP' -Direction Inbound -Protocol TCP -LocalPort 5201 -Action Allow | Enable-NetFirewallRule
-New-NetFirewallRule -DisplayName 'iPerf-Server-Inbound-UDP' -Direction Inbound -Protocol UDP -LocalPort 5201 -Action Allow | Enable-NetFirewallRule
-## Create iPerf starter on desktop
-Set-Content "C:\Users\Public\Desktop\RuniPerf.bat" 'C:\iPerf\iperf-3.1.3-win64\iperf3.exe -s' -Encoding Ascii
-# Deploy IIS apps
-## Can be customized ensure the folder path has trailing "\" 
-$destinationDirectory ="c:\AppDemov1\"
-if ([int]$PSVersionTable.PSVersion.Major -lt 5)
-{
-    Write-Host "Minimum required version is PowerShell 5.0"
-    Write-Host "Refer https://aka.ms/wmf5download"
-    Write-Host "Program will terminate now .."
-    exit
-}
-#[string] $AppProxyConnector =  Read-Host "AppProxy Connector Machine Netbios Name (For KCD Config)" 
-[string] $AppProxyConnector = "Ignore"
-##Donot Modify 
-function Invoke-Script
-{
-    param
-    (
-        [Parameter(Mandatory = $true)]
-        [string]
-        $Script,
-
-        [Parameter(Mandatory = $false)]
-        [object[]]
-        $ArgumentList
-    )
-
-    $ScriptBlock = [Scriptblock]::Create((Get-Content $Script -Raw))
-    Invoke-Command -NoNewScope -ArgumentList $ArgumentList -ScriptBlock $ScriptBlock -Verbose
-}
-[string]$kickStartFolder = $destinationDirectory + "DemoSuite-master\Website\"
-[string]$kickStartScript = $kickStartFolder + "install.ps1"
-Start-BitsTransfer -Source 'https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_VM/Resources/DemoSuite.zip?raw=true' -Destination 'C:\Users\Public\Downloads\master.zip'
-New-Item -Force -ItemType directory -Path $destinationDirectory
-Expand-Archive 'C:\Users\Public\Downloads\master.zip' -DestinationPath $destinationDirectory -Force 
-$args = @()
-$args += ("$kickStartFolder", "$AppProxyConnector")
-Invoke-Script $kickStartScript $args
-}
-
 ## Disable Internet Explorer (Disable only to retain IE legacy mode in Edge)
 dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
-#stop-process -name explorer -force
