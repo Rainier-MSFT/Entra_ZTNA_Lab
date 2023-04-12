@@ -20,10 +20,10 @@ This Azure automation deploys a **Test App VM** that's pre-configured with a mix
 The following ARM resources are deployed as part of the solution:
 
 ### VMs
-+ **App Server VM**: Windows Server 2016, 2019, or 2022 VM joined to the domain. IIS 10 and .NET 4.5 are installed and several test apps are pre-configured for IWA, forms, and header based authentication. The directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for domain accounts
++ **App Server VM**: Windows Server 2016, 2019, or 2022 VM that can be joined to any Windows Active Diretory (AD) domain. IIS 10 and .NET 4.5 are installed and several test apps are pre-configured for IWA, forms, and header based authentication. The directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for domain accounts. iPerf is also installed for network performance tecting.
 
 ### Networking
-+ **Network interfaces**: 1 NIC per VM
++ **Network interfaces**: 1 NIC per VM. A prefered private IP address can be specified during deployment 
 + **Public IP addresses**: 1 static public IP if chosen during deployment
 
 ### Extensions
@@ -63,7 +63,6 @@ Prior to deploying the template, have the following information ready:
 <li> A *User1* domain account is created and added to the Domain Admins group. The password is the same as provided in the *adminPassword* parameter during deployment
 <li> The *App server* and *Client* VM resources depend on the **ADDC** resource deployment in order to ensure that the AD domain exists prior to execution of 
 the JoinDomain extensions for the member VMs. This asymmetric VM deployment process adds several extra minutes to the overall deployment time
-<li> The private IP address of the **ADDC** VM is always *10.0.0.10*. This IP is set as the DNS IP for the virtual network and all member NICs
 <li> Deployment outputs include public IP address and FQDN for each VM
 <li> The default VM size for the VM in the deployment is Standard_B2s, but can be changed
 <li> When the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected, and then may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
