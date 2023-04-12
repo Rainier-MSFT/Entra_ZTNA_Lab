@@ -20,10 +20,8 @@ This Azure automation deploys a **Test App VM** that's pre-configured with a mix
 The following ARM resources are deployed as part of the solution:
 
 + **App Server VM**: Windows Server 2016, 2019, or 2022 VM joined to the domain. IIS 10 and .NET 4.5 are installed and several test apps are pre-configured for IWA, forms, and header based authentication. The directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for domain accounts
-+ **Storage account**: Diagnostics storage account, and client VM storage account if indicated. The App Server VM uses managed disks, so no storage account is created for VHD
-+ **Virtual network**: Azure VNet for internal traffic, configured as 10.0.0.0/22 and with custom DNS pointing to the AD DC's private IP address. Internal Subnet is defined as 10.0.0.0/24 for a total of 249 available IP addresses and Bastion subnet as 10.0.1.0/26
 + **Network interfaces**: 1 NIC per VM
-+ **Public IP addresses**: 1 static public IP
++ **Public IP addresses**: 1 static public IP if chosen during deployment
 
 ### Extensions
 + **JoinDomain** is used to join a specified domain

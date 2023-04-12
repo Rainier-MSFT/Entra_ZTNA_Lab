@@ -30,7 +30,7 @@ The following ARM resources are deployed as part of the solution:
 + **NSG**: Network security group is configured to deny all inbound connectivity with the exception of RDP 3389, but allows outbound Internet connectivity without restrictions
 + **Virtual network**: Azure VNet for internal traffic, configured as 10.0.0.0/22 and with custom DNS pointing to the AD DC's private IP address. Internal Subnet is defined as 10.0.0.0/24 for a total of 249 available IP addresses and Bastion subnet as 10.0.1.0/26
 + **Network interfaces**: 1 NIC per VM, all with static private IPs
-+ **Public IP addresses**: VMs are only provisioned with an optional static public IP for remote management, if selected during deployment
++ **Public IP addresses**: VMs are only provisioned with an optional static public IP for remote management, if chosen during deployment
 
 ### Extensions
 + Each member VM uses the **JsonADDomainExtension** extension to join the domain post Azure deployment
