@@ -40,7 +40,7 @@ The following ARM resources are deployed as part of the solution:
 + A **CustomExtension** is used to apply a set of common configs to such as enabling TLS1.2 & .Net connectivity, disabling IE ESC, relaxing UAC, and a bunch of extras to help complete the hybrid setup  
 
 ### Management
-+ **RDP** is enabled on all VMs. Can only be used remotely if machiens were provisioned with a public IP 
++ **RDP** is enabled on all VMs, but can only be used for direct remote management if provisioned with a public IP either during or after deployment
 + **Azure Bastion** basic is also offered as an alternative to managing the VMs via a direct RDP connection 
 
 <br>

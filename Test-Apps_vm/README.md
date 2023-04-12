@@ -45,7 +45,7 @@ Prior to deploying the template, have the following information ready:
 ### Management
 Once deployed, the VM can be administered thru either of the following:
 
-+ **RDP** is enabled & RDP traffic allowed thru the NSG, but can only be used if the machine is provisioned with a public IP 
++ **RDP** is enabled, but can only be used for direct remote management if VM is provisioned with a public IP either during or after deployment
 + **Azure Bastion** basic is also offered as an alternative to managing the VMs via a direct RDP connection 
         
 ## Additional notes
