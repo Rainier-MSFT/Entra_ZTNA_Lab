@@ -60,7 +60,7 @@ if ([int]$PSVersionTable.PSVersion.Major -lt 5)
 }
 $WWWroot = (Get-WebFilePath "IIS:\Sites\Default Web Site").Parent.FullName + "\"
 $TmpDirectory = 'C:\Users\Public\Downloads\TestApps'
-Start-BitsTransfer -Source 'https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_vm/Resources/TestApps.zip?raw=true' -Destination 'C:\Users\Public\Downloads\TestApps.zip'
+Start-BitsTransfer -Source 'https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_vm/resources/TestApps.zip?raw=true' -Destination 'C:\Users\Public\Downloads\TestApps.zip'
 Expand-Archive 'C:\Users\Public\Downloads\TestApps.zip' -DestinationPath $TmpDirectory -Force
 Copy-Item -Path "$TmpDirectory\IISSites\*" -Destination $WWWroot -Recurse
 
