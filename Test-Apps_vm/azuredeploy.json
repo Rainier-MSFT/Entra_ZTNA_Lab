@@ -150,6 +150,9 @@
       "location": "[resourceGroup().location]",
       "apiVersion": "2018-01-01",
       "comments": "This is the network interface for the app server VM.",
+      "dependsOn": [
+        "[resourceId ('Microsoft.Network/publicIPAddresses/',variables('VMs').appPublicIpName)]"
+      ],
       "properties": {
         "ipConfigurations": [
           {
