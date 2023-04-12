@@ -68,25 +68,25 @@
     "privateIPAddress": {
       "type": "string",
       "metadata": {
-        "description": "Static IP Address to allocate VM. Must be within range of Subnet"
+        "description": "Static IP Address to allocate VM. Must fall within Subnet range"
       },
       "defaultValue": "10.0.0.11"
     },
-	"VnetName": {
+	  "VnetName": {
       "type": "string",
       "metadata": {
         "description": "Name of Azure VNet the VM Subnet belongs to, within the same Resource Group"
       },
       "defaultValue": "BaseConfig-01-VNET"
     },
-	"subnetName": {
+	  "subnetName": {
       "type": "string",
       "metadata": {
         "description": "Name of Subnet the VM will be connected to, within the same Resource Group"
       },
       "defaultValue": "subnet-01"
     },
-  "DNSip": {
+    "DNSip": {
       "type": "string",
       "metadata": {
         "description": "IP of internal DNS server"

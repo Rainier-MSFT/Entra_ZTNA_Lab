@@ -26,7 +26,10 @@ $dnsLabelPrefix = "" # DNS label prefix for public IPs. Must be lowercase and ma
 $_artifactsLocation = "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Test-Apps_vm/" # Location of template artifacts
 $_artifactsLocationSasToken = "" # Enter SAS token here if needed
 $templateUri = "$_artifactsLocation/azuredeploy.json"
-
+$privateIPAddress = "" # Static IP Address to allocate VM. Must fall within subnet range
+$VnetName = "" # Name of Azure VNet the VM Subnet belongs to, within the same Resource Group
+$subnetName = "" # Name of Subnet the VM will be connected to, within the same Resource Group
+$DNSip = "" # IP of internal DNS server
 
 # Add parameters to array
 $parameters = @{}
@@ -41,13 +44,14 @@ $parameters.Add("vmSize",$vmSize)
 $parameters.Add("dnsLabelPrefix",$dnsLabelPrefix)
 $parameters.Add("_artifactsLocation",$_artifactsLocation)
 $parameters.Add("_artifactsLocationSasToken",$_artifactsLocationSasToken)
+$parameters.Add("privateIPAddress",$privateIPAddress)
+$parameters.Add("VnetName",$VnetName)
+$parameters.Add("subnetName",$subnetName)
+$parameters.Add("DNSip",$DNSip)
 
 # Log in to Azure subscription
 Connect-AzureRmAccount
 Select-AzureRmSubscription -SubscriptionName $subscription
-
-# Deploy resource group
-New-AzureRmResourceGroup -Name $resourceGroup -Location $location
 
 # Deploy template
 New-AzureRmResourceGroupDeployment -Name $configName -ResourceGroupName $resourceGroup `
