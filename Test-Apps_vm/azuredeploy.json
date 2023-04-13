@@ -96,7 +96,7 @@
     "EnablePublicIP": {
       "type": "string",
       "allowedValues": [
-        "No", "Yes"
+        "Yes", "No"
       ],
       "metadata": {
         "description": "'Yes' provisions the VM with a public IP for connecting to it directly from the Internet"
@@ -125,6 +125,10 @@
       "appNicIP": "[parameters('privateIPAddress')]",
       "appPublicIpName": "[concat(parameters('configName'),'-APP_IP')]"
     },
+
+	"pipObject": {
+	"id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('appPublicIpName'))]"
+	},
 
     "SharedVmConfig": {
       "location": "[resourceGroup().location]",
@@ -157,10 +161,9 @@
     },
     {
       "name": "[concat(parameters('configName'),'-APP_NIC')]",
-      "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[resourceGroup().location]",
-      "apiVersion": "2018-01-01",
+      "apiVersion": "2018-04-01",
       "comments": "This is the network interface for the app server VM.",
       "dependsOn": [
         "[resourceId ('Microsoft.Network/publicIPAddresses/',variables('VMs').appPublicIpName)]"
@@ -172,37 +175,7 @@
             "properties": {
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[variables('VMs').appNicIP]",
-              "publicIPAddress": {
-                "id": "[resourceId ('Microsoft.Network/publicIPAddresses/',variables('VMs').appPublicIpName)]"
-              },
-              "subnet": {
-                "id": "[variables('network').subnetRef]"
-              }
-            }
-          }
-        ],
-        "dnsSettings": {
-          "dnsServers": [
-            "[parameters('DNSip')]"
-          ],
-          "internalDomainNameSuffix": "[parameters('domainName')]"
-        }
-      }
-    },
-    {
-      "name": "[concat(parameters('configName'),'-APP_NIC')]",
-      "condition": "[equals(parameters('EnablePublicIP'),'No')]",
-      "type": "Microsoft.Network/networkInterfaces",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "2018-01-01",
-      "comments": "This is the network interface for the app server VM.",
-      "properties": {
-        "ipConfigurations": [
-          {
-            "name": "ipconfig1",
-            "properties": {
-              "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[variables('VMs').appNicIP]",
+			  "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('pipObject'), json('null'))]",
               "subnet": {
                 "id": "[variables('network').subnetRef]"
               }
