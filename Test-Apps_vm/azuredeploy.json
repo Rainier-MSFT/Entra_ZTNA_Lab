@@ -127,7 +127,7 @@
     },
 
 	"pipObject": {
-	"id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('appPublicIpName'))]"
+  "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').appPublicIpName)]"
 	},
 
     "SharedVmConfig": {
