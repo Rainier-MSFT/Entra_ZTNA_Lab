@@ -102,7 +102,8 @@
         "description": "'Yes' provisions the VM with a public IP for connecting to it directly from the Internet"
       },
       "defaultValue": "No"
-    },
+    }
+  },
 
   "variables": {
 
