@@ -91,6 +91,16 @@
         "description": "Choose 'Yes to deploy a Bastion for VM management via a browser based RDP connection instead of exposing RDP directly to the WWW"
       },
       "defaultValue": "Yes"
+    },
+    "EnablePublicIP": {
+      "type": "string",
+      "allowedValues": [
+        "Yes", "No"
+      ],
+      "metadata": {
+        "description": "'Yes' provisions the VM with a public IP for connecting to it directly from the Internet"
+      },
+      "defaultValue": "No"
     }
   },
 
@@ -128,6 +138,16 @@
       "clientNicIP": "10.0.0.12",
       "cliPublicIpName": "[concat(parameters('configName'),'-CLI_IP')]"
     },
+
+    "adpipObject": {
+      "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').adPublicIpName)]"
+      },
+    "apppipObject": {
+      "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').appPublicIpName)]"
+      },
+    "clipipObject": {
+      "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').cliPublicIpName)]"
+      },
 
     "SharedVmConfig": {
       "location": "[resourceGroup().location]",
@@ -215,6 +235,7 @@
     },
     {
       "apiVersion": "2017-06-01",
+      "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').adPublicIpName]",
       "location": "[resourceGroup().location]",
@@ -228,6 +249,7 @@
     },
     {
       "apiVersion": "2017-06-01",
+      "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').appPublicIpName]",
       "location": "[resourceGroup().location]",
@@ -261,7 +283,7 @@
         "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
       ],
       "apiVersion": "2018-01-01",
-      "comments": "The network interface for the ADDC VM.",
+      "comments": "The network interface for the AD DC VM.",
       "properties": {
         "ipConfigurations": [
           {
@@ -269,9 +291,7 @@
             "properties": {
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[variables('VMs').adNicIP]",
-              "publicIPAddress": {
-                "id": "[resourceId ('Microsoft.Network/publicIPAddresses/',variables('VMs').adPublicIpName)]"
-              },
+              "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('adpipObject'), json('null'))]",
               "subnet": {
                 "id": "[variables('network').subnetRef]"
               }
@@ -296,9 +316,7 @@
             "properties": {
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[variables('VMs').appNicIP]",
-              "publicIPAddress": {
-                "id": "[resourceId ('Microsoft.Network/publicIPAddresses/',variables('VMs').appPublicIpName)]"
-              },
+              "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('apppipObject'), json('null'))]",
               "subnet": {
                 "id": "[variables('network').subnetRef]"
               }
@@ -330,9 +348,7 @@
             "properties": {
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[variables('VMs').clientNicIP]",
-              "publicIPAddress": {
-                "id": "[resourceId ('Microsoft.Network/publicIPAddresses/',variables('VMs').cliPublicIpName)]"
-              },
+              "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('clipipObject'), json('null'))]",
               "subnet": {
                 "id": "[variables('network').subnetRef]"
               }
@@ -472,18 +488,22 @@
 
   "outputs": {
     "DcPublicIpAddress": {
+      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
       "type": "string",
       "value": "[reference(variables('VMs').adPublicIpName).ipAddress]"
     },
     "DcFqdn": {
+      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
       "type": "string",
       "value": "[reference(variables('VMs').adPublicIpName).dnsSettings.fqdn]"
     },
     "AppPublicIpAddress": {
+      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
       "type": "string",
       "value": "[reference(variables('VMs').appPublicIpName).ipAddress]"
     },
     "AppFqdn": {
+      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
       "type": "string",
       "value": "[reference(variables('VMs').appPublicIpName).dnsSettings.fqdn]"
     }

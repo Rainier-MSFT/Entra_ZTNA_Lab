@@ -175,7 +175,7 @@
             "properties": {
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[variables('VMs').appNicIP]",
-			  "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('pipObject'), json('null'))]",
+			        "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('pipObject'), json('null'))]",
               "subnet": {
                 "id": "[variables('network').subnetRef]"
               }
