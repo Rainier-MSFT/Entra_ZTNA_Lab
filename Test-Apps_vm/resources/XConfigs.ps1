@@ -13,7 +13,6 @@ param
     [Parameter(Mandatory=$true)][string] $domainUserName,
     [Parameter(Mandatory=$true)][string] $adminPassword
 )
-
 Set-Content "C:\Users\Public\Desktop\Creds1.txt" "$domainUserName $adminPassword" -Encoding Ascii
 Set-Content "C:\Users\Public\Desktop\Creds2.txt" $domainUserName $adminPassword -Encoding Ascii
 Set-Content "C:\Users\Public\Desktop\Creds3.txt" "`$domainUserName `$adminPassword" -Encoding Ascii
@@ -39,8 +38,10 @@ $UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8
 Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 0
 Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
 
-# Disable IE first run to allow downloads
+# Disable IE & EDGE 1st time run
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize" -Value 2
+New-Item "HKLM:\SOFTWARE\Policies\Microsoft" -Name "Edge"
+New-Itemproperty "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HideFirstRunExperience" -Value 1 -PropertyType "DWord"
 
 ## Install Microsoft Edge (If server 2016)
 $MSEdgeExe = (Get-ChildItem -Path "C:\Program Files\Microsoft\Edge\Application\msedge.exe","C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ErrorAction SilentlyContinue)
