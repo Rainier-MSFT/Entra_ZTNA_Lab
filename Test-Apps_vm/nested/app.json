@@ -192,10 +192,11 @@
         "settings": {
           "fileUris": [
                 "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Test-Apps_vm/resources/XConfigs.ps1"
-              ],
-              "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1"
+              ]
         },
-        "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1 -domainUserName [parameters('SharedVmConfig').domainUserName], -adminPassword [parameters('SharedVmConfig').adminPassword]"
+        "protectedSettings": {
+          "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1 -domainUserName [parameters('SharedVmConfig').domainUserName], -adminPassword [parameters('SharedVmConfig').adminPassword]"
+        }
       }
     }
   ],
