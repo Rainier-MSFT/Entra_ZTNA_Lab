@@ -254,12 +254,12 @@
 
   "outputs": {
     "AppPublicIpAddress": {
-      "condition": "[equals(parameters('publicIpNewOrExisting'), 'new')]",
+      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
       "type": "string",
       "value": "[reference(variables('VMs').appPublicIpName).ipAddress]"
     },
     "AppFqdn": {
-      "condition": "[equals(parameters('publicIpNewOrExisting'), 'new')]",
+      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
       "type": "string",
       "value": "[reference(variables('VMs').appPublicIpName).dnsSettings.fqdn]"
     }
