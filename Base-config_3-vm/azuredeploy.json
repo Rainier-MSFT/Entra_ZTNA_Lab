@@ -218,7 +218,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').adPublicIpName]",
       "location": "[resourceGroup().location]",
-      "comments": "The public IP address for the ADDC VM.",
+      "comments": "The public IP address for the AD DC VM.",
       "properties": {
         "publicIPAllocationMethod": "Static",
         "dnsSettings": {

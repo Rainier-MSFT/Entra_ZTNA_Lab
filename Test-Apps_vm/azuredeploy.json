@@ -92,8 +92,17 @@
         "description": "IP of internal DNS server"
       },
       "defaultValue": "10.0.0.10"
-    }
-  },
+    },
+    "EnablePublicIP": {
+      "type": "string",
+      "allowedValues": [
+        "No", "Yes"
+      ],
+      "metadata": {
+        "description": "'Yes' provisions the VM with a public IP for connecting to it directly from the Internet"
+      },
+      "defaultValue": "No"
+    },
 
   "variables": {
 
@@ -133,6 +142,7 @@
   "resources": [
     {
       "apiVersion": "2017-06-01",
+      "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').appPublicIpName]",
       "location": "[resourceGroup().location]",
@@ -146,6 +156,7 @@
     },
     {
       "name": "[concat(parameters('configName'),'-APP_NIC')]",
+      "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[resourceGroup().location]",
       "apiVersion": "2018-01-01",
@@ -163,6 +174,34 @@
               "publicIPAddress": {
                 "id": "[resourceId ('Microsoft.Network/publicIPAddresses/',variables('VMs').appPublicIpName)]"
               },
+              "subnet": {
+                "id": "[variables('network').subnetRef]"
+              }
+            }
+          }
+        ],
+        "dnsSettings": {
+          "dnsServers": [
+            "[parameters('DNSip')]"
+          ],
+          "internalDomainNameSuffix": "[parameters('domainName')]"
+        }
+      }
+    },
+    {
+      "name": "[concat(parameters('configName'),'-APP_NIC')]",
+      "condition": "[equals(parameters('EnablePublicIP'),'No')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2018-01-01",
+      "comments": "This is the network interface for the app server VM.",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[variables('VMs').appNicIP]",
               "subnet": {
                 "id": "[variables('network').subnetRef]"
               }
@@ -214,10 +253,12 @@
 
   "outputs": {
     "AppPublicIpAddress": {
+      "condition": "[equals(parameters('publicIpNewOrExisting'), 'new')]",
       "type": "string",
       "value": "[reference(variables('VMs').appPublicIpName).ipAddress]"
     },
     "AppFqdn": {
+      "condition": "[equals(parameters('publicIpNewOrExisting'), 'new')]",
       "type": "string",
       "value": "[reference(variables('VMs').appPublicIpName).dnsSettings.fqdn]"
     }
