@@ -29,11 +29,6 @@ $UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8
 Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 0
 Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
 
-# Disable IE & EDGE 1st time run
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize" -Value 2
-New-Item "HKLM:\SOFTWARE\Policies\Microsoft" -Name "Edge" -Force
-New-Itemproperty "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HideFirstRunExperience" -Value 1 -PropertyType "DWord" -Force
-
 ## Install Microsoft Edge (If server 2016)
 $MSEdgeExe = (Get-ChildItem -Path "C:\Program Files\Microsoft\Edge\Application\msedge.exe","C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ErrorAction SilentlyContinue)
 If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
@@ -42,6 +37,11 @@ If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
     Start-BitsTransfer -Source "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/68c5e2fb-3fa9-493b-a593-69ab63bd2651/MicrosoftEdgeEnterpriseX64.msi" -Destination "C:\Users\Public\Downloads\MicrosoftEdgeEnterpriseX64.msi"
     MsiExec.exe /i "C:\Users\Public\Downloads\MicrosoftEdgeEnterpriseX64.msi" /qn
 }
+
+# Disable IE & EDGE 1st time run
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize" -Value 2
+New-Item "HKLM:\SOFTWARE\Policies\Microsoft" -Name "Edge" -Force
+New-Itemproperty "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HideFirstRunExperience" -Value 1 -PropertyType "DWord" -Force
 
 ## Download Azure AD Connect (If DC - Optional)
 If ($env:computername -like "*DC*") {
