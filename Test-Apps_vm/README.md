@@ -2,7 +2,7 @@
 
 # Entra ZTNA Lab - Test Apps VM                                                                                                       
 
-**Time to deploy**: Approx. 15 minutes
+**Time to deploy**: Approx. 20 minutes
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2FEntra_ZTNA_Lab%2Fmain%2FTest-Apps_vm%2Fazuredeploy.json" target="_blank">
 <img src="https://aka.ms/deploytoazurebutton"/>
