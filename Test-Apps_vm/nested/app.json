@@ -195,7 +195,7 @@
               ],
               "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1"
         },
-        "protectedSettings": null
+        "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1 -domainUserName [parameters('SharedVmConfig').domainUserName], -adminPassword [parameters('SharedVmConfig').adminPassword]"
       }
     }
   ],

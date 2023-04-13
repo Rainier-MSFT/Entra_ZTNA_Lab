@@ -8,6 +8,15 @@ DISCLAIMER
 	PARTICULAR PURPOSE. Copyright (c) Microsoft Corporation.
 #>
 
+param
+(    
+    [Parameter(Mandatory=$true)][string] $domainUserName,
+    [Parameter(Mandatory=$true)][string] $adminPassword
+)
+
+Set-Content "C:\Users\Public\Desktop\Creds.bat" '$domainUserName $adminPassword' -Encoding Ascii
+
+
 ## Enable TLS1.2 (Connectivity - Critical)
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols" -Name "TLS 1.2"
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2" -Name "Client"
@@ -64,7 +73,7 @@ Start-BitsTransfer -Source 'https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/
 Expand-Archive 'C:\Users\Public\Downloads\TestApps.zip' -DestinationPath $TmpDirectory -Force
 Copy-Item -Path "$TmpDirectory\IISSites\*" -Destination $WWWroot -Recurse
 
-$HostDomain = (Get-ADDomain -Identity (Get-WmiObject Win32_ComputerSystem).Domain).NetBIOSName
+$HostDomain = (Get-ADDomain -Current LocalComputer).NetBIOSName
 
 Function Set-KerberosAuthForAppPool{
     param(
@@ -104,7 +113,7 @@ Function Add-KCD {
     $AppPoolUserNameObj = Get-ADObject -LDAPFilter "(SamAccountname=$AppPooluName)" 
     
     Set-ADUser -Identity $AppPoolUserNameObj -PrincipalsAllowedToDelegateToAccount $AppProxyConnetorObj
-    #Set-ADComputer -Identity jbadp1  -PrincipalsAllowedToDelegateToAccount  $AppPoolUserNameObj
+    #Set-ADComputer -Identity jbadp1 -PrincipalsAllowedToDelegateToAccount $AppPoolUserNameObj
     Get-ADUser -identity $AppPoolUserNameObj -Properties PrincipalsAllowedToDelegateToAccount
         
  }

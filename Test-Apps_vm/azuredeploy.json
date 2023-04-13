@@ -29,7 +29,7 @@
     "adminUsername": {
       "type": "string",
       "metadata": {
-        "description": "Name of the domain admin account used to join the target domain & also create a local admin account on the app VM"
+        "description": "Name of the domain admin account used to join the target domain & use as a local admin account on the app VM"
       }
     },
     "adminPassword": {
