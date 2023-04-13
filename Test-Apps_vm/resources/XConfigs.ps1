@@ -40,8 +40,8 @@ Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
 
 # Disable IE & EDGE 1st time run
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize" -Value 2
-New-Item "HKLM:\SOFTWARE\Policies\Microsoft" -Name "Edge"
-New-Itemproperty "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HideFirstRunExperience" -Value 1 -PropertyType "DWord"
+New-Item "HKLM:\SOFTWARE\Policies\Microsoft" -Name "Edge" -Force
+New-Itemproperty "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HideFirstRunExperience" -Value 1 -PropertyType "DWord" -Force
 
 ## Install Microsoft Edge (If server 2016)
 $MSEdgeExe = (Get-ChildItem -Path "C:\Program Files\Microsoft\Edge\Application\msedge.exe","C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ErrorAction SilentlyContinue)
