@@ -14,8 +14,7 @@ param
     [Parameter(Mandatory=$true)][string] $adminPassword
 )
 
-Set-Content "C:\Users\Public\Desktop\Creds.bat" '$domainUserName $adminPassword' -Encoding Ascii
-
+Set-Content "C:\Users\Public\Desktop\Creds.txt" "$domainUserName $adminPassword" -Encoding Ascii
 
 ## Enable TLS1.2 (Connectivity - Critical)
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols" -Name "TLS 1.2"
