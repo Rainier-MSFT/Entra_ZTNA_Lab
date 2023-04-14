@@ -38,7 +38,7 @@ Once deployed, the VM can be administered thru either of the following:
 + **RDP** is enabled, but can only be used for direct remote management if VM is provisioned with a public IP either during or after deployment
 + **Azure Bastion** basic is also offered as an alternative to managing the VMs via a direct RDP connection 
 
-**Note:** Don't forget to log into the VM using a domain account. I.e. username@domain
+**Note:** Don't forget to log into the VM using the domain admin account, not the local admin. I.e. <domain_admin>@<your_domain>
 
 ## Deployment
 You can deploy the VM in one of two ways:
