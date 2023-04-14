@@ -1,5 +1,5 @@
 <#  XConfigs.ps1
-    Rainier Amara 9/1/23
+    Rainier Amara 8/1/23
     This script applies a bunch of additional configurations to a deployed VM
 DISCLAIMER
 	THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
