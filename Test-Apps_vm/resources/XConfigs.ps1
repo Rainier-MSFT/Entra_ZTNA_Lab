@@ -49,6 +49,10 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "
 New-Item "HKLM:\SOFTWARE\Policies\Microsoft" -Name "Edge" -Force
 New-Itemproperty "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HideFirstRunExperience" -Value 1 -PropertyType "DWord" -Force
 
+$TmpDirectory = "C:\Users\Public\Downloads"
+Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
+Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
+
 # Install iPerf
 Import-Module BitsTransfer
 Start-BitsTransfer -Source "https://iperf.fr/download/windows/iperf-3.1.3-win64.zip" -Destination "C:\Users\Public\Downloads\iperf-3.1.3-win64.zip"
@@ -67,7 +71,6 @@ if ([int]$PSVersionTable.PSVersion.Major -lt 5)
     exit
 }
 $WWWroot = (Get-WebFilePath "IIS:\Sites\Default Web Site").Parent.FullName + "\"
-$TmpDirectory = "C:\Users\Public\Downloads"
 Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_vm/resources/WebSites.zip?raw=true" -Destination "$TmpDirectory\WebSites.zip"
 Expand-Archive "$TmpDirectory\WebSites.zip" -DestinationPath $WWWroot -Force
 
