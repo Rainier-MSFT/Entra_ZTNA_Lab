@@ -56,7 +56,7 @@ Expand-Archive "C:\Users\Public\Downloads\iperf-3.1.3-win64.zip" -DestinationPat
 New-NetFirewallRule -DisplayName 'iPerf-Server-Inbound-TCP' -Direction Inbound -Protocol TCP -LocalPort 5201 -Action Allow | Enable-NetFirewallRule
 New-NetFirewallRule -DisplayName 'iPerf-Server-Inbound-UDP' -Direction Inbound -Protocol UDP -LocalPort 5201 -Action Allow | Enable-NetFirewallRule
 ## Create iPerf starter on desktop
-Set-Content "C:\Users\Public\Desktop\RuniPerf.bat" 'C:\iPerf\iperf-3.1.3-win64\iperf3.exe -s' -Encoding Ascii
+Set-Content "C:\Users\Public\Desktop\Run iPerf.bat" 'C:\iPerf\iperf-3.1.3-win64\iperf3.exe -s' -Encoding Ascii
 
 # Deploy IIS apps
 if ([int]$PSVersionTable.PSVersion.Major -lt 5)
