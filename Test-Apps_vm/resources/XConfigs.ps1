@@ -36,7 +36,7 @@ $UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8
 Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 0
 Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
 
-## Install Microsoft Edge (If server 2016)
+## Install Microsoft Edge
 $MSEdgeExe = (Get-ChildItem -Path "C:\Program Files\Microsoft\Edge\Application\msedge.exe","C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ErrorAction SilentlyContinue)
 If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
     ## Download & install Edge Browser
@@ -256,3 +256,4 @@ Write-Progress -PercentComplete 100 -id 2 -Activity "Config Started" -Status "Co
 
 ## Disable Internet Explorer (Disabled only to retain IE legacy mode in Edge)
 dism /online /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
+Restart-computer
