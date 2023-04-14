@@ -255,4 +255,4 @@ Write-Progress -PercentComplete 100 -id 1 -Activity "Test Apps Installer " -Stat
 Write-Progress -PercentComplete 100 -id 2 -Activity "Config Started" -Status "Config complete!"
 
 ## Disable Internet Explorer (Disabled only to retain IE legacy mode in Edge)
-dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
+dism /online /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
