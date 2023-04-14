@@ -43,7 +43,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "
 New-Item "HKLM:\SOFTWARE\Policies\Microsoft" -Name "Edge" -Force
 New-Itemproperty "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HideFirstRunExperience" -Value 1 -PropertyType "DWord" -Force
 
-## Azure AD sync installer link on DC
+## Azure AD sync link on DC
 If ($env:computername -like "*DC*") {
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("C:\Users\Public\Desktop\Install AAD Cloud Sync.lnk")
@@ -52,7 +52,7 @@ $ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238"
 $Shortcut.Save()
 }
 
-## Azure AD App Proxy Connector install link on DC
+## Azure AD App Proxy Connector link on DC
 If ($env:computername -like "*DC*") {
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("C:\Users\Public\Desktop\Install AAD Cloud Sync.lnk")
