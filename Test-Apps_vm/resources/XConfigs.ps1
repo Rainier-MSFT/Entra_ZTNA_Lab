@@ -74,6 +74,8 @@ $WWWroot = (Get-WebFilePath "IIS:\Sites\Default Web Site").Parent.FullName + "\"
 Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_vm/resources/WebSites.zip?raw=true" -Destination "$TmpDirectory\WebSites.zip"
 Expand-Archive "$TmpDirectory\WebSites.zip" -DestinationPath $WWWroot -Force
 
+Add-WindowsCapability -Name Rsat.ActiveDirectory.DS-LDS.Tools -Online
+Import-Module -Name ActiveDirectory
 $HostDomain = Get-ADDomain -Current LocalComputer | Select-Object -ExpandProperty NetBIOSName
 
 Function Set-KerberosAuthForAppPool{
