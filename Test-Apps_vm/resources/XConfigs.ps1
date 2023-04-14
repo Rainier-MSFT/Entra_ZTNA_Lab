@@ -68,10 +68,9 @@ if ([int]$PSVersionTable.PSVersion.Major -lt 5)
     exit
 }
 $WWWroot = (Get-WebFilePath "IIS:\Sites\Default Web Site").Parent.FullName + "\"
-$TmpDirectory = 'C:\Users\Public\Downloads\TestApps'
-Start-BitsTransfer -Source 'https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_vm/resources/TestApps.zip?raw=true' -Destination 'C:\Users\Public\Downloads\TestApps.zip'
-Expand-Archive 'C:\Users\Public\Downloads\TestApps.zip' -DestinationPath $TmpDirectory -Force
-Copy-Item -Path "$TmpDirectory\IISSites\*" -Destination $WWWroot -Recurse
+$TmpDirectory = "C:\Users\Public\Downloads"
+Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_vm/resources/WebSites.zip?raw=true" -Destination "$TmpDirectory\WebSites.zip"
+Expand-Archive "$TmpDirectory\WebSites.zip" -DestinationPath $WWWroot -Force
 
 $HostDomain = Get-ADDomain -Current LocalComputer | Select-Object -ExpandProperty NetBIOSName
 
@@ -248,7 +247,8 @@ sleep(1)
 Set-ItemProperty IIS:\AppPools\$SiteName -name processModel -value @{userName="$HostDomain\$AppPooluName";password=$AppPoolPword;identitytype=3}
 sleep(1)
 
-Write-Progress -PercentComplete 75 -id 2 -Activity "Initialize Install" -Status "Install ASP.net Core hosting Package" 
+Write-Progress -PercentComplete 75 -id 2 -Activity "Initialize Install" -Status "Install ASP.net Core hosting Package"
+https://download.visualstudio.microsoft.com/download/pr/ff658e5a-c017-4a63-9ffe-e53865963848/15875eef1f0b8e25974846e4a4518135/dotnet-hosting-3.1.3-win.exe 
 & "$TmpDirectory\dotnet-hosting-3.1.3-win.exe" /quiet
     
 Write-Progress -PercentComplete 100 -id 1 -Activity "Test Apps Installer " -Status "Completing Config"
