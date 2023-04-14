@@ -43,18 +43,13 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "
 New-Item "HKLM:\SOFTWARE\Policies\Microsoft" -Name "Edge" -Force
 New-Itemproperty "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HideFirstRunExperience" -Value 1 -PropertyType "DWord" -Force
 
-## Download Azure AD Connect if DC
+## Azure AD sync installer link on DC
 If ($env:computername -like "*DC*") {
-## Drop Azure AD Connect portal link on desktop (Optional)
-$ShortcutPath = "C:\Users\Public\Desktop\AAD Sync Portal.lnk"
-$WScriptObj = New-Object -ComObject ("WScript.Shell")
-$shortcut = $WscriptObj.CreateShortcut($ShortcutPath)
-$shortcut.TargetPath = $MSEdgeExe
-$ShortCut.Arguments = "https://entra.microsoft.com/#view/Microsoft_AAD_Connect_Provisioning/AADConnectMenuBlade/~/GetStarted"
-$shortcut.WindowStyle = 1
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("C:\Users\Public\Desktop\Install AAD Cloud Sync.lnk")
+$Shortcut.TargetPath = "https://entra.microsoft.com/#view/Microsoft_AAD_Connect_Provisioning/AADConnectMenuBlade/~/GetStarted"
 $ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238"
-$ShortCut.Hotkey = 'CTRL+SHIFT+T'
-$shortcut.Save()
+$Shortcut.Save()
 }
 
 ## Install AD Certificate Services on DC
