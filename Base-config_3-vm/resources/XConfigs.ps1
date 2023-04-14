@@ -34,14 +34,18 @@ $MSEdgeExe = (Get-ChildItem -Path "C:\Program Files\Microsoft\Edge\Application\m
 If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
     ## Download & install Edge Browser
     Import-Module BitsTransfer
-    Start-BitsTransfer -Source "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/68c5e2fb-3fa9-493b-a593-69ab63bd2651/MicrosoftEdgeEnterpriseX64.msi" -Destination "C:\Users\Public\Downloads\MicrosoftEdgeEnterpriseX64.msi"
-    MsiExec.exe /i "C:\Users\Public\Downloads\MicrosoftEdgeEnterpriseX64.msi" /qn
+    Start-BitsTransfer -Source "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/68c5e2fb-3fa9-493b-a593-69ab63bd2651/MicrosoftEdgeEnterpriseX64.msi" -Destination "$TmpDirectory\MicrosoftEdgeEnterpriseX64.msi"
+    MsiExec.exe /i "$TmpDirectory\MicrosoftEdgeEnterpriseX64.msi" /qn
 }
 
 # Disable IE & EDGE 1st time run
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize" -Value 2
 New-Item "HKLM:\SOFTWARE\Policies\Microsoft" -Name "Edge" -Force
 New-Itemproperty "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HideFirstRunExperience" -Value 1 -PropertyType "DWord" -Force
+
+$TmpDirectory = "C:\Users\Public\Downloads"
+Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
+Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
 
 ## Azure AD sync link on DC
 If ($env:computername -like "*DC*") {
@@ -55,9 +59,9 @@ $Shortcut.Save()
 ## Azure AD App Proxy Connector link on DC
 If ($env:computername -like "*DC*") {
 $WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("C:\Users\Public\Desktop\Install AAD Cloud Sync.lnk")
+$Shortcut = $WshShell.CreateShortcut("C:\Users\Public\Desktop\Install App Proxy.lnk")
 $Shortcut.TargetPath = "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/AppProxyOverviewBlade"
-$ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238"
+$ShortCut.IconLocation = "$TmpDirectory\connectors.ico"
 $Shortcut.Save()
 }
 
