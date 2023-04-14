@@ -8,6 +8,9 @@ DISCLAIMER
 	PARTICULAR PURPOSE. Copyright (c) Microsoft Corporation.
 #>
 
+Set-PSDebug -Trace 2
+Start-Transcript -OutputDirectory "C:\Users\Public\Downloads\PSlog.txt"
+
 #param
 #(    
 #    [Parameter(Mandatory=$true)][string] $domainUserName,
