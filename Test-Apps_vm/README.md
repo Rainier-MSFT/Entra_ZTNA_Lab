@@ -28,7 +28,7 @@ The following ARM resources are deployed as part of the solution:
 
 ### Extensions
 + **JoinDomain** is used to join a specified domain
-+ **BGInfo** is applied to the VM but will not display over RDP sessions that have the wallpaper disabled
++ **BGInfo** displays session info on desktop wallpaper on all VMs, but only displays over direct RDP sessions and not over Azure Bastion
 + **iaaSAntimalware** is applied with basic scheduled scan and exclusion settings
 + A **CustomExtension** is used to apply a set of common configs such as enabling TLS1.2 for .Net, disabling IE ESC, relaxing UAC, and deploying the test services
 

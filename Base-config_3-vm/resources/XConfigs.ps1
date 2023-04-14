@@ -43,16 +43,14 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "
 New-Item "HKLM:\SOFTWARE\Policies\Microsoft" -Name "Edge" -Force
 New-Itemproperty "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HideFirstRunExperience" -Value 1 -PropertyType "DWord" -Force
 
-## Download Azure AD Connect (If DC - Optional)
+## Download Azure AD Connect if DC
 If ($env:computername -like "*DC*") {
-Import-Module BitsTransfer
-Start-BitsTransfer -Source "https://download.microsoft.com/download/B/0/0/B00291D0-5A83-4DE7-86F5-980BC00DE05A/AzureADConnect.msi" -Destination "C:\Users\Public\Desktop\Install Azure AD Connect.msi"
 ## Drop Azure AD Connect portal link on desktop (Optional)
 $ShortcutPath = "C:\Users\Public\Desktop\AAD Sync Portal.lnk"
 $WScriptObj = New-Object -ComObject ("WScript.Shell")
 $shortcut = $WscriptObj.CreateShortcut($ShortcutPath)
 $shortcut.TargetPath = $MSEdgeExe
-$ShortCut.Arguments = "https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/AzureADConnect"
+$ShortCut.Arguments = "https://entra.microsoft.com/#view/Microsoft_AAD_Connect_Provisioning/AADConnectMenuBlade/~/GetStarted"
 $shortcut.WindowStyle = 1
 $ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238"
 $ShortCut.Hotkey = 'CTRL+SHIFT+T'
@@ -60,10 +58,10 @@ $shortcut.Save()
 }
 
 ## Install AD Certificate Services on DC
-#if ($env:computername -like "*DC*") {
-#Install-WindowsFeature AD-Certificate,ADCS-Cert-Authority,ADCS-Web-Enrollment -IncludeManagementTools
-#Install-AdcsCertificationAuthority -CAType EnterpriseRootCa -Force
-#}
+if ($env:computername -like "*DC*") {
+Install-WindowsFeature AD-Certificate,ADCS-Cert-Authority,ADCS-Web-Enrollment -IncludeManagementTools
+Install-AdcsCertificationAuthority -CAType EnterpriseRootCa -CryptoProviderName "RSA#Microsoft Software Key Storage Provider" -KeyLength 2048 -HashAlgorithmName SHA256 -ValidityPeriod Years -ValidityPeriodUnits 3 -DatabaseDirectory "C:\windows\system32\certLog" -LogDirectory "c:\windows\system32\CertLog" -Force
+}
 
 ## Disable Internet Explorer (Disabled only to retain IE legacy mode in Edge)
 dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
