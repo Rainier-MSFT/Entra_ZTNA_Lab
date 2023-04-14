@@ -73,7 +73,7 @@ Start-BitsTransfer -Source 'https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/
 Expand-Archive 'C:\Users\Public\Downloads\TestApps.zip' -DestinationPath $TmpDirectory -Force
 Copy-Item -Path "$TmpDirectory\IISSites\*" -Destination $WWWroot -Recurse
 
-$HostDomain = (Get-ADDomain -Current LocalComputer).NetBIOSName
+$HostDomain = Get-ADDomain -Current LocalComputer | Select-Object -ExpandProperty NetBIOSName
 
 Function Set-KerberosAuthForAppPool{
     param(
