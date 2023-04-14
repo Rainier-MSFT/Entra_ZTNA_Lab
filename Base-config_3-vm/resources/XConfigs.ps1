@@ -52,6 +52,15 @@ $ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238"
 $Shortcut.Save()
 }
 
+## Azure AD App Proxy Connector install link on DC
+If ($env:computername -like "*DC*") {
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("C:\Users\Public\Desktop\Install AAD Cloud Sync.lnk")
+$Shortcut.TargetPath = "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/AppProxyOverviewBlade"
+$ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238"
+$Shortcut.Save()
+}
+
 ## Install AD Certificate Services on DC
 if ($env:computername -like "*DC*") {
 Install-WindowsFeature AD-Certificate,ADCS-Cert-Authority,ADCS-Web-Enrollment -IncludeManagementTools
