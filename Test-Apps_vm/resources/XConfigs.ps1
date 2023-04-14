@@ -8,14 +8,12 @@ DISCLAIMER
 	PARTICULAR PURPOSE. Copyright (c) Microsoft Corporation.
 #>
 
-param
-(    
-    [Parameter(Mandatory=$true)][string] $domainUserName,
-    [Parameter(Mandatory=$true)][string] $adminPassword
-)
-Set-Content "C:\Users\Public\Desktop\Creds1.txt" "$domainUserName $adminPassword" -Encoding Ascii
-Set-Content "C:\Users\Public\Desktop\Creds2.txt" $domainUserName $adminPassword -Encoding Ascii
-Set-Content "C:\Users\Public\Desktop\Creds3.txt" "`$domainUserName `$adminPassword" -Encoding Ascii
+#param
+#(    
+#    [Parameter(Mandatory=$true)][string] $domainUserName,
+#    [Parameter(Mandatory=$true)][string] $adminPassword
+#)
+#Set-Content "C:\Users\Public\Desktop\Creds1.txt" "$domainUserName $adminPassword" -Encoding Ascii
 
 ## Enable TLS1.2 (Connectivity - Critical)
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols" -Name "TLS 1.2"
@@ -214,9 +212,9 @@ New-Item -Path IIS:\AppPools\$SiteName
 sleep(1)
 Set-ItemProperty IIS:\AppPools\$SiteName -name processModel -value @{userName="$HostDomain\$AppPooluName";password=$AppPoolPword;identitytype=3}
 sleep(1)
-Set-KerberosAuthForAppPool -WebSiteName $WebSiteName1
-sleep(1)
-Add-SPN -UserName $AppPooluName 
+#Set-KerberosAuthForAppPool -WebSiteName $WebSiteName1
+#sleep(1)
+#Add-SPN -UserName $AppPooluName 
 
 Write-Progress -PercentComplete 50 -id 2 -Activity "Initialize Install" -Status "Install HeaderApp Website"
 # Site 2 vars
