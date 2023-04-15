@@ -29,7 +29,7 @@
     "adminUsername": {
       "type": "string",
       "metadata": {
-        "description": "Name of the domain admin account used to join the target domain & use as a local admin account on the app VM"
+        "description": "Name of the domain admin account used to join the target domain & to use as a local admin account on the app VM"
       }
     },
     "adminPassword": {
@@ -48,7 +48,7 @@
     "dnsLabelPrefix": {
       "type": "string",
       "metadata": {
-        "description": "DNS label prefix for public IPs. Must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
+        "description": "DNS label prefix if enabling a public IP. Must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
       }
     },
     "_artifactsLocation": {
@@ -99,7 +99,7 @@
         "Yes", "No"
       ],
       "metadata": {
-        "description": "'Yes' provisions the VM with a public IP for connecting to it directly from the Internet"
+        "description": "Provisions the VM with a public IP for connecting to it directly from the Internet. Azure Bastion can be used to connect to the VM, if enabled on the VNet"
       },
       "defaultValue": "No"
     }
