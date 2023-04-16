@@ -78,6 +78,7 @@ Expand-Archive "$TmpDirectory\WebSites.zip" -DestinationPath $WWWroot -Force
 Add-WindowsFeature net-framework-core
 Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature
 Import-Module -Name ActiveDirectory
+Install-Module -Name ActiveDirectory -Scope AllUsers -Force
 $HostDomain = Get-ADDomain -Current LocalComputer | Select-Object -ExpandProperty NetBIOSName
 
 Function Set-KerberosAuthForAppPool{
