@@ -9,7 +9,7 @@ DISCLAIMER
 #>
 
 Set-PSDebug -Trace 2
-Start-Transcript -OutputDirectory "C:\Users\Public\Downloads\PSlog.txt"
+Start-Transcript -OutputDirectory "C:\Users\Public\Downloads\PSlog.txt" -IncludeInvocationHeader
 
 #param
 #(    
@@ -29,25 +29,25 @@ New-ItemProperty "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -Name "SchU
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 ## Relax UAC (Optional)
+Write-Host "Disable UAC to avoid interupts..."
 Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 0
 
 ## Disable IE Enhanced Security Config (Relax Internet access)
 Write-Host "Disabling IE Enhanced Security Configuration (ESC)..."
-$AdminKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}"
-$UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}"
-Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 0
-Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}" -Name "IsInstalled" -Value 0
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}" -Name "IsInstalled" -Value 0
 
-## Install Microsoft Edge
+## Install Microsoft Edge if missing
+Write-Host "Download & Install Microsoft EDGE browser..."
 $MSEdgeExe = (Get-ChildItem -Path "C:\Program Files\Microsoft\Edge\Application\msedge.exe","C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ErrorAction SilentlyContinue)
 If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
-    ## Download & install Edge Browser
     Import-Module BitsTransfer
     Start-BitsTransfer -Source "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/68c5e2fb-3fa9-493b-a593-69ab63bd2651/MicrosoftEdgeEnterpriseX64.msi" -Destination "C:\Users\Public\Downloads\MicrosoftEdgeEnterpriseX64.msi"
     MsiExec.exe /i "C:\Users\Public\Downloads\MicrosoftEdgeEnterpriseX64.msi" /qn
 }
 
-# Disable IE & EDGE 1st time run
+# Disable EDGE (& IE) 1st time run
+Write-Host "Disabling EDGE (& IE) 1st time run..."
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize" -Value 2
 New-Item "HKLM:\SOFTWARE\Policies\Microsoft" -Name "Edge" -Force
 New-Itemproperty "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HideFirstRunExperience" -Value 1 -PropertyType "DWord" -Force
@@ -56,28 +56,27 @@ $TmpDirectory = "C:\Users\Public\Downloads"
 Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
 Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
 
-# Install iPerf
+# Install iPerf & create shortcut
+Write-Host "Installing iPerf & creating shortcut..."
 Import-Module BitsTransfer
 Start-BitsTransfer -Source "https://iperf.fr/download/windows/iperf-3.1.3-win64.zip" -Destination "C:\Users\Public\Downloads\iperf-3.1.3-win64.zip"
 Expand-Archive "C:\Users\Public\Downloads\iperf-3.1.3-win64.zip" -DestinationPath "C:\iPerf" -Force
 New-NetFirewallRule -DisplayName 'iPerf-Server-Inbound-TCP' -Direction Inbound -Protocol TCP -LocalPort 5201 -Action Allow | Enable-NetFirewallRule
 New-NetFirewallRule -DisplayName 'iPerf-Server-Inbound-UDP' -Direction Inbound -Protocol UDP -LocalPort 5201 -Action Allow | Enable-NetFirewallRule
-## Create iPerf starter on desktop
 Set-Content "C:\Users\Public\Desktop\Run iPerf.bat" 'C:\iPerf\iperf-3.1.3-win64\iperf3.exe -s' -Encoding Ascii
 
 # Deploy IIS apps
 if ([int]$PSVersionTable.PSVersion.Major -lt 5)
 {
-    Write-Host "Minimum required version is PowerShell 5.0"
-    Write-Host "Refer https://aka.ms/wmf5download"
-    Write-Host "Program will terminate now .."
+    Write-Host "Minimum required version is PowerShell 5.0, IIS deployment will terminate - https://aka.ms/wmf5download"
     exit
 }
 $WWWroot = (Get-WebFilePath "IIS:\Sites\Default Web Site").Parent.FullName + "\"
 Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_vm/resources/WebSites.zip?raw=true" -Destination "$TmpDirectory\WebSites.zip"
 Expand-Archive "$TmpDirectory\WebSites.zip" -DestinationPath $WWWroot -Force
 
-Add-WindowsCapability -Name Rsat.ActiveDirectory.DS-LDS.Tools -Online
+Add-WindowsFeature net-framework-core
+Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature
 Import-Module -Name ActiveDirectory
 $HostDomain = Get-ADDomain -Current LocalComputer | Select-Object -ExpandProperty NetBIOSName
 
@@ -121,14 +120,13 @@ Function Add-KCD {
     Set-ADUser -Identity $AppPoolUserNameObj -PrincipalsAllowedToDelegateToAccount $AppProxyConnetorObj
     #Set-ADComputer -Identity jbadp1 -PrincipalsAllowedToDelegateToAccount $AppPoolUserNameObj
     Get-ADUser -identity $AppPoolUserNameObj -Properties PrincipalsAllowedToDelegateToAccount
-        
  }
 
 Function appPoolcredName {
-[string] $Randz = -join ((65..90) + (97..122) | Get-Random -Count 4 | % {[char]$_})
-$Randz=$Randz.ToLower()
-$AppPooluName = "TestAppPool-$Randz"
-return $AppPooluName
+    [string] $Randz = -join ((65..90) + (97..122) | Get-Random -Count 4 | % {[char]$_})
+    $Randz=$Randz.ToLower()
+    $AppPooluName = "TestAppPool-$Randz"
+    return $AppPooluName
 }
 
 Function passGen {
