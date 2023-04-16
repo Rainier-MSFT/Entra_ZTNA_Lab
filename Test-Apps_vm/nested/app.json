@@ -62,7 +62,7 @@
         "diagnosticsProfile": {
           "bootDiagnostics": {
             "enabled": true,
-            "storageUri": "[uri(reference(concat('Microsoft.Storage/storageAccounts/',parameters('SharedVmConfig').storageAccountNamePrefix),'2017-06-01').primaryEndpoints.blob)]"
+            "storageUri": "[reference(concat('Microsoft.Storage/storageAccounts/',parameters('SharedVmConfig').storageAccountNamePrefix),'2017-06-01').primaryEndpoints.blob]"
           }
         }
       }
@@ -108,7 +108,7 @@
         "typeHandlerVersion": "2.9",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "modulesUrl": "[uri(concat(parameters('modulesURL'),'/AppConfig.ps1.zip'))]",
+          "modulesUrl": "[concat(parameters('modulesURL'),'/AppConfig.ps1.zip')]",
           "sasToken": "[parameters('SharedVmConfig').SasToken]",
           "wmfVersion": "latest",
           "configurationFunction": "[parameters('configurationFunction').AppConfig]",
