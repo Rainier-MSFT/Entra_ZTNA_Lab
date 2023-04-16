@@ -82,7 +82,6 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "Name": "[parameters('SharedVmConfig').domainName]",
-          "OUPath": null,
           "Options": "3",
           "Restart": "true",
           "User": "[parameters('SharedVmConfig').domainUserName]"
@@ -108,9 +107,6 @@
         "type": "DSC",
         "typeHandlerVersion": "2.9",
         "autoUpgradeMinorVersion": true,
-        "protectedSettings": {
-          "Items":{}
-        },
         "settings": {
           "modulesUrl": "[concat(parameters('modulesURL'),'/AppConfig.ps1.zip')]",
           "sasToken": "[parameters('SharedVmConfig').SasToken]",
@@ -171,8 +167,7 @@
             "day": "7",
             "time": "120"
           }
-        },
-        "protectedSettings": null
+        }
       }
     },
     {
