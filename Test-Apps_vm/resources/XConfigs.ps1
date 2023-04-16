@@ -10,6 +10,8 @@ DISCLAIMER
 
 Set-PSDebug -Trace 2
 Start-Transcript -OutputDirectory "C:\Users\Public\Downloads\PSlog.txt" -IncludeInvocationHeader
+$Env:PSModulePath > "C:\Users\Public\Downloads\pshenv.txt"
+PS C:\WINDOWS\system32> Get-Module -ListAvailable > "C:\Users\Public\Downloads\pshmodules.txt"
 
 #param
 #(    
