@@ -108,7 +108,7 @@
         "typeHandlerVersion": "2.9",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "modulesUrl": "[concat(parameters('modulesURL'),'/AppConfig.ps1.zip')]",
+          "modulesUrl": "[uri(concat(parameters('modulesURL'),'/AppConfig.ps1.zip'))]",
           "sasToken": "[parameters('SharedVmConfig').SasToken]",
           "wmfVersion": "latest",
           "configurationFunction": "[parameters('configurationFunction').AppConfig]",
