@@ -13,15 +13,18 @@ Start-Transcript -OutputDirectory "C:\Users\Public\Downloads\PSlog.txt" -Include
 $Env:PSModulePath > "C:\Users\Public\Downloads\pshenv.txt"
 Add-WindowsFeature net-framework-core
 Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature
+Sleep 10
+#Install-Module -Name ActiveDirectory -Scope AllUsers -Force
 Import-Module -Name ActiveDirectory
-Install-Module -Name ActiveDirectory -Scope AllUsers -Force
 #Get-Module -ListAvailable > "C:\Users\Public\Downloads\pshmodules.txt"
 
-#param
-#(    
-#    [Parameter(Mandatory=$true)][string] $domainUserName,
-#    [Parameter(Mandatory=$true)][string] $adminPassword
-#)
+<#
+Param
+(    
+    [Parameter(Mandatory=$true)][string] $domainUserName,
+    [Parameter(Mandatory=$true)][string] $adminPassword
+)
+#>
 
 ## Enable TLS1.2 (Connectivity - Critical)
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols" -Name "TLS 1.2"
