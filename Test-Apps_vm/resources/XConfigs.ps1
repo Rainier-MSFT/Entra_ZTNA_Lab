@@ -11,7 +11,11 @@ DISCLAIMER
 Set-PSDebug -Trace 2
 Start-Transcript -OutputDirectory "C:\Users\Public\Downloads\PSlog.txt" -IncludeInvocationHeader
 $Env:PSModulePath > "C:\Users\Public\Downloads\pshenv.txt"
-PS C:\WINDOWS\system32> Get-Module -ListAvailable > "C:\Users\Public\Downloads\pshmodules.txt"
+Add-WindowsFeature net-framework-core
+Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature
+Import-Module -Name ActiveDirectory
+Install-Module -Name ActiveDirectory -Scope AllUsers -Force
+#Get-Module -ListAvailable > "C:\Users\Public\Downloads\pshmodules.txt"
 
 #param
 #(    
@@ -77,10 +81,6 @@ $WWWroot = (Get-WebFilePath "IIS:\Sites\Default Web Site").Parent.FullName + "\"
 Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_vm/resources/WebSites.zip?raw=true" -Destination "$TmpDirectory\WebSites.zip"
 Expand-Archive "$TmpDirectory\WebSites.zip" -DestinationPath $WWWroot -Force
 
-Add-WindowsFeature net-framework-core
-Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature
-Import-Module -Name ActiveDirectory
-Install-Module -Name ActiveDirectory -Scope AllUsers -Force
 $HostDomain = Get-ADDomain -Current LocalComputer | Select-Object -ExpandProperty NetBIOSName
 
 Function Set-KerberosAuthForAppPool{
