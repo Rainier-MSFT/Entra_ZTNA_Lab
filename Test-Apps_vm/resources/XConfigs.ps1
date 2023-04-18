@@ -10,11 +10,11 @@ DISCLAIMER
 
 Param
 (    
-    [Parameter(Mandatory=$true)][string] $domainUserName,
+    [Parameter(Mandatory=$true)][string] $domainAdmin,
     [Parameter(Mandatory=$true)][string] $adminPassword
 )
-$Password = ConvertTo-SecureString $adminPassword -AsPlainText -Force
-$Cred = New-Object System.Management.Automation.PSCredential ($domainUserName, $Password)
+$SadminPassword = ConvertTo-SecureString $adminPassword -AsPlainText -Force
+$Cred = New-Object System.Management.Automation.PSCredential ($domainAdmin, $SadminPassword)
 
 Set-PSDebug -Trace 2
 Start-Transcript -OutputDirectory "C:\Users\Public\Downloads\PSlog.txt" -IncludeInvocationHeader

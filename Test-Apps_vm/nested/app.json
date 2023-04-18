@@ -191,7 +191,7 @@
               ]
         },
         "protectedSettings": {
-          "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1 -domainUserName ',parameters('SharedVmConfig').domainUserName,' -adminPassword ',parameters('SharedVmConfig').adminPassword)]"
+          "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1 -domainAdmin ',parameters('SharedVmConfig').domainAdmin,' -adminPassword ',parameters('SharedVmConfig').adminPassword)]"
         }
       }
     }
