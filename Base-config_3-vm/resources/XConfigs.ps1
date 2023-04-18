@@ -47,9 +47,16 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "
 New-Item "HKLM:\SOFTWARE\Policies\Microsoft" -Name "Edge" -Force
 New-Itemproperty "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HideFirstRunExperience" -Value 1 -PropertyType "DWord" -Force
 
+## Drop icons
 $TmpDirectory = "C:\Users\Public\Downloads"
 Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
 Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
+Copy-Item 
+If ($env:computername -like "*DC*") {
+Copy-Item "$TmpDirectory\Icons\DC1\*" "C:\Users\Public\Desktop\"
+} else {
+Copy-Item "$TmpDirectory\Icons\APP1\*" "C:\Users\Public\Desktop\"
+}
 
 ## Azure AD sync link on DC
 If ($env:computername -like "*DC*") {

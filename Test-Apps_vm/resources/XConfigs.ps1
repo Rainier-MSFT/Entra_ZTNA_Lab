@@ -21,6 +21,7 @@ Add-WindowsFeature net-framework-core
 Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature
 Sleep 10
 Import-Module -Name ActiveDirectory
+$TmpDirectory = "C:\Users\Public\Downloads"
 
 ## Enable TLS1.2 (Connectivity - Critical)
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols" -Name "TLS 1.2"
