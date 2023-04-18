@@ -18,13 +18,15 @@ Sleep 10
 Import-Module -Name ActiveDirectory
 #Get-Module -ListAvailable > "C:\Users\Public\Downloads\pshmodules.txt"
 
-<#
+<
 Param
 (    
     [Parameter(Mandatory=$true)][string] $domainUserName,
     [Parameter(Mandatory=$true)][string] $adminPassword
 )
-#>
+>
+[securestring]$secStringPassword = ConvertTo-SecureString $adminPassword -AsPlainText -Force
+[pscredential]$credObject = New-Object System.Management.Automation.PSCredential ($domainUserName, $secStringPassword)
 
 ## Enable TLS1.2 (Connectivity - Critical)
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols" -Name "TLS 1.2"
@@ -214,7 +216,7 @@ Write-Progress -PercentComplete 25 -id 2 -Activity "Initialize Install" -Status 
 # Create App Pool domain cred
 $AppPooluName = appPoolcredName
 $appPoolPword = passGen
-New-ADUser appPoolcredName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account " -AccountExpirationDate $null
+New-ADUser -Credential $credObject -Name $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account " -AccountExpirationDate $null
 # Gen site
 New-Item iis:\Sites\$SiteName -bindings @{protocol="http";bindingInformation=":"+$SitePort+":"} -PhysicalPath ("$WWWroot" + "$SiteName")
 sleep(2)
@@ -233,7 +235,7 @@ Write-Progress -PercentComplete 50 -id 2 -Activity "Initialize Install" -Status 
 # Create App Pool domain cred
 $AppPooluName = appPoolcredName
 $appPoolPword = passGen
-New-ADUser $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account " -AccountExpirationDate $null
+New-ADUser -Credential $credObject -Name $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account " -AccountExpirationDate $null
 # Gen site
 New-Item iis:\Sites\$SiteName -bindings @{protocol="http";bindingInformation=":"+$SitePort+":"} -PhysicalPath ("$WWWroot" + "$SiteName")
 sleep(2)
@@ -249,7 +251,7 @@ Write-Progress -PercentComplete 75 -id 2 -Activity "Initialize Install" -Status 
 ## Create App Pool domain cred
 $AppPooluName = appPoolcredName
 $appPoolPword = passGen
-New-ADUser $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account " -AccountExpirationDate $null
+New-ADUser -Credential $credObject -Name $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account " -AccountExpirationDate $null
 # Gen site
 New-Item iis:\Sites\$SiteName -bindings @{protocol="http";bindingInformation=":"+$SitePort+":"} -PhysicalPath ("$WWWroot" + "$SiteName")
 sleep(2)
@@ -259,7 +261,7 @@ Set-ItemProperty IIS:\AppPools\$SiteName -name processModel -value @{userName="$
 sleep(1)
 
 Write-Progress -PercentComplete 75 -id 2 -Activity "Initialize Install" -Status "Install ASP.net Core hosting Package"
-https://download.visualstudio.microsoft.com/download/pr/ff658e5a-c017-4a63-9ffe-e53865963848/15875eef1f0b8e25974846e4a4518135/dotnet-hosting-3.1.3-win.exe 
+Start-BitsTransfer -Source https://download.visualstudio.microsoft.com/download/pr/ff658e5a-c017-4a63-9ffe-e53865963848/15875eef1f0b8e25974846e4a4518135/dotnet-hosting-3.1.3-win.exe -Destination "$TmpDirectory\dotnet-hosting-3.1.3-win.exe"
 & "$TmpDirectory\dotnet-hosting-3.1.3-win.exe" /quiet
     
 Write-Progress -PercentComplete 100 -id 1 -Activity "Test Apps Installer " -Status "Completing Config"
