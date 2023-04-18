@@ -26,7 +26,7 @@
       },
       "defaultValue": "2016-Datacenter"
     },
-    "adminUsername": {
+    "domainAdmin": {
       "type": "string",
       "metadata": {
         "description": "Name of the domain admin account used to join the target domain & to use as a local admin account on the app VM"
@@ -108,7 +108,7 @@
   "variables": {
 
     "shortDomainName": "[first(split(parameters('domainName'),'.'))]",
-    "domainUserName": "[concat(variables('shortDomainName'),'\\',parameters('adminUsername'))]",
+    "domainAdmin": "[concat(variables('shortDomainName'),'\\',parameters('domainAdmin'))]",
     "assetLocation": "[concat(parameters('_artifactsLocation'),'/DSC')]",
     "templates": "[concat(parameters('_artifactsLocation'),'/nested')]",
     "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
@@ -134,7 +134,7 @@
       "location": "[resourceGroup().location]",
       "vmSize": "[parameters('vmSize')]",
       "serverOS": "[parameters('serverOS')]",
-      "domainUsername": "[variables('domainUsername')]",
+      "domainAdmin": "[variables('domainAdmin')]",
       "adminUsername": "[parameters('adminUsername')]",
       "adminPassword": "[parameters('adminPassword')]",
       "storageAccountNamePrefix": "[variables('storageAccountName')]",

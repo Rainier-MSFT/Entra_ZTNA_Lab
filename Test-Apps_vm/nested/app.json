@@ -84,7 +84,7 @@
           "Name": "[parameters('SharedVmConfig').domainName]",
           "Options": "3",
           "Restart": "true",
-          "User": "[parameters('SharedVmConfig').domainUserName]"
+          "User": "[parameters('SharedVmConfig').domainAdmin]"
         },
         "protectedsettings": {
           "Password": "[parameters('SharedVmConfig').adminPassword]"

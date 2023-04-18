@@ -18,13 +18,10 @@ $Cred = New-Object System.Management.Automation.PSCredential ($domainUserName, $
 
 Set-PSDebug -Trace 2
 Start-Transcript -OutputDirectory "C:\Users\Public\Downloads\PSlog.txt" -IncludeInvocationHeader
-$Env:PSModulePath > "C:\Users\Public\Downloads\pshenv.txt"
 Add-WindowsFeature net-framework-core
 Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature
 Sleep 10
-#Install-Module -Name ActiveDirectory -Scope AllUsers -Force
 Import-Module -Name ActiveDirectory
-#Get-Module -ListAvailable > "C:\Users\Public\Downloads\pshmodules.txt"
 
 ## Enable TLS1.2 (Connectivity - Critical)
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols" -Name "TLS 1.2"
@@ -65,6 +62,7 @@ $TmpDirectory = "C:\Users\Public\Downloads"
 Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
 Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
 
+
 # Install iPerf & create shortcut
 Write-Host "Installing iPerf & creating shortcut..."
 Import-Module BitsTransfer
@@ -77,7 +75,7 @@ Set-Content "C:\Users\Public\Desktop\Run iPerf.bat" 'C:\iPerf\iperf-3.1.3-win64\
 # Deploy IIS apps
 if ([int]$PSVersionTable.PSVersion.Major -lt 5)
 {
-    Write-Host "Minimum required version is PowerShell 5.0, IIS deployment will terminate - https://aka.ms/wmf5download"
+    Write-Host "Minimum required version is PowerShell 5.0, IIS setup will terminate - https://aka.ms/wmf5download"
     exit
 }
 $WWWroot = (Get-WebFilePath "IIS:\Sites\Default Web Site").Parent.FullName + "\"
@@ -258,9 +256,9 @@ sleep(1)
 Set-ItemProperty IIS:\AppPools\$SiteName -name processModel -value @{userName="$HostDomain\$AppPooluName";password=$AppPoolPword;identitytype=3}
 sleep(1)
 
-Write-Progress -PercentComplete 75 -id 2 -Activity "Initialize Install" -Status "Install ASP.net Core hosting Package"
-Start-BitsTransfer -Source https://download.visualstudio.microsoft.com/download/pr/ff658e5a-c017-4a63-9ffe-e53865963848/15875eef1f0b8e25974846e4a4518135/dotnet-hosting-3.1.3-win.exe -Destination "$TmpDirectory\dotnet-hosting-3.1.3-win.exe"
-& "$TmpDirectory\dotnet-hosting-3.1.3-win.exe" /quiet
+#Write-Progress -PercentComplete 75 -id 2 -Activity "Initialize Install" -Status "Install ASP.net Core hosting Package"
+#Start-BitsTransfer -Source https://download.visualstudio.microsoft.com/download/pr/ff658e5a-c017-4a63-9ffe-e53865963848/15875eef1f0b8e25974846e4a4518135/dotnet-hosting-3.1.3-win.exe -Destination "$TmpDirectory\dotnet-hosting-3.1.3-win.exe"
+#& "$TmpDirectory\dotnet-hosting-3.1.3-win.exe" /quiet
     
 Write-Progress -PercentComplete 100 -id 1 -Activity "Test Apps Installer " -Status "Completing Config"
 Write-Progress -PercentComplete 100 -id 2 -Activity "Config Started" -Status "Config complete!"
