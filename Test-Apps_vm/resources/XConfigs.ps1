@@ -18,13 +18,12 @@ Sleep 10
 Import-Module -Name ActiveDirectory
 #Get-Module -ListAvailable > "C:\Users\Public\Downloads\pshmodules.txt"
 
-<
 Param
 (    
     [Parameter(Mandatory=$true)][string] $domainUserName,
     [Parameter(Mandatory=$true)][string] $adminPassword
 )
->
+
 [securestring]$secStringPassword = ConvertTo-SecureString $adminPassword -AsPlainText -Force
 [pscredential]$credObject = New-Object System.Management.Automation.PSCredential ($domainUserName, $secStringPassword)
 
@@ -216,7 +215,7 @@ Write-Progress -PercentComplete 25 -id 2 -Activity "Initialize Install" -Status 
 # Create App Pool domain cred
 $AppPooluName = appPoolcredName
 $appPoolPword = passGen
-New-ADUser -Credential $credObject -Name $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account " -AccountExpirationDate $null
+New-ADUser -Credential $credObject -Name $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account" -AccountExpirationDate $null
 # Gen site
 New-Item iis:\Sites\$SiteName -bindings @{protocol="http";bindingInformation=":"+$SitePort+":"} -PhysicalPath ("$WWWroot" + "$SiteName")
 sleep(2)
@@ -235,7 +234,7 @@ Write-Progress -PercentComplete 50 -id 2 -Activity "Initialize Install" -Status 
 # Create App Pool domain cred
 $AppPooluName = appPoolcredName
 $appPoolPword = passGen
-New-ADUser -Credential $credObject -Name $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account " -AccountExpirationDate $null
+New-ADUser -Credential $credObject -Name $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account" -AccountExpirationDate $null
 # Gen site
 New-Item iis:\Sites\$SiteName -bindings @{protocol="http";bindingInformation=":"+$SitePort+":"} -PhysicalPath ("$WWWroot" + "$SiteName")
 sleep(2)
@@ -251,7 +250,7 @@ Write-Progress -PercentComplete 75 -id 2 -Activity "Initialize Install" -Status 
 ## Create App Pool domain cred
 $AppPooluName = appPoolcredName
 $appPoolPword = passGen
-New-ADUser -Credential $credObject -Name $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account " -AccountExpirationDate $null
+New-ADUser -Credential $credObject -Name $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account" -AccountExpirationDate $null
 # Gen site
 New-Item iis:\Sites\$SiteName -bindings @{protocol="http";bindingInformation=":"+$SitePort+":"} -PhysicalPath ("$WWWroot" + "$SiteName")
 sleep(2)
