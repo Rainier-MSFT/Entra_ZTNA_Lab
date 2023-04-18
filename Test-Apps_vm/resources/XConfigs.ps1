@@ -7,7 +7,6 @@ DISCLAIMER
 	THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
 	PARTICULAR PURPOSE. Copyright (c) Microsoft Corporation.
 #>
-
 Param
 (    
     [Parameter(Mandatory=$true)][string] $domainAdmin,
