@@ -8,6 +8,12 @@ DISCLAIMER
 	PARTICULAR PURPOSE. Copyright (c) Microsoft Corporation.
 #>
 
+Param
+(    
+    [Parameter(Mandatory=$true)][string] $domainUserName,
+    [Parameter(Mandatory=$true)][string] $adminPassword
+)
+
 Set-PSDebug -Trace 2
 Start-Transcript -OutputDirectory "C:\Users\Public\Downloads\PSlog.txt" -IncludeInvocationHeader
 $Env:PSModulePath > "C:\Users\Public\Downloads\pshenv.txt"
@@ -17,12 +23,6 @@ Sleep 10
 #Install-Module -Name ActiveDirectory -Scope AllUsers -Force
 Import-Module -Name ActiveDirectory
 #Get-Module -ListAvailable > "C:\Users\Public\Downloads\pshmodules.txt"
-
-Param
-(    
-    [Parameter(Mandatory=$true)][string] $domainUserName,
-    [Parameter(Mandatory=$true)][string] $adminPassword
-)
 
 [securestring]$secStringPassword = ConvertTo-SecureString $adminPassword -AsPlainText -Force
 [pscredential]$credObject = New-Object System.Management.Automation.PSCredential ($domainUserName, $secStringPassword)
