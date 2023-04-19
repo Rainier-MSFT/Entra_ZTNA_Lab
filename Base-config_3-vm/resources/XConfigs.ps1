@@ -59,22 +59,22 @@ Copy-Item "$TmpDirectory\Icons\APP\*" "C:\Users\Public\Desktop\"
 }
 
 ## Azure AD sync link on DC
-If ($env:computername -like "*DC*") {
-$WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("C:\Users\Public\Desktop\Install AAD Cloud Sync.lnk")
-$Shortcut.TargetPath = "https://entra.microsoft.com/#view/Microsoft_AAD_Connect_Provisioning/AADConnectMenuBlade/~/GetStarted"
-$ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238"
-$Shortcut.Save()
-}
+#If ($env:computername -like "*DC*") {
+#$WshShell = New-Object -comObject WScript.Shell
+#$Shortcut = $WshShell.CreateShortcut("C:\Users\Public\Desktop\Install AAD Cloud Sync.lnk")
+#$Shortcut.TargetPath = "https://entra.microsoft.com/#view/Microsoft_AAD_Connect_Provisioning/AADConnectMenuBlade/~/GetStarted"
+#$ShortCut.IconLocation = "%SystemRoot%\system32\SHELL32.dll, 238"
+#$Shortcut.Save()
+#}
 
 ## Azure AD App Proxy Connector link on DC
-If ($env:computername -like "*DC*") {
-$WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("C:\Users\Public\Desktop\Install App Proxy.lnk")
-$Shortcut.TargetPath = "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/AppProxyOverviewBlade"
-$ShortCut.IconLocation = "$TmpDirectory\connectors.ico"
-$Shortcut.Save()
-}
+#If ($env:computername -like "*DC*") {
+#$WshShell = New-Object -comObject WScript.Shell
+#$Shortcut = $WshShell.CreateShortcut("C:\Users\Public\Desktop\Install App Proxy.lnk")
+#$Shortcut.TargetPath = "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/AppProxyOverviewBlade"
+#$ShortCut.IconLocation = "$TmpDirectory\connectors.ico"
+#$Shortcut.Save()
+#}
 
 ## Install AD Certificate Services on DC
 if ($env:computername -like "*DC*") {
