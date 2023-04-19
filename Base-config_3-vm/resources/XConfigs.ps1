@@ -51,12 +51,13 @@ New-Itemproperty "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HideFirstRunExp
 $TmpDirectory = "C:\Users\Public\Downloads"
 Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
 Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
-Copy-Item 
+Move-Item "$TmpDirectory\Icons\Cert Management*" "C:\Users\Public\Desktop\"
 If ($env:computername -like "*DC*") {
 Copy-Item "$TmpDirectory\Icons\DC1\*" "C:\Users\Public\Desktop\"
 } else {
 Copy-Item "$TmpDirectory\Icons\APP1\*" "C:\Users\Public\Desktop\"
 }
+Get-ChildItem -Path "$TmpDirectory\Icons\*.*" | Move-Item -Destination "C:\Windows\System32\"
 
 ## Azure AD sync link on DC
 If ($env:computername -like "*DC*") {
