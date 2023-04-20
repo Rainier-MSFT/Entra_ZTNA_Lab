@@ -84,3 +84,6 @@ Install-AdcsCertificationAuthority -CAType EnterpriseRootCa -CryptoProviderName 
 
 ## Disable Internet Explorer (Disabled only to retain IE legacy mode in Edge)
 dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
+
+#Clean-up
+Remove-Item -Path "$TmpDirectory*.*" -recurse
