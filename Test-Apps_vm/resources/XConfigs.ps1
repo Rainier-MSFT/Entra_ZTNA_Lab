@@ -66,6 +66,7 @@ ChromeHTML
 MSEdgeHTM
 FirefoxHTML-308046B0AF4A39CB
 #>
+Copy-Item "$TmpDirectory\Icons\defaultapplication.xml" "C:\Windows\System32\"
 $Path = (Get-ItemProperty HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice -Name ProgId).ProgId
 $RegistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'
 $Name = "DefaultAssociationsConfiguration"
