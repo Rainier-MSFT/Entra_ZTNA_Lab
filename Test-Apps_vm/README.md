@@ -59,7 +59,8 @@ Prior to deploying the template, have the following information ready:
   <summary>Expand</summary>
 
 <p><p>
-<li> Guest OS configuration is executed using DSC & custom extensions thru AppConfig.ps1.zip & Common_Configs.ps1 resources</li>
+<li> Guest OS configuration is executed using DSC & custom extensions thru AppConfig.ps1.zip & XConfigs.ps1 resources</li>
+<li> A localadmin account is created on the App VM with the same password specified for the domain admin account during deployment
 <li> A *User1* domain account is created and added to the Domain Admins group. The password is the same as provided in the *adminPassword* parameter during deployment
 <li> The *App server* and *Client* VM resources depend on the **ADDC** resource deployment in order to ensure that the AD domain exists prior to execution of 
 the JoinDomain extensions for the member VMs. This asymmetric VM deployment process adds several extra minutes to the overall deployment time
