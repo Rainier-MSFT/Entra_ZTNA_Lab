@@ -52,6 +52,32 @@ If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
     MsiExec.exe /i "C:\Users\Public\Downloads\MicrosoftEdgeEnterpriseX64.msi" /qn
 }
 
+#Set EDGE as default browser - Needs restart
+Set-Content "C:\Windows\System32\defaultapplication.xml" '<?xml version="1.0" encoding="UTF-8"?>
+<DefaultAssociations>
+  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier=".html"/>
+  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier=".htm"/>
+  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier="http"/>
+  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier="https"/>
+</DefaultAssociations>' -Encoding Ascii
+<# ID value for different browsers
+IE.HTTP
+ChromeHTML
+MSEdgeHTM
+FirefoxHTML-308046B0AF4A39CB
+#>
+$Path = (Get-ItemProperty HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice -Name ProgId).ProgId
+$RegistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'
+$Name = "DefaultAssociationsConfiguration"
+$value = 'C:\Windows\System32\defaultapplication.xml'
+$result = "IE.HTTP"
+IF($Path -eq $result) {
+    New-ItemProperty -Path $registryPath -Name $name -Value $value -PropertyType String -Force | Out-Null
+}
+ELSE {
+    Exit
+}
+
 # Disable EDGE (& IE) 1st time run
 Write-Host "Disabling EDGE (& IE) 1st time run..."
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize" -Value 2
@@ -62,15 +88,23 @@ $TmpDirectory = "C:\Users\Public\Downloads"
 Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
 Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
 
-
-# Install iPerf & create shortcut
+# Install iPerf
 Write-Host "Installing iPerf & creating shortcut..."
 Import-Module BitsTransfer
 Start-BitsTransfer -Source "https://iperf.fr/download/windows/iperf-3.1.3-win64.zip" -Destination "C:\Users\Public\Downloads\iperf-3.1.3-win64.zip"
 Expand-Archive "C:\Users\Public\Downloads\iperf-3.1.3-win64.zip" -DestinationPath "C:\iPerf" -Force
 New-NetFirewallRule -DisplayName 'iPerf-Server-Inbound-TCP' -Direction Inbound -Protocol TCP -LocalPort 5201 -Action Allow | Enable-NetFirewallRule
 New-NetFirewallRule -DisplayName 'iPerf-Server-Inbound-UDP' -Direction Inbound -Protocol UDP -LocalPort 5201 -Action Allow | Enable-NetFirewallRule
-Set-Content "C:\Users\Public\Desktop\Run iPerf.bat" 'C:\iPerf\iperf-3.1.3-win64\iperf3.exe -s' -Encoding Ascii
+
+## Drop icons
+Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
+Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
+If ($env:computername -like "*DC*") {
+Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\DC\*" -Include "*.ico","*.msc")) {move-Item $file "C:\Windows\System32\"}
+Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\DC\*" -Include "*.lnk","Cert Management*")) {move-Item $file "C:\Users\Public\Desktop\"}
+} else {
+Copy-Item "$TmpDirectory\Icons\APP\*" "C:\Users\Public\Desktop\"
+}
 
 # Deploy IIS apps
 if ([int]$PSVersionTable.PSVersion.Major -lt 5)
@@ -265,3 +299,7 @@ Write-Progress -PercentComplete 100 -id 2 -Activity "Config Started" -Status "Co
 
 ## Disable Internet Explorer (Disabled only to retain IE legacy mode in Edge)
 dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
+
+#Clean-up
+Remove-Item -Path "$TmpDirectory*.*" -recurse
+Restart-computer -Force
