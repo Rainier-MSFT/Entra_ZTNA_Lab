@@ -134,12 +134,7 @@
       "location": "[resourceGroup().location]",
       "vmSize": "[parameters('vmSize')]",
       "serverOS": "[parameters('serverOS')]",
-<<<<<<< HEAD
-      "domainAdmin": "[variables('adminUsername')]",
-      "adminUsername": "[parameters('adminUsername')]",
-=======
       "domainAdmin": "[parameters('domainAdmin')]",
->>>>>>> eedd79c5033702e48badec22f6b50b061d453c82
       "adminPassword": "[parameters('adminPassword')]",
       "storageAccountNamePrefix": "[variables('storageAccountName')]",
       "sasToken": "[parameters('_artifactsLocationSasToken')]",
