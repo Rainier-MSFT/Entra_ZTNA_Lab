@@ -22,20 +22,26 @@
         "2016-Datacenter", "2019-Datacenter", "2022-Datacenter"
       ],
       "metadata": {
-        "description": "OS version of application servers in your deployment"
+        "description": "OS version of application server for this deployment"
       },
       "defaultValue": "2016-Datacenter"
     },
     "domainAdmin": {
       "type": "string",
       "metadata": {
-        "description": "Name of the domain admin account used to join the target domain & to use as a local admin account on the app VM"
+        "description": "Name of the domain admin account used to join the target domain & to set as a local admin account on the app VM"
       }
     },
     "adminPassword": {
       "type": "securestring",
       "metadata": {
-        "description": "Admin account password"
+        "description": "Domain admin account password that will be used when joining the domain & will be set as the local admin password"
+      },
+    "localAdmin": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the local admin account that will be created on the app VM"
+        }
       }
     },
     "vmSize": {
@@ -134,7 +140,8 @@
       "location": "[resourceGroup().location]",
       "vmSize": "[parameters('vmSize')]",
       "serverOS": "[parameters('serverOS')]",
-      "domainAdmin": "[parameters('domainAdmin')]",
+      "Localadmin": "[parameters('localAdmin')]",
+      "domainAdmin": "[variables('domainAdmin')]",
       "adminPassword": "[parameters('adminPassword')]",
       "storageAccountNamePrefix": "[variables('storageAccountName')]",
       "sasToken": "[parameters('_artifactsLocationSasToken')]",
