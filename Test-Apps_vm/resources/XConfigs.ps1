@@ -59,14 +59,14 @@ New-Item "HKLM:\SOFTWARE\Policies\Microsoft" -Name "Edge" -Force
 New-Itemproperty "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HideFirstRunExperience" -Value 1 -PropertyType "DWord" -Force
 
 # Install iPerf
-Write-Host "Installing iPerf & creating shortcut..."
+Write-Host "Installing iPerf..."
 Import-Module BitsTransfer
 Start-BitsTransfer -Source "https://iperf.fr/download/windows/iperf-3.1.3-win64.zip" -Destination "C:\Users\Public\Downloads\iperf-3.1.3-win64.zip"
 Expand-Archive "C:\Users\Public\Downloads\iperf-3.1.3-win64.zip" -DestinationPath "C:\iPerf" -Force
 New-NetFirewallRule -DisplayName 'iPerf-Server-Inbound-TCP' -Direction Inbound -Protocol TCP -LocalPort 5201 -Action Allow | Enable-NetFirewallRule
 New-NetFirewallRule -DisplayName 'iPerf-Server-Inbound-UDP' -Direction Inbound -Protocol UDP -LocalPort 5201 -Action Allow | Enable-NetFirewallRule
 
-## Drop icons
+## Provision icons
 Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
 Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
 If ($env:computername -like "*DC*") {
@@ -77,31 +77,23 @@ Copy-Item "$TmpDirectory\Icons\APP\*" "C:\Users\Public\Desktop\"
 }
 
 #Set EDGE as default browser - Needs restart
-#Set-Content "C:\Windows\System32\defaultapplication.xml" '<?xml version="1.0" encoding="UTF-8"?>
-#<DefaultAssociations>
-#  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier=".html"/>
-#  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier=".htm"/>
-#  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier="http"/>
-#  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier="https"/>
-#</DefaultAssociations>' -Encoding Ascii
+Set-Content "C:\Windows\System32\defaultapplication.xml" '<?xml version="1.0" encoding="UTF-8"?>
+<DefaultAssociations>
+  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier=".html"/>
+  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier=".htm"/>
+  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier="http"/>
+  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier="https"/>
+</DefaultAssociations>' -Encoding Ascii
 <# ID value for different browsers
 IE.HTTP
 ChromeHTML
 MSEdgeHTM
 FirefoxHTML-308046B0AF4A39CB
 #>
-Copy-Item "$TmpDirectory\Icons\defaultapplication.xml" "C:\Windows\System32\"
-$Path = (Get-ItemProperty HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice -Name ProgId).ProgId
 $RegistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'
 $Name = "DefaultAssociationsConfiguration"
 $value = 'C:\Windows\System32\defaultapplication.xml'
-$result = "IE.HTTP"
-IF($Path -eq $result) {
-    New-ItemProperty -Path $registryPath -Name $name -Value $value -PropertyType String -Force | Out-Null
-}
-ELSE {
-    Exit
-}
+New-ItemProperty -Path $registryPath -Name $name -Value $value -PropertyType String -Force | Out-Null
 
 # Deploy IIS apps
 if ([int]$PSVersionTable.PSVersion.Major -lt 5)
