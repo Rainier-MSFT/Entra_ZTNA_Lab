@@ -67,7 +67,7 @@ New-NetFirewallRule -DisplayName 'iPerf-Server-Inbound-TCP' -Direction Inbound -
 New-NetFirewallRule -DisplayName 'iPerf-Server-Inbound-UDP' -Direction Inbound -Protocol UDP -LocalPort 5201 -Action Allow | Enable-NetFirewallRule
 
 ## Provision icons
-Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
+Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
 Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
 If ($env:computername -like "*DC*") {
 Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\DC\*" -Include "*.ico","*.msc")) {move-Item $file "C:\Windows\System32\"}
