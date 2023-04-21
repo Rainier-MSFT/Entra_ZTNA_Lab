@@ -21,7 +21,7 @@
   "variables": {},
   "resources": [
     {
-      "apiVersion": "2017-03-30",
+      "apiVersion": "2022-11-01",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
       "location": "[parameters('SharedVmConfig').location]",
@@ -31,7 +31,7 @@
         },
         "osProfile": {
           "computerName": "[parameters('vmName')]",
-          "adminUsername": "[parameters('SharedVmConfig').adminUsername]",
+          "adminUsername": "[parameters('SharedVmConfig').localAdmin]",
           "adminPassword": "[parameters('SharedVmConfig').adminPassword]"
         },
         "storageProfile": {
@@ -165,14 +165,16 @@
         "type": "CustomScriptExtension",
         "typeHandlerVersion": "1.10",
         "autoUpgradeMinorVersion": true,
+        "forceUpdateTag": "1",
         "settings": {
           "fileUris": [
                 "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/resources/XConfigs.ps1"
               ],
-              "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1"
+              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1 -domainAdmin ',parameters('SharedVmConfig').domainAdmin,' -adminPassword ',parameters('SharedVmConfig').adminPassword)]"
         },
         "protectedSettings": null
       }
     }
-  ]
+  ],
+  "outputs": {}
 }

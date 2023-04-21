@@ -21,7 +21,7 @@
   "variables": {},
   "resources": [
     {
-      "apiVersion": "2017-03-30",
+      "apiVersion": "2022-03-30",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
       "location": "[parameters('SharedVmConfig').location]",
@@ -31,7 +31,7 @@
         },
         "osProfile": {
           "computerName": "[parameters('vmName')]",
-          "adminUsername": "[parameters('SharedVmConfig').adminUsername]",
+          "adminUsername": "[parameters('SharedVmConfig').localAdmin]",
           "adminPassword": "[parameters('SharedVmConfig').adminPassword]"
         },
         "storageProfile": {
@@ -68,7 +68,7 @@
       }
     },
     {
-      "apiVersion": "2017-03-30",
+      "apiVersion": "2022-11-01",
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('vmName'),'/JoinDomain')]",
       "location": "[parameters('SharedVmConfig').location]",
@@ -85,7 +85,7 @@
           "OUPath": null,
           "Options": "3",
           "Restart": "true",
-          "User": "[parameters('SharedVmConfig').domainUserName]"
+          "User": "[parameters('SharedVmConfig').domainAdmin]"
         },
         "protectedsettings": {
           "Password": "[parameters('SharedVmConfig').adminPassword]"
@@ -98,7 +98,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('vmName'),'/AppConfig')]",
-      "apiVersion": "2017-03-30",
+      "apiVersion": "2022-11-01",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]"
@@ -126,7 +126,7 @@
 
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('vmName'),'/BGInfo')]",
-      "apiVersion": "2017-03-30",
+      "apiVersion": "2022-11-01",
       "scale": null,
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
@@ -148,7 +148,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('vmName'),'/Antimalware')]",
-      "apiVersion": "2017-03-30",
+      "apiVersion": "2022-11-01",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]"
@@ -172,28 +172,29 @@
             "day": "7",
             "time": "120"
           }
-        },
-        "protectedSettings": null
+        }
       }
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('vmName'),'/XConfigs')]",
-      "apiVersion": "2019-03-01",
+      "apiVersion": "2022-11-01",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[parameters('vmName')]"
+        "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'), '/extensions/joindomain')]",
+        "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'), '/extensions/AppConfig')]"
       ],
       "properties": {
         "publisher": "Microsoft.Compute",
         "type": "CustomScriptExtension",
         "typeHandlerVersion": "1.10",
         "autoUpgradeMinorVersion": true,
+        "forceUpdateTag": "1",
         "settings": {
           "fileUris": [
-                "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/resources/XConfigs.ps1"
+            "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Test-Apps_vm/resources/XConfigs.ps1"
               ],
-              "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1"
+              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1 -domainAdmin ',parameters('SharedVmConfig').domainAdmin,' -adminPassword ',parameters('SharedVmConfig').adminPassword)]"
         },
         "protectedSettings": null
       }

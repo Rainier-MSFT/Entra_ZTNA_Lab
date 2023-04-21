@@ -26,7 +26,7 @@
       },
       "defaultValue": "2016-Datacenter"
     },
-    "adminUsername": {
+    "domainAdmin": {
       "type": "string",
       "metadata": {
         "description": "Name of the domain admin account to create, i.e. entadmin"
@@ -36,6 +36,12 @@
       "type": "securestring",
       "metadata": {
         "description": "The admin account password"
+      }
+    },
+    "localAdmin": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the local admin account that will be created on the app VM, and client if provisioned."
       }
     },
     "vmSize": {
@@ -48,8 +54,9 @@
     "dnsLabelPrefix": {
       "type": "string",
       "metadata": {
-        "description": "DNS label prefix if enabling a public IP. Must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
-      }
+        "description": "DNS label prefix to connect to the VMs public IP via DNS. Leave bkank if no public IP, otherwise must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
+      },
+      "defaultValue": ""
     },
     "deployClientVm": {
       "type": "string",
@@ -98,7 +105,7 @@
         "Yes", "No"
       ],
       "metadata": {
-        "description": "Provisions the VM with a public IP for connecting to it directly from the Internet"
+        "description": "Provisions the VM with a public IP for connecting to it directly from the Internet. Bit Azure Bastion can be used to connect to the VM via a jumphost, if enabled "
       },
       "defaultValue": "No"
     }
@@ -107,7 +114,7 @@
   "variables": {
 
     "shortDomainName": "[first(split(parameters('domainName'),'.'))]",
-    "domainUserName": "[concat(variables('shortDomainName'),'\\',parameters('adminUsername'))]",
+    "domainUserName": "[concat(variables('shortDomainName'),'\\',parameters('domainAdmin'))]",
     "assetLocation": "[concat(parameters('_artifactsLocation'),'/DSC')]",
     "templates": "[concat(parameters('_artifactsLocation'),'/nested')]",
     "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
@@ -153,8 +160,8 @@
       "location": "[resourceGroup().location]",
       "vmSize": "[parameters('vmSize')]",
       "serverOS": "[parameters('serverOS')]",
-      "domainUsername": "[variables('domainUsername')]",
-      "adminUsername": "[parameters('adminUsername')]",
+      "Localadmin": "[parameters('localAdmin')]",
+      "domainAdmin": "[variables('domainAdmin')]",
       "adminPassword": "[parameters('adminPassword')]",
       "storageAccountNamePrefix": "[variables('storageAccountName')]",
       "sasToken": "[parameters('_artifactsLocationSasToken')]",
@@ -234,7 +241,7 @@
       }
     },
     {
-      "apiVersion": "2017-06-01",
+      "apiVersion": "2018-04-01",
       "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').adPublicIpName]",
@@ -248,7 +255,7 @@
       }
     },
     {
-      "apiVersion": "2017-06-01",
+      "apiVersion": "2018-04-01",
       "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').appPublicIpName]",
@@ -307,7 +314,7 @@
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
       ],
-      "apiVersion": "2018-01-01",
+      "apiVersion": "2018-04-01",
       "comments": "This is the network interface for the app server VM.",
       "properties": {
         "ipConfigurations": [

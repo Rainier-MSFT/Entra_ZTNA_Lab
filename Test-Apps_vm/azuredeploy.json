@@ -106,7 +106,7 @@
         "Yes", "No"
       ],
       "metadata": {
-        "description": "Provisions the VM with a public IP for connecting to it directly from the Internet. Bit Azure Bastion can be used to connect to the VM via a jumphost, if enabled on the connected VNet"
+        "description": "Provisions the VM with a public IP for connecting to it directly from the Internet. Bit Azure Bastion can be used to connect to the VM via a jumphost, if enabled on the provisioned VNet"
       },
       "defaultValue": "No"
     }
@@ -141,7 +141,7 @@
       "location": "[resourceGroup().location]",
       "vmSize": "[parameters('vmSize')]",
       "serverOS": "[parameters('serverOS')]",
-      "Localadmin": "[parameters('localAdmin')]",
+      "localAdmin": "[parameters('localAdmin')]",
       "domainAdmin": "[variables('domainAdmin')]",
       "adminPassword": "[parameters('adminPassword')]",
       "storageAccountNamePrefix": "[variables('storageAccountName')]",
