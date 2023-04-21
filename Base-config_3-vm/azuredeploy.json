@@ -29,19 +29,19 @@
     "adminUsername": {
       "type": "string",
       "metadata": {
-        "description": "Name of the domain admin account to create, i.e. entadmin. This will also be used to create a local admin account on the app server and client VMs"
+        "description": "Name of the domain admin account to create, i.e. entadmin"
       }
     },
     "adminPassword": {
       "type": "securestring",
       "metadata": {
-        "description": "The admin account password."
+        "description": "The admin account password"
       }
     },
     "vmSize": {
       "type": "string",
       "metadata": {
-        "description": "Select a VM size for all VMs in your deployment."
+        "description": "Select a VM size for all VMs in your deployment"
       },
       "defaultValue": "Standard_B2s"
     },
