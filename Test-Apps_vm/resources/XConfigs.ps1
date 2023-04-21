@@ -52,33 +52,6 @@ If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
     MsiExec.exe /i "C:\Users\Public\Downloads\MicrosoftEdgeEnterpriseX64.msi" /qn
 }
 
-#Set EDGE as default browser - Needs restart
-Set-Content "C:\Windows\System32\defaultapplication.xml" '<?xml version="1.0" encoding="UTF-8"?>
-<DefaultAssociations>
-  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier=".html"/>
-  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier=".htm"/>
-  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier="http"/>
-  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier="https"/>
-</DefaultAssociations>' -Encoding Ascii
-<# ID value for different browsers
-IE.HTTP
-ChromeHTML
-MSEdgeHTM
-FirefoxHTML-308046B0AF4A39CB
-#>
-Copy-Item "$TmpDirectory\Icons\defaultapplication.xml" "C:\Windows\System32\"
-$Path = (Get-ItemProperty HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice -Name ProgId).ProgId
-$RegistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'
-$Name = "DefaultAssociationsConfiguration"
-$value = 'C:\Windows\System32\defaultapplication.xml'
-$result = "IE.HTTP"
-IF($Path -eq $result) {
-    New-ItemProperty -Path $registryPath -Name $name -Value $value -PropertyType String -Force | Out-Null
-}
-ELSE {
-    Exit
-}
-
 # Disable EDGE (& IE) 1st time run
 Write-Host "Disabling EDGE (& IE) 1st time run..."
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize" -Value 2
@@ -86,8 +59,8 @@ New-Item "HKLM:\SOFTWARE\Policies\Microsoft" -Name "Edge" -Force
 New-Itemproperty "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "HideFirstRunExperience" -Value 1 -PropertyType "DWord" -Force
 
 $TmpDirectory = "C:\Users\Public\Downloads"
-Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
-Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
+#Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
+#Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
 
 # Install iPerf
 Write-Host "Installing iPerf & creating shortcut..."
@@ -105,6 +78,33 @@ Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\DC\*" -Include "*.ico","*.m
 Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\DC\*" -Include "*.lnk","Cert Management*")) {move-Item $file "C:\Users\Public\Desktop\"}
 } else {
 Copy-Item "$TmpDirectory\Icons\APP\*" "C:\Users\Public\Desktop\"
+}
+
+#Set EDGE as default browser - Needs restart
+#Set-Content "C:\Windows\System32\defaultapplication.xml" '<?xml version="1.0" encoding="UTF-8"?>
+#<DefaultAssociations>
+#  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier=".html"/>
+#  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier=".htm"/>
+#  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier="http"/>
+#  <Association ApplicationName="Microsoft Edge" ProgId="MSEdgeHTM" Identifier="https"/>
+#</DefaultAssociations>' -Encoding Ascii
+<# ID value for different browsers
+IE.HTTP
+ChromeHTML
+MSEdgeHTM
+FirefoxHTML-308046B0AF4A39CB
+#>
+Copy-Item "$TmpDirectory\Icons\defaultapplication.xml" "C:\Windows\System32\"
+$Path = (Get-ItemProperty HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice -Name ProgId).ProgId
+$RegistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'
+$Name = "DefaultAssociationsConfiguration"
+$value = 'C:\Windows\System32\defaultapplication.xml'
+$result = "IE.HTTP"
+IF($Path -eq $result) {
+    New-ItemProperty -Path $registryPath -Name $name -Value $value -PropertyType String -Force | Out-Null
+}
+ELSE {
+    Exit
 }
 
 # Deploy IIS apps
