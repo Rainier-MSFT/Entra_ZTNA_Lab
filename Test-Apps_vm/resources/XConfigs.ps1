@@ -228,6 +228,9 @@ Write-Progress -PercentComplete 50 -id 1 -Activity "Test Apps Installer " -Statu
 Import-Module WebAdministration
 Write-Progress -PercentComplete 5 -id 2 -Activity "Initialize Install" -Status "Read Config"
 Write-Progress -PercentComplete 25 -id 2 -Activity "Initialize Install" -Status "Install IWA Website" 
+Write-Progress -PercentComplete 75 -id 2 -Activity "Initialize Install" -Status "Install ASP.net Core hosting Package"
+Start-BitsTransfer -Source https://download.visualstudio.microsoft.com/download/pr/ff658e5a-c017-4a63-9ffe-e53865963848/15875eef1f0b8e25974846e4a4518135/dotnet-hosting-3.1.3-win.exe -Destination "$TmpDirectory\dotnet-hosting-3.1.3-win.exe"
+& "$TmpDirectory\dotnet-hosting-3.1.3-win.exe" /quiet
 
 # Site 1 Vars
 [string] $SiteName = "IWAApp"
@@ -277,11 +280,6 @@ sleep(2)
 New-Item -Path IIS:\AppPools\$SiteName
 sleep(1)
 Set-ItemProperty IIS:\AppPools\$SiteName -name processModel -value @{userName="$HostDomain\$AppPooluName";password=$AppPoolPword;identitytype=3}
-sleep(1)
-
-#Write-Progress -PercentComplete 75 -id 2 -Activity "Initialize Install" -Status "Install ASP.net Core hosting Package"
-#Start-BitsTransfer -Source https://download.visualstudio.microsoft.com/download/pr/ff658e5a-c017-4a63-9ffe-e53865963848/15875eef1f0b8e25974846e4a4518135/dotnet-hosting-3.1.3-win.exe -Destination "$TmpDirectory\dotnet-hosting-3.1.3-win.exe"
-#& "$TmpDirectory\dotnet-hosting-3.1.3-win.exe" /quiet
     
 Write-Progress -PercentComplete 100 -id 1 -Activity "Test Apps Installer " -Status "Completing Config"
 Write-Progress -PercentComplete 100 -id 2 -Activity "Config Started" -Status "Config complete!"
@@ -290,5 +288,5 @@ Write-Progress -PercentComplete 100 -id 2 -Activity "Config Started" -Status "Co
 dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
 
 #Clean-up
-Remove-Item -Path "$TmpDirectory*.*" -recurse
+Remove-Item -Path "$TmpDirectory\*" -recurse
 Restart-computer -Force
