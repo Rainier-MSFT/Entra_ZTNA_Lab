@@ -17,6 +17,9 @@
     "adminPassword": {
       "value": ""
     },
+    "localAdmin": {
+      "value": ""
+    },
     "deployClientVM": {
       "value": "yes"
     },
@@ -36,6 +39,18 @@
       "value": ""
     },
     "privateIPAddress": {
+      "value": ""
+    },
+    "VnetName": {
+      "value": ""
+    },
+    "subnetName": {
+      "value": ""
+    },
+    "DNSip": {
+      "value": ""
+    },
+    "EnablePublicIP": {
       "value": ""
     }
   }
