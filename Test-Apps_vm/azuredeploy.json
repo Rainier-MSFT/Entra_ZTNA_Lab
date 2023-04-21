@@ -36,15 +36,13 @@
       "type": "securestring",
       "metadata": {
         "description": "Domain admin account password that will be used when joining the domain & will be set as the local admin password"
-      },
-    "defaultValue": ""
+      }
     },
     "localAdmin": {
         "type": "string",
         "metadata": {
           "description": "Name of the local admin account that will be created on the app VM"
-        },
-      "defaultValue": ""
+        }
       },
     "vmSize": {
       "type": "string",
