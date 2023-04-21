@@ -114,7 +114,7 @@
   "variables": {
 
     "shortDomainName": "[first(split(parameters('domainName'),'.'))]",
-    "domainUserName": "[concat(variables('shortDomainName'),'\\',parameters('domainAdmin'))]",
+    "domainAdmin": "[concat(variables('shortDomainName'),'\\',parameters('domainAdmin'))]",
     "assetLocation": "[concat(parameters('_artifactsLocation'),'/DSC')]",
     "templates": "[concat(parameters('_artifactsLocation'),'/nested')]",
     "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
