@@ -43,8 +43,7 @@
         "metadata": {
           "description": "Name of the local admin account that will be created on the app VM"
         }
-      }
-    },
+      },
     "vmSize": {
       "type": "string",
       "metadata": {
