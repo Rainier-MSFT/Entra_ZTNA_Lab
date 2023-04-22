@@ -170,7 +170,7 @@
           "fileUris": [
                 "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/resources/XConfigs.ps1"
               ],
-              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1)]"
+              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1')]"
         },
         "protectedSettings": null
       }
