@@ -19,7 +19,7 @@
     }
   },
   "variables": {
-    "domainAdmin": "[concat(parameters('SharedVmConfig').shortDomainName,'\\',parameters('domainAdmin'))]"
+    "domainAdmin": "[concat(parameters('SharedVmConfig').shortDomainName,'\\',parameters('SharedVmConfig').domainAdmin)]"
   },
   "resources": [
     {
