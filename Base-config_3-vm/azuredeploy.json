@@ -371,6 +371,28 @@
       }
     },
     {
+      "name": "Bastion",
+      "condition": "[equals(parameters('enableBastion'),'Yes')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "comments": "This is the deployment resource for the Bastion",
+      "dependsOn": [
+        "[concat('Microsoft.Resources/deployments/','ADDC')]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('templates'),'/bastion.json',parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "vnetName": {
+            "value": "[variables('network').vnetName]"
+          }
+        }
+      }
+    },
+    {
       "name": "ADDC",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
@@ -465,28 +487,6 @@
           },
           "vhdUri": {
             "value": "[parameters('clientVhdUri')]"
-          }
-        }
-      }
-    },
-    {
-      "name": "Bastion",
-      "condition": "[equals(parameters('enableBastion'),'Yes')]",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
-      "comments": "This is the deployment resource for the Bastion",
-      "dependsOn": [
-        "[concat('Microsoft.Resources/deployments/','ADDC')]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(variables('templates'),'/bastion.json',parameters('_artifactsLocationSasToken'))]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "vnetName": {
-            "value": "[variables('network').vnetName]"
           }
         }
       }
