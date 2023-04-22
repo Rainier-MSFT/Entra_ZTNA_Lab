@@ -69,12 +69,7 @@ New-NetFirewallRule -DisplayName 'iPerf-Server-Inbound-UDP' -Direction Inbound -
 ## Provision icons
 Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
 Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
-If ($env:computername -like "*DC*") {
-Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\DC\*" -Include "*.ico","*.msc")) {move-Item $file "C:\Windows\System32\"}
-Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\DC\*" -Include "*.lnk","Cert Management*")) {move-Item $file "C:\Users\Public\Desktop\"}
-} else {
-Copy-Item "$TmpDirectory\Icons\APP\*" "C:\Users\Public\Desktop\"
-}
+Copy-Item "$TmpDirectory\Icons\*" "C:\Users\Public\Desktop\"
 
 #Set EDGE as default browser - Needs restart
 Set-Content "C:\Windows\System32\defaultapplication.xml" '<?xml version="1.0" encoding="UTF-8"?>
