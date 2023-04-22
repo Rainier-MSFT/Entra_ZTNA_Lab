@@ -283,5 +283,7 @@ Write-Progress -PercentComplete 100 -id 2 -Activity "Config Started" -Status "Co
 dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
 
 #Clean-up
+Stop-Transcript
+Sleep (2)
 Remove-Item -Path "$TmpDirectory\*" -recurse
 Restart-computer -Force

@@ -37,8 +37,8 @@ Write-Host "Download & Install Microsoft EDGE browser..."
 $MSEdgeExe = (Get-ChildItem -Path "C:\Program Files\Microsoft\Edge\Application\msedge.exe","C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ErrorAction SilentlyContinue)
 If ( -Not [System.IO.File]::Exists($MSEdgeExe.FullName)) {
     Import-Module BitsTransfer
-    Start-BitsTransfer -Source "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/68c5e2fb-3fa9-493b-a593-69ab63bd2651/MicrosoftEdgeEnterpriseX64.msi" -Destination "C:\Users\Public\Downloads\MicrosoftEdgeEnterpriseX64.msi"
-    MsiExec.exe /i "C:\Users\Public\Downloads\MicrosoftEdgeEnterpriseX64.msi" /qn
+    Start-BitsTransfer -Source "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/68c5e2fb-3fa9-493b-a593-69ab63bd2651/MicrosoftEdgeEnterpriseX64.msi" -Destination "$TmpDirectory\MicrosoftEdgeEnterpriseX64.msi"
+    MsiExec.exe /i "$TmpDirectory\MicrosoftEdgeEnterpriseX64.msi" /qn
 }
 
 # Disable EDGE (& IE) 1st time run
@@ -88,5 +88,7 @@ New-ItemProperty -Path $registryPath -Name $name -Value $value -PropertyType Str
 dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
 
 #Clean-up
+Stop-Transcript
+Sleep (2)
 Remove-Item -Path "$TmpDirectory\*" -recurse
 Restart-computer -Force
