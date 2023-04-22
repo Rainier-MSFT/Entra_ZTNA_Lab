@@ -114,7 +114,6 @@
   "variables": {
 
     "shortDomainName": "[first(split(parameters('domainName'),'.'))]",
-    "domainAdmin": "[concat(variables('shortDomainName'),'\\',parameters('domainAdmin'))]",
     "assetLocation": "[concat(parameters('_artifactsLocation'),'/DSC')]",
     "templates": "[concat(parameters('_artifactsLocation'),'/nested')]",
     "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
@@ -161,7 +160,7 @@
       "vmSize": "[parameters('vmSize')]",
       "serverOS": "[parameters('serverOS')]",
       "Localadmin": "[parameters('localAdmin')]",
-      "domainAdmin": "[variables('domainAdmin')]",
+      "domainAdmin": "[parameters('domainAdmin')]",
       "adminPassword": "[parameters('adminPassword')]",
       "storageAccountNamePrefix": "[variables('storageAccountName')]",
       "sasToken": "[parameters('_artifactsLocationSasToken')]",

@@ -18,7 +18,9 @@
       "type": "object"
     }
   },
-  "variables": {},
+  "variables": {
+    "domainAdmin": "[concat(variables('shortDomainName'),'\\',parameters('domainAdmin'))]"
+  },
   "resources": [
     {
       "apiVersion": "2023-03-01",
@@ -85,7 +87,7 @@
           "OUPath": null,
           "Options": "3",
           "Restart": "true",
-          "User": "[parameters('SharedVmConfig').domainAdmin]"
+          "User": "[variables('domainAdmin')]"
         },
         "protectedsettings": {
           "Password": "[parameters('SharedVmConfig').adminPassword]"
