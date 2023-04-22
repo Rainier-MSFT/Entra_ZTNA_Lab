@@ -7,14 +7,14 @@ DISCLAIMER
 	THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
 	PARTICULAR PURPOSE. Copyright (c) Microsoft Corporation.
 #>
-Set-PSDebug -Trace 2
-Start-Transcript -OutputDirectory "C:\Users\Public\Downloads\PSlog.txt" -IncludeInvocationHeader
-
 Param
 (    
     [Parameter(Mandatory=$true)][string] $domainAdmin,
     [Parameter(Mandatory=$true)][string] $adminPassword
 )
+Set-PSDebug -Trace 2
+Start-Transcript -OutputDirectory "C:\Users\Public\Downloads\PSlog.txt" -IncludeInvocationHeader
+
 $SadminPassword = ConvertTo-SecureString $adminPassword -AsPlainText -Force
 $Cred = New-Object System.Management.Automation.PSCredential ($domainAdmin, $SadminPassword)
 
