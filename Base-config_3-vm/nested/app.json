@@ -19,7 +19,7 @@
     }
   },
   "variables": {
-    "domainAdmin": "[concat(variables('shortDomainName'),'\\',parameters('domainAdmin'))]"
+    "domainAdmin": "[concat(parameters('shortDomainName'),'\\',parameters('domainAdmin'))]"
   },
   "resources": [
     {
