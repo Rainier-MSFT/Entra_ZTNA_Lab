@@ -7,6 +7,11 @@ DISCLAIMER
 	THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
 	PARTICULAR PURPOSE. Copyright (c) Microsoft Corporation.
 #>
+Set-PSDebug -Trace 2
+Start-Transcript -OutputDirectory "C:\Users\Public\Downloads\PSlog.txt" -IncludeInvocationHeader
+
+$TmpDirectory = "C:\Users\Public\Downloads"
+
 Param
 (    
     [Parameter(Mandatory=$true)][string] $domainAdmin,
@@ -15,13 +20,10 @@ Param
 $SadminPassword = ConvertTo-SecureString $adminPassword -AsPlainText -Force
 $Cred = New-Object System.Management.Automation.PSCredential ($domainAdmin, $SadminPassword)
 
-Set-PSDebug -Trace 2
-Start-Transcript -OutputDirectory "C:\Users\Public\Downloads\PSlog.txt" -IncludeInvocationHeader
 Add-WindowsFeature net-framework-core
 Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature
 Sleep 10
 Import-Module -Name ActiveDirectory
-$TmpDirectory = "C:\Users\Public\Downloads"
 
 ## Enable TLS1.2 (Connectivity - Critical)
 New-Item "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols" -Name "TLS 1.2"
