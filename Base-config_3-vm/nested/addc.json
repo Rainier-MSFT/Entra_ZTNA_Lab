@@ -31,7 +31,7 @@
         },
         "osProfile": {
           "computerName": "[parameters('vmName')]",
-          "adminUsername": "[parameters('SharedVmConfig').localAdmin]",
+          "adminUsername": "[parameters('SharedVmConfig').domainAdmin]",
           "adminPassword": "[parameters('SharedVmConfig').adminPassword]"
         },
         "storageProfile": {
@@ -95,7 +95,7 @@
           "Properties": {
             "DomainName": "[parameters('SharedVmConfig').domainName]",
             "AdminCreds": {
-              "UserName": "[parameters('SharedVmConfig').localAdmin]",
+              "UserName": "[parameters('SharedVmConfig').domainAdmin]",
               "Password": "PrivateSettingsRef:AdminPassword"
             }
           }
