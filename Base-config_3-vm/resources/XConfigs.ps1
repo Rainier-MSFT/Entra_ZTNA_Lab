@@ -90,6 +90,6 @@ dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional
 
 #Clean-up
 Stop-Transcript
-Sleep (2)
-Remove-Item -Path "$TmpDirectory\*" -recurse
-Restart-computer -Force
+#Sleep (2)
+#Remove-Item -Path "$TmpDirectory\*" -recurse
+#Restart-computer -Force
