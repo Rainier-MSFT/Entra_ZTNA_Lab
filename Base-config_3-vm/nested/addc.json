@@ -151,6 +151,29 @@
         },
         "protectedSettings": null
       }
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('vmName'),'/XConfigs')]",
+      "apiVersion": "2022-11-01",
+      "location": "[parameters('SharedVmConfig').location]",
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'), '/extensions/InstallDomainController')]"
+      ],
+      "properties": {
+        "publisher": "Microsoft.Compute",
+        "type": "CustomScriptExtension",
+        "typeHandlerVersion": "1.10",
+        "autoUpgradeMinorVersion": true,
+        "forceUpdateTag": "1",
+        "settings": {
+          "fileUris": [
+            "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/resources/XConfigs.ps1"
+              ],
+              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1 -domainAdmin ',parameters('SharedVmConfig').domainAdmin,' -adminPassword ',parameters('SharedVmConfig').adminPassword)]"
+        },
+        "protectedSettings": null
+      }
     }
   ],
   "outputs": {}
