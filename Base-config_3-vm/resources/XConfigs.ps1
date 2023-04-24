@@ -274,4 +274,4 @@ dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional
 Stop-Transcript
 #Sleep (2)
 #Remove-Item -Path "$TmpDirectory\*" -recurse
-#Restart-computer -Force
+Restart-computer -Force
