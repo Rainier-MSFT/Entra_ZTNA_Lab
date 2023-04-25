@@ -2,6 +2,12 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "configName": {
+            "type": "string",
+            "metadata": {
+              "description": "The name of the deployment, for concatenating certain resource names. E.g. BaseConfig-01. Do not use spaces or special characters other than _ or -"
+            }
+          },
         "vnetName": {
             "defaultValue": "",
             "type": "String",
@@ -16,13 +22,6 @@
                 "description": "Bastion subnet IP prefix MUST be within vnet IP prefix address space"
             }
         },
-        "bastionHostName": {
-            "defaultValue": "BastionHost",
-            "type": "String",
-            "metadata": {
-                "description": "Name of Azure Bastion resource"
-            }
-        },
         "location": {
             "defaultValue": "[resourceGroup().location]",
             "type": "String",
@@ -34,7 +33,8 @@
     "variables": {
         "publicIpAddressName": "[format('{0}-PIP', parameters('bastionHostName'))]",
         "bastionSubnetName": "AzureBastionSubnet",
-        "bastionNsgName": "[format('{0}-NSG', parameters('bastionHostName'))]"
+        "bastionNsgName": "[format('{0}-NSG', parameters('bastionHostName'))]",
+        "bastionHostName": "[concat(parameters('configName'),'-BastionHost')]"
     },
     "resources": [
         {
