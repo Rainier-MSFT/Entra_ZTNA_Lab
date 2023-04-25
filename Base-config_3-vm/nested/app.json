@@ -19,7 +19,7 @@
     }
   },
   "variables": {
-    "domainAdmin": "[concat(parameters('SharedVmConfig').shortDomainName,'\\',parameters('SharedVmConfig').domainAdmin)]"
+    "domainUserName": "[concat(parameters('SharedVmConfig').shortDomainName,'\\',parameters('SharedVmConfig').domainAdmin)]"
   },
   "resources": [
     {
@@ -87,7 +87,7 @@
           "OUPath": null,
           "Options": "3",
           "Restart": "true",
-          "User": "[variables('domainAdmin')]"
+          "User": "[variables('domainUserName')]"
         },
         "protectedsettings": {
           "Password": "[parameters('SharedVmConfig').adminPassword]"
@@ -196,7 +196,7 @@
           "fileUris": [
             "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/resources/XConfigs.ps1"
               ],
-              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1 -domainAdmin ',parameters('SharedVmConfig').domainAdmin,' -adminPassword ',parameters('SharedVmConfig').adminPassword)]"
+              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File XConfigs.ps1 -domainAdmin ',variables('domainUserName'),' -adminPassword ',parameters('SharedVmConfig').adminPassword)]"
         },
         "protectedSettings": null
       }

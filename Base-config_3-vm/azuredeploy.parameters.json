@@ -11,17 +11,20 @@
     "serverOS": {
       "value": "2016-Datacenter"
     },
-    "adminUsername": {
+    "domainAdmin": {
+      "value": ""
+    },
+    "localAdmin": {
       "value": ""
     },
     "adminPassword": {
       "value": ""
     },
     "deployClientVM": {
-      "value": "yes"
+      "value": "No"
     },
     "clientVhdUri": {
-      "value": "yes"
+      "value": ""
     },
     "vmSize": {
       "value": "Standard_B2s"

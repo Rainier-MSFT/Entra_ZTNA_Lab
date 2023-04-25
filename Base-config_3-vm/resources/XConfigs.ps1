@@ -9,8 +9,8 @@ DISCLAIMER
 #>
 Param
 (    
-    [Parameter(Mandatory=$true)][string] $domainAdmin,
-    [Parameter(Mandatory=$true)][string] $adminPassword
+    [Parameter(Mandatory=$false)][string] $domainAdmin,
+    [Parameter(Mandatory=$false)][string] $adminPassword
 )
 Set-PSDebug -Trace 2
 Start-Transcript -OutputDirectory "C:\Users\Public\Downloads\PSlog.txt" -IncludeInvocationHeader

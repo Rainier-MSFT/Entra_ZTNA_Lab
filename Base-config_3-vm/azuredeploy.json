@@ -26,6 +26,12 @@
       },
       "defaultValue": "2016-Datacenter"
     },
+    "localAdmin": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the local admin account that will be created on the app VM, and client if provisioned."
+      }
+    },
     "domainAdmin": {
       "type": "string",
       "metadata": {
@@ -36,12 +42,6 @@
       "type": "securestring",
       "metadata": {
         "description": "The admin account password"
-      }
-    },
-    "localAdmin": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of the local admin account that will be created on the app VM, and client if provisioned."
       }
     },
     "vmSize": {
@@ -158,14 +158,14 @@
     "SharedVmConfig": {
       "location": "[resourceGroup().location]",
       "vmSize": "[parameters('vmSize')]",
+      "domainName": "[parameters('domainName')]",
+      "shortDomainName": "[variables('shortDomainName')]",
       "serverOS": "[parameters('serverOS')]",
-      "Localadmin": "[parameters('localAdmin')]",
+      "localAdmin": "[parameters('localAdmin')]",
       "domainAdmin": "[parameters('domainAdmin')]",
       "adminPassword": "[parameters('adminPassword')]",
       "storageAccountNamePrefix": "[variables('storageAccountName')]",
-      "sasToken": "[parameters('_artifactsLocationSasToken')]",
-      "domainName": "[parameters('domainName')]",
-      "shortDomainName": "[variables('shortDomainName')]"
+      "sasToken": "[parameters('_artifactsLocationSasToken')]"
     }
   },
 
