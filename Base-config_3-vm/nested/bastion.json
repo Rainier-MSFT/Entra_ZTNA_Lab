@@ -31,10 +31,10 @@
         }
     },
     "variables": {
-        "publicIpAddressName": "[format('{0}-PIP', parameters('bastionHostName'))]",
+        "bastionHostName": "[concat(parameters('configName'),'-BastionHost')]",
+        "publicIpAddressName": "[format('{0}-PIP', variables('bastionHostName'))]",
         "bastionSubnetName": "AzureBastionSubnet",
-        "bastionNsgName": "[format('{0}-NSG', parameters('bastionHostName'))]",
-        "bastionHostName": "[concat(parameters('configName'),'-BastionHost')]"
+        "bastionNsgName": "[format('{0}-NSG', variables('bastionHostName'))]"
     },
     "resources": [
         {
@@ -218,7 +218,7 @@
         {
             "type": "Microsoft.Network/bastionHosts",
             "apiVersion": "2022-07-01",
-            "name": "[parameters('bastionHostName')]",
+            "name": "[variables('bastionHostName')]",
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))]",
