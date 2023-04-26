@@ -17,7 +17,6 @@
   },
   "variables": {
     "imageName": "[concat(parameters('vmName'),'-image')]",
-    "domainAdmin": "[concat(parameters('SharedVmConfig').shortDomainName,'\\',parameters('SharedVmConfig').domainAdmin)]"
   },
   "resources": [
     {
@@ -50,7 +49,7 @@
         },
         "osProfile": {
           "computerName": "[parameters('vmName')]",
-          "adminUsername": "[parameters('SharedVmConfig').localAdmin]",
+          "adminUsername": "[parameters('SharedVmConfig').adminUsername]",
           "adminPassword": "[parameters('SharedVmConfig').adminPassword]"
         },
         "storageProfile": {
@@ -91,7 +90,7 @@
           "OUPath": null,
           "Options": "3",
           "Restart": "true",
-          "User": "[variables('domainAdmin')]"
+          "User": "[parameters('SharedVmConfig').domainUserName]"
         },
         "protectedsettings": {
           "Password": "[parameters('SharedVmConfig').adminPassword]"
