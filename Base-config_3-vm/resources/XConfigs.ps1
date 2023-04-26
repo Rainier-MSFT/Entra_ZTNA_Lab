@@ -15,14 +15,11 @@ Param
 Set-PSDebug -Trace 2
 Start-Transcript -OutputDirectory "C:\Users\Public\Downloads\PSlog.txt" -IncludeInvocationHeader
 
-$SadminPassword = ConvertTo-SecureString $adminPassword -AsPlainText -Force
-$Cred = New-Object System.Management.Automation.PSCredential ($domainAdmin, $SadminPassword)
-
 $TmpDirectory = "C:\Users\Public\Downloads"
+$AllDesktop = ([Environment]::GetEnvironmentVariable("Public"))+"\Desktop\"
 
 # Global pre-reqs
 Add-WindowsFeature net-framework-core
-#New-ItemProperty "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -Name "SchUseStrongCrypto" -Value 1 -PropertyType "Dword"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 ## Relax UAC (Optional)
@@ -72,20 +69,25 @@ If ($env:computername -like "DC*") {
     # Install AD Certificate Services
     Install-WindowsFeature AD-Certificate,ADCS-Cert-Authority,ADCS-Web-Enrollment -IncludeManagementTools
     Install-AdcsCertificationAuthority -CAType EnterpriseRootCa -CryptoProviderName "RSA#Microsoft Software Key Storage Provider" -KeyLength 2048 -HashAlgorithmName SHA256 -ValidityPeriod Years -ValidityPeriodUnits 3 -DatabaseDirectory "C:\windows\system32\certLog" -LogDirectory "c:\windows\system32\CertLog" -Force
+    Certutiul -vroot
 
     ## Provision icons
     Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
     Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
     Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "*.ico","*.msc")) {move-Item $file "C:\Windows\System32\"}
     Sleep (2)
-    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "*.lnk","Cert Management*")) {move-Item $file "C:\Users\Public\Desktop\"}
+    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "*.lnk","Cert Management*")) {move-Item $file $AllDesktop}
 }
 
-if ($env:computername -like "*APP*") {
+## Execute on APP VM (If called from app template)
+If ( -not [string]::IsNullOrEmpty($domainAdmin)){
+    $SadminPassword = ConvertTo-SecureString $adminPassword -AsPlainText -Force
+    $Creds = New-Object System.Management.Automation.PSCredential ($domainAdmin, $SadminPassword)
+
     # Pre-reqs
     Install-WindowsFeature -Name RSAT-AD-Tools -IncludeAllSubFeature
     Add-windowsfeature web-server -includeallsubfeature
-    Sleep (6)
+    Sleep (4)
     Import-module servermanager
     Import-Module -Name ActiveDirectory
     import-module servermanager
@@ -104,7 +106,7 @@ if ($env:computername -like "*APP*") {
     ## Provision icons
     Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Test-Apps_vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
     Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
-    Copy-Item "$TmpDirectory\Icons\*" "C:\Users\Public\Desktop\"
+    Copy-Item "$TmpDirectory\Icons\*" $AllDesktop
 
     # Deploy IIS apps
     $WWWroot = (Get-WebFilePath "IIS:\Sites\Default Web Site").Parent.FullName + "\"
@@ -112,48 +114,6 @@ if ($env:computername -like "*APP*") {
     Expand-Archive "$TmpDirectory\WebSites.zip" -DestinationPath $WWWroot -Force
 
     $HostDomain = Get-ADDomain -Current LocalComputer | Select-Object -ExpandProperty NetBIOSName
-
-    Function Set-KerberosAuthForAppPool{
-        param(
-            [Parameter(Mandatory=$true)][string]$WebSiteName 
-            )
-
-        [string]$IISAppConfigPath = "IIS:\Sites\$WebSiteName"
-        
-        #IWA authN config
-        Set-WebConfigurationProperty -filter /system.webServer/security/authentication/windowsAuthentication -name enabled -value true -PSPath IIS:\ -location $WebSiteName
-        Set-WebConfigurationProperty -filter /system.webServer/security/authentication/anonymousAuthentication -name enabled -value False  -PSPath IIS:\ -location $WebSiteName
-        
-        cd $env:windir\system32\inetsrv
-        #.\appcmd.exe set config $SiteName -section:system.webServer/security/authentication/windowsAuthentication /useKernelMode:"False"  /commit:apphost 
-        .\appcmd.exe set config $SiteName -section:system.webServer/security/authentication/windowsAuthentication /useAppPoolCredentials:"True"  /commit:apphost
-    }
-
-    Function Add-SPN { 
-        param(
-        [Parameter(Mandatory=$true)][string]$UserName
-        )
-
-        [string]$ShortSPN="http/"+ $env:COMPUTERNAME
-        [string]$LongSPN="http/" + $env:COMPUTERNAME+"."+$env:USERDNSDOMAIN
-        $Result = Get-ADObject -LDAPFilter "(SamAccountname=$UserName)" 
-        Set-ADObject -Identity $Result.DistinguishedName -add @{serviceprincipalname=$ShortSPN} 
-        Set-ADObject -Identity $Result.DistinguishedName -add @{serviceprincipalname=$LongSPN}
-    }
-
-    Function Add-KCD { 
-        param(
-        [Parameter(Mandatory=$true)][string]$AppPooluName,
-        [Parameter(Mandatory=$true)][string]$AppProxyConnetor
-        )
-        $dc=Get-ADDomainController -Discover -DomainName $env:USERDNSDOMAIN
-        $AppProxyConnetorObj= Get-ADComputer -Identity $AppProxyConnetor -Server $dc.HostName[0]
-        $AppPoolUserNameObj = Get-ADObject -LDAPFilter "(SamAccountname=$AppPooluName)" 
-        
-        Set-ADUser -Identity $AppPoolUserNameObj -PrincipalsAllowedToDelegateToAccount $AppProxyConnetorObj
-        #Set-ADComputer -Identity jbadp1 -PrincipalsAllowedToDelegateToAccount $AppPoolUserNameObj
-        Get-ADUser -identity $AppPoolUserNameObj -Properties PrincipalsAllowedToDelegateToAccount
-    }
 
     Function appPoolcredName {
         [string] $Randz = -join ((65..90) + (97..122) | Get-Random -Count 4 | % {[char]$_})
@@ -165,14 +125,9 @@ if ($env:computername -like "*APP*") {
     Function passGen {
         [CmdletBinding()]
         Param (
-            [Parameter(Mandatory = $false)]
-            [int]$Length = 10,
-
-            [Parameter(Mandatory = $false)]
-            [string]$SamAccountName = $null,
-
-            [Parameter(Mandatory = $false)]
-            [string]$DisplayName = $null
+            [Parameter(Mandatory = $false)][int]$Length = 10,
+            [Parameter(Mandatory = $false)][string]$SamAccountName = $null,
+            [Parameter(Mandatory = $false)][string]$DisplayName = $null
         )
         # [Microsoft.ActiveDirectory.Management.ADEntity]
         $passwordPolicy = Get-ADDefaultDomainPasswordPolicy -ErrorAction SilentlyContinue
@@ -194,10 +149,10 @@ if ($env:computername -like "*APP*") {
                 if ($bad) { continue }  # bad password, skip and try another one
             }
             if ($passwordPolicy.ComplexityEnabled) {
-                # check for presence of 
+                # check for presence of... 
                 # - Uppercase: A through Z, with diacritic marks, Greek and Cyrillic characters
                 if ($password -cnotmatch "[A-Z\p{Lu}\s]") {
-                    continue  # bad password, skip and try another one
+                    continue  # bad password, skip & try another one
                 }
                 # - Lowercase: a through z, sharp-s, with diacritic marks, Greek and Cyrillic characters
                 if ($password -cnotmatch "[a-z\p{Ll}\s]") {
@@ -205,61 +160,56 @@ if ($env:computername -like "*APP*") {
                 }
                 # - Base 10 digits (0 through 9)
                 if ($password -notmatch "[\d]") {
-                    continue  # bad password, skip and try another one
+                    continue  # bad password, skip & try another one
                 }
-                # - Nonalphanumeric characters: ~!@#$%^&*_-+=`|\(){}[]:;”‘<>,.?/
+                # - Nonalphanum characters: ~!@#$%^&*_-+=`|\(){}[]:;”‘<>,.?/
                 if ($password -notmatch "[^\w]") {
                     continue  # bad password, skip and try another one
                 }
             }
-            # apparently all tests succeeded, so break out of the while loop
+            # All tests succeeded so break loop
             break
         }
-        # return the new password
+        # return new password
         $Password
     }
 
-    # Site 1 Vars
+    # Site 1 setup
     [string] $SiteName = "IWAApp"
     [string] $SitePort = "8080"
     # Create App Pool domain cred
     $AppPooluName = appPoolcredName
     $appPoolPword = passGen
-    New-ADUser -Credential $Cred -Name $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account" -AccountExpirationDate $null
-    # Gen site
+    New-ADUser -Credential $Creds -Name $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account" -AccountExpirationDate $null
     New-Item iis:\Sites\$SiteName -bindings @{protocol="http";bindingInformation=":"+$SitePort+":"} -PhysicalPath ("$WWWroot" + "$SiteName")
     sleep(2)
     New-Item -Path IIS:\AppPools\$SiteName
     sleep(1)
     Set-ItemProperty IIS:\AppPools\$SiteName -name processModel -value @{userName="$HostDomain\$AppPooluName";password=$AppPoolPword;identitytype=3}
-    sleep(1)
-    #Set-KerberosAuthForAppPool -WebSiteName $WebSiteName1
-    #sleep(1)
-    #Add-SPN -UserName $AppPooluName 
+    Set-WebConfigurationProperty -filter /system.webServer/security/authentication/windowsAuthentication -name enabled -value 1 -PSPath IIS:\ -location $SiteName
+    Set-WebConfigurationProperty -filter /system.webServer/security/authentication/anonymousAuthentication -name enabled -value 0  -PSPath IIS:\ -location $SiteName
+    Set-WebConfigurationProperty -filter /system.webServer/security/authentication/windowsAuthentication -Name useAppPoolCredentials -value 1 -PSPath IIS:\ -location $SiteName
 
-    # Site 2 vars
+    # Site 2 setup
     [string] $SiteName = "HeaderApp"
     [string] $SitePort = "8081"
     # Create App Pool domain cred
     $AppPooluName = appPoolcredName
     $appPoolPword = passGen
-    New-ADUser -Credential $Cred -Name $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account" -AccountExpirationDate $null
-    # Gen site
+    New-ADUser -Credential $Creds -Name $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account" -AccountExpirationDate $null
     New-Item iis:\Sites\$SiteName -bindings @{protocol="http";bindingInformation=":"+$SitePort+":"} -PhysicalPath ("$WWWroot" + "$SiteName")
     sleep(2)
     New-Item -Path IIS:\AppPools\$SiteName
     sleep(1)
     Set-ItemProperty IIS:\AppPools\$SiteName -name processModel -value @{userName="$HostDomain\$AppPooluName";password=$AppPoolPword;identitytype=3}
-    sleep(1)
 
-    # Site 3 vars
+    # Site 3 setup
     [string] $SiteName = "FormsApp"
     [string] $SitePort = "8082"
     ## Create App Pool domain cred
     $AppPooluName = appPoolcredName
     $appPoolPword = passGen
-    New-ADUser -Credential $Cred -Name $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account" -AccountExpirationDate $null
-    # Gen site
+    New-ADUser -Credential $Creds -Name $AppPooluName -enable 1 -ChangePasswordAtLogon 0 -PasswordNeverExpires 1 -AccountPassword (ConvertTo-SecureString -AsPlainText $appPoolPword -Force) -PassThru -Surname $AppPooluName -GivenName $AppPooluName  -Description "Test AppPool Account" -AccountExpirationDate $null
     New-Item iis:\Sites\$SiteName -bindings @{protocol="http";bindingInformation=":"+$SitePort+":"} -PhysicalPath ("$WWWroot" + "$SiteName")
     sleep(2)
     New-Item -Path IIS:\AppPools\$SiteName
@@ -271,6 +221,7 @@ if ($env:computername -like "*APP*") {
 dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
 
 #Clean-up
+Set-PSDebug -Trace 0
 Stop-Transcript
 #Sleep (2)
 #Remove-Item -Path "$TmpDirectory\*" -recurse
