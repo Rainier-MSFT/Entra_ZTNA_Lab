@@ -125,7 +125,7 @@
     },
 
     "VMs": {
-      "cliVmName": "CLI1",
+      "cliVmName": "[concat('CLI1-',parameters('clientOS'))]",
       "cliNicIP": "[parameters('privateIPAddress')]",
       "cliPublicIpName": "[concat(parameters('configName'),'-CLI_IP')]"
     },
