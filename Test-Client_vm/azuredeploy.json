@@ -217,9 +217,6 @@
           },
           "nicName": {
             "value": "[concat(parameters('configName'),'-CLI_NIC')]"
-          },
-          "modulesURL": {
-            "value": "[variables('assetLocation')]"
           }
         }
       }
