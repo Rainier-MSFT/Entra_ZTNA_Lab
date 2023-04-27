@@ -1,0 +1,247 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "configName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the deployment, for concatenating certain resource names. E.g. BaseConfig-01. Do not use spaces or special characters other than _ or -"
+      },
+      "defaultValue": "BaseConfig-01"
+    },
+    "domainName": {
+      "type": "string",
+      "metadata": {
+        "description": "FQDN of the target AD domain"
+      },
+      "defaultValue": "corp.contoso.com"
+    },
+    "clientOS": {
+      "type": "string",
+      "allowedValues": [
+        "2016-Datacenter", "2019-Datacenter", "2022-Datacenter"
+      ],
+      "metadata": {
+        "description": "OS version of client for this deployment"
+      },
+      "defaultValue": "2016-Datacenter"
+    },
+    "domainAdmin": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the domain admin account used to join the target domain"
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Domain admin account password that will be used when joining the domain & will be set as the local admin password"
+      }
+    },
+    "localAdmin": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the local admin account that will be created on the client"
+        }
+      },
+    "vmSize": {
+      "type": "string",
+      "metadata": {
+        "description": "Select a VM size for your deployment."
+      },
+      "defaultValue": "Standard_B2s"
+    },
+    "dnsLabelPrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "DNS label prefix to connect to the VMs public IP via DNS. Leave bkank if no public IP, otherwise must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
+      },
+      "defaultValue": ""
+    },
+    "_artifactsLocation": {
+      "type": "string",
+      "metadata": {
+        "description": "Auto-generated container in staging storage account to receive post-build staging folder upload"
+      },
+      "defaultValue": "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Test-Client_vm/"
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Auto-generated token to access _artifactsLocation"
+      },
+      "defaultValue": ""
+    },
+    "privateIPAddress": {
+      "type": "string",
+      "metadata": {
+        "description": "Static IP Address to allocate VM. Must fall within Subnet range"
+      },
+      "defaultValue": "10.0.0.14"
+    },
+	  "VnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of Azure VNet the VM Subnet belongs to, within the same Resource Group"
+      },
+      "defaultValue": "BaseConfig-01-VNET"
+    },
+	  "subnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of Subnet the VM will be connected to, within the same Resource Group"
+      },
+      "defaultValue": "subnet-01"
+    },
+    "DNSip": {
+      "type": "string",
+      "metadata": {
+        "description": "IP of internal DNS server. Usually a DC"
+      },
+      "defaultValue": "10.0.0.10"
+    },
+    "EnablePublicIP": {
+      "type": "string",
+      "allowedValues": [
+        "Yes", "No"
+      ],
+      "metadata": {
+        "description": "Provisions the VM with a public IP for connecting to it directly from the Internet. Bit Azure Bastion can be used to connect to the VM via a jumphost, if enabled on the provisioned VNet"
+      },
+      "defaultValue": "No"
+    }
+  },
+
+  "variables": {
+
+    "shortDomainName": "[first(split(parameters('domainName'),'.'))]",
+    "domainAdmin": "[concat(variables('shortDomainName'),'\\',parameters('domainAdmin'))]",
+    "assetLocation": "[concat(parameters('_artifactsLocation'),'/DSC')]",
+    "templates": "[concat(parameters('_artifactsLocation'),'/nested')]",
+    "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
+
+    "network": {
+	"subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('VNetName'), parameters('subnetName'))]"
+    },
+
+    "VMs": {
+      "cliVmName": "CLI1",
+      "cliConfigurationFunction": {
+        "AppConfig": "AppConfig.ps1\\AppConfig"
+      },
+      "cliNicIP": "[parameters('privateIPAddress')]",
+      "cliPublicIpName": "[concat(parameters('configName'),'-CLI_IP')]"
+    },
+
+	"pipObject": {
+  "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').cliPublicIpName)]"
+	},
+
+    "SharedVmConfig": {
+      "location": "[resourceGroup().location]",
+      "vmSize": "[parameters('vmSize')]",
+      "clientOS": "[parameters('clientOS')]",
+      "localAdmin": "[parameters('localAdmin')]",
+      "domainAdmin": "[variables('domainAdmin')]",
+      "adminPassword": "[parameters('adminPassword')]",
+      "storageAccountNamePrefix": "[variables('storageAccountName')]",
+      "sasToken": "[parameters('_artifactsLocationSasToken')]",
+      "domainName": "[parameters('domainName')]",
+      "privateIPAddress": "[parameters('privateIPAddress')]"
+    }
+  },
+
+  "resources": [
+    {
+      "apiVersion": "2017-06-01",
+      "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[variables('VMs').appPublicIpName]",
+      "location": "[resourceGroup().location]",
+      "comments": "The public IP address for the client VM.",
+      "properties": {
+        "publicIPAllocationMethod": "Static",
+        "dnsSettings": {
+          "domainNameLabel": "[toLower(concat(parameters('dnsLabelPrefix'),'cli'))]"
+        }
+      }
+    },
+    {
+      "name": "[concat(parameters('configName'),'-CLI_NIC')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2018-04-01",
+      "comments": "This is the network interface for the client VM.",
+      "dependsOn": [
+        "[resourceId ('Microsoft.Network/publicIPAddresses/',variables('VMs').cliPublicIpName)]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[variables('VMs').cliNicIP]",
+			        "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('pipObject'), json('null'))]",
+              "subnet": {
+                "id": "[variables('network').subnetRef]"
+              }
+            }
+          }
+        ],
+        "dnsSettings": {
+          "dnsServers": [
+            "[parameters('DNSip')]"
+          ],
+          "internalDomainNameSuffix": "[parameters('domainName')]"
+        }
+      }
+    },
+    {
+      "name": "ClientVM",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "comments": "This is the deployment resource for the client VM.",
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-CLI_NIC')]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('templates'),'/cli.json',parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "SharedVmConfig": { 
+            "value": "[variables('SharedVmConfig')]" 
+          },
+          "vmName": {
+            "value": "[variables('VMs').cliVmName]"
+          },
+          "nicName": {
+            "value": "[concat(parameters('configName'),'-CLI_NIC')]"
+          },
+          "modulesURL": {
+            "value": "[variables('assetLocation')]"
+          },
+          "configurationFunction": {
+            "value": "[variables('VMs').cliConfigurationFunction]"
+          }
+        }
+      }
+    }
+  ],
+
+  "outputs": {
+    "CliPublicIpAddress": {
+      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
+      "type": "string",
+      "value": "[reference(variables('VMs').cliPublicIpName).ipAddress]"
+    },
+    "CliFqdn": {
+      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
+      "type": "string",
+      "value": "[reference(variables('VMs').cliPublicIpName).dnsSettings.fqdn]"
+    }
+  }
+}

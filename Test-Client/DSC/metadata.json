@@ -1,0 +1,7 @@
+﻿{
+  "itemDisplayName": "Entra ZTNA Lab - 3 VM Base configuration (v1.0)",
+  "description": "This template deploys a 3 VM base configuration, a base build for a variety of hybrid identity ZTNA test labs. This template provisions a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, an application server running Windows Server 2012 R2 or 2016, and optionally a client VM running Windows 10.",
+  "summary": "Deploys 3 VMs: Server 2016/19/22 AD DC, Server 2016/19/22 app server and optional Windows 10/11 client. Provisions an AD domain and joins member VMs.",
+  "githubUsername": "Rainier-MSFT",
+  "dateUpdated": "2023-01-12"
+}

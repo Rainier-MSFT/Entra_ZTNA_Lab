@@ -47,7 +47,7 @@
     "vmSize": {
       "type": "string",
       "metadata": {
-        "description": "Select a VM size for all VMs in your deployment."
+        "description": "Select a VM size for your deployment."
       },
       "defaultValue": "Standard_B2s"
     },
