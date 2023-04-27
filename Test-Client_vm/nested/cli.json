@@ -10,9 +10,6 @@
     },
     "nicName": {
       "type": "string"
-    },
-    "vhdUri": {
-      "type": "string"
     }
   },
   "variables": {
