@@ -8,8 +8,8 @@
     "domainName": {
       "value": "corp.contoso.com"
     },
-    "serverOS": {
-      "value": "2016-Datacenter"
+    "clientOS": {
+      "value": "windows-10"
     },
     "adminUsername": {
       "value": ""
@@ -19,12 +19,6 @@
     },
     "localAdmin": {
       "value": ""
-    },
-    "deployClientVM": {
-      "value": "yes"
-    },
-    "clientVhdUri": {
-      "value": "yes"
     },
     "vmSize": {
       "value": "Standard_B2s"
