@@ -16,7 +16,7 @@
   "resources": [
     {
       "apiVersion": "2023-03-01",
-      "condition": "[equals(parameters('clientOS'),'windows-10')]",
+      "condition": "[equals(parameters('SharedVmConfig').clientOS,'windows-10')]",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
       "location": "[parameters('SharedVmConfig').location]",
@@ -57,7 +57,7 @@
     },
     {
       "apiVersion": "2023-03-01",
-      "condition": "[equals(parameters('clientOS'),'windows-11')]",
+      "condition": "[equals(parameters('SharedVmConfig').clientOS,'windows-11')]",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
       "location": "[parameters('SharedVmConfig').location]",
