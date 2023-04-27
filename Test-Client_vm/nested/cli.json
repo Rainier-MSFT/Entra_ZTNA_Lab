@@ -12,9 +12,7 @@
       "type": "string"
     }
   },
-  "variables": {
-    "imageName": "[concat(parameters('vmName'),'-image')]"
-  },
+  "variables": {},
   "resources": [
     {
       "apiVersion": "2017-03-30",
