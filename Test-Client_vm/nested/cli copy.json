@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
@@ -20,6 +20,22 @@
   },
   "resources": [
     {
+      "type": "Microsoft.Compute/images",
+      "apiVersion": "2017-03-30",
+      "name": "[variables('ImageName')]",
+      "location": "[parameters('SharedVmConfig').location]",
+      "properties": {
+        "storageProfile": {
+          "osDisk": {
+            "osType": "Windows",
+            "osState": "Generalized",
+            "blobUri": "[concat(parameters('vhdUri'))]",
+            "storageAccountType": "Standard_LRS"
+          }
+        }
+      }
+    },
+    {
       "apiVersion": "2017-03-30",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
@@ -38,13 +54,7 @@
         },
         "storageProfile": {
           "imageReference": {
-            "publisher": "MicrosoftWindowsDesktop",
-            "offer": "[parameters('SharedVmConfig').clientOS]",
-            "sku": "win10-22h2-entn",
-            "version": "latest"
-          },
-          "osDisk": {
-            "createOption": "FromImage"
+            "id": "[resourceId('Microsoft.Compute/images/',variables('ImageName'))]"
           }
         },
         "networkProfile": {

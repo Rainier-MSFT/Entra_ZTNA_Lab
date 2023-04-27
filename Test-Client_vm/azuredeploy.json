@@ -19,12 +19,12 @@
     "clientOS": {
       "type": "string",
       "allowedValues": [
-        "2016-Datacenter", "2019-Datacenter", "2022-Datacenter"
+        "windows-11", "windows-10"
       ],
       "metadata": {
         "description": "OS version of client for this deployment"
       },
-      "defaultValue": "2016-Datacenter"
+      "defaultValue": "windows-10"
     },
     "domainAdmin": {
       "type": "string",
