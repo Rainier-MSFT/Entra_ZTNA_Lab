@@ -12,10 +12,7 @@
       "type": "string"
     }
   },
-  "variables": {
-    "windows10Sku": "win10-22h2-entn",
-    "windows11Sku": "win11-22h2-entn"
-  },
+  "variables": {},
   "resources": [
     {
       "apiVersion": "2023-03-01",
