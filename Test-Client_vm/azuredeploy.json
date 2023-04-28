@@ -130,8 +130,8 @@
     "VMs": {
       "cliVmName": "[concat(variables('clientOS'),'-CLIENT')]",
       "cliNicIP": "[parameters('privateIPAddress')]",
-      "cliPublicIpName": "[concat(parameters('configName'),'-CLI_IP')]",
-      "cliNicName": "[concat(parameters('configName'),'-',variables('clientOS'),'-CLI-NIC')]"
+      "cliPublicIpName": "[concat(parameters('configName'),'-',variables('clientOS'),'-CLIENT-IP')]",
+      "cliNicName": "[concat(parameters('configName'),'-',variables('clientOS'),'-CLIENT-NIC')]"
     },
 
 	"pipObject": {
@@ -163,7 +163,7 @@
       "properties": {
         "publicIPAllocationMethod": "Static",
         "dnsSettings": {
-          "domainNameLabel": "[toLower(concat(parameters('dnsLabelPrefix'),'cli'))]"
+          "domainNameLabel": "[toLower(concat(parameters('dnsLabelPrefix'),'client'))]"
         }
       }
     },
