@@ -123,13 +123,12 @@
     "W10": "W10",
     "W11": "W11",
     "clientOS": "[if(equals(parameters('clientOS'), 'windows-10'), variables('W10'), variables('W11'))]",
-
     "network": {
 	"subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('VNetName'), parameters('subnetName'))]"
     },
 
     "VMs": {
-      "cliVmName": "[concat(variables('clientOS'),'-CLI')]",
+      "cliVmName": "[concat(variables('clientOS'),'-CLIENT')]",
       "cliNicIP": "[parameters('privateIPAddress')]",
       "cliPublicIpName": "[concat(parameters('configName'),'-CLI_IP')]",
       "cliNicName": "[concat(parameters('configName'),'-',variables('clientOS'),'-CLI-NIC')]"
@@ -200,7 +199,7 @@
       }
     },
     {
-      "name": "ClientVM",
+      "name": "[concat(parameters('configName'),'-',variables('clientOS'),'-CLIENT')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "comments": "This is the deployment resource for the client VM.",
