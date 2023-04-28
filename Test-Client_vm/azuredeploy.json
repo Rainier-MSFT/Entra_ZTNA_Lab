@@ -96,7 +96,7 @@
     "DNSip": {
       "type": "string",
       "metadata": {
-        "description": "IP of internal DNS server. Usually a DC"
+        "description": "IP of internal DNS server, usually a DC"
       },
       "defaultValue": "10.0.0.10"
     },
