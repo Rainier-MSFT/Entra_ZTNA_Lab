@@ -19,7 +19,7 @@
     "clientOS": {
       "type": "string",
       "allowedValues": [
-        "windows-11", "windows-10"
+        "windows-10", "windows-11"
       ],
       "metadata": {
         "description": "OS version of client for this deployment"
