@@ -125,7 +125,7 @@
     },
 
     "VMs": {
-      "appVmName": "APP1",
+      "name": "[concat(parameters('configName'),'-APPS')]",
       "appConfigurationFunction": {
         "AppConfig": "AppConfig.ps1\\AppConfig"
       },
