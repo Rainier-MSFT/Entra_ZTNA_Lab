@@ -54,7 +54,8 @@
       "type": "string",
       "metadata": {
         "description": "DNS label prefix to connect to the VMs public IP via DNS. Leave bkank if no public IP, otherwise must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
-      }
+      },
+      "defaultValue": ""
     },
     "_artifactsLocation": {
       "type": "string",
@@ -67,7 +68,8 @@
       "type": "securestring",
       "metadata": {
         "description": "Auto-generated token to access _artifactsLocation"
-      }
+      },
+      "defaultValue": ""
     },
     "privateIPAddress": {
       "type": "string",
