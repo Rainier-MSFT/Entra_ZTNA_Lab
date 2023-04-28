@@ -29,19 +29,22 @@
       "type": "string",
       "metadata": {
         "description": "Name of the domain admin account used to join the target domain"
-      }
+      },
+      "defaultValue": "entadmin"
     },
     "adminPassword": {
       "type": "securestring",
       "metadata": {
         "description": "Domain admin account password that will be used when joining the domain & will be set as the local admin password"
-      }
+      },
+      "defaultValue": "ScrappyDoo!!"
     },
     "localAdmin": {
         "type": "string",
         "metadata": {
           "description": "Name of the local admin account that will be created on the client"
-        }
+        },
+        "defaultValue": "localadmin"
       },
     "vmSize": {
       "type": "string",
