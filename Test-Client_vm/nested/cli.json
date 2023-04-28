@@ -20,9 +20,6 @@
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
       "location": "[parameters('SharedVmConfig').location]",
-      "dependsOn": [
-        "[parameters('vmName')]"
-      ],
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('SharedVmConfig').vmSize]"
@@ -64,9 +61,6 @@
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
       "location": "[parameters('SharedVmConfig').location]",
-      "dependsOn": [
-        "[parameters('vmName')]"
-      ],
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('SharedVmConfig').vmSize]"
