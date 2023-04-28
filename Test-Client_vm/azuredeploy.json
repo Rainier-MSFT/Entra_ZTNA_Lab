@@ -117,6 +117,8 @@
     "domainAdmin": "[concat(variables('shortDomainName'),'\\',parameters('domainAdmin'))]",
     "templates": "[concat(parameters('_artifactsLocation'),'/nested')]",
     "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
+    "W10": "W10",
+    "W11": "W11",
     "clientOS": "[if(equals(parameters('clientOS'), 'windows-10'), variables('W10'), variables('W11'))]",
 
     "network": {
@@ -167,7 +169,7 @@
       "name": "[variables('VMs').cliNicName]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[resourceGroup().location]",
-      "apiVersion": "2022-07-01",
+      "apiVersion": "2017-06-01",
       "comments": "This is the network interface for the client VM.",
       "dependsOn": [
         "[resourceId ('Microsoft.Network/publicIPAddresses/',variables('VMs').cliPublicIpName)]"
