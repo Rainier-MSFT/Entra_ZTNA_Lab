@@ -37,7 +37,7 @@
       "metadata": {
         "description": "Domain admin account password that will be used when joining the domain & will be set as the local admin password"
       },
-      "defaultValue": "ScrappyDoo!!"
+      "defaultValue": ""
     },
     "localAdmin": {
         "type": "string",
