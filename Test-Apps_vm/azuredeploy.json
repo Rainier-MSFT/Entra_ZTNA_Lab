@@ -200,7 +200,7 @@
     {
       "name": "AppServer",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2022-09-01",
       "comments": "This is the deployment resource for the app server VM.",
       "dependsOn": [
         "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-APP_NIC')]"

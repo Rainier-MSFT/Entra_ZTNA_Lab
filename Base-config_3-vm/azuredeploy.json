@@ -392,7 +392,7 @@
     {
       "name": "ADDC",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2022-09-01",
       "comments": "This is the deployment resource for the AD DC VM.",
       "dependsOn": [
         "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-DC_NIC')]"
@@ -425,7 +425,7 @@
     {
       "name": "AppServer",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2022-09-01",
       "comments": "This is the deployment resource for the app server VM.",
       "dependsOn": [
         "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-APP_NIC')]",
@@ -460,7 +460,7 @@
       "name": "Client",
       "condition": "[equals(parameters('deployClientVm'),'Yes')]",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2022-09-01",
       "comments": "This is the deployment resource for the client VM.",
       "dependsOn": [
         "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-CLI_NIC')]",
