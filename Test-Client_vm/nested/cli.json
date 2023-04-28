@@ -31,8 +31,8 @@
         "storageProfile": {
           "imageReference": {
             "publisher": "MicrosoftWindowsDesktop",
-            "offer": "[if(equals(parameters('SharedVmConfig').clientOS, 'windows-10'), 'windows-10', 'windows-11')]",
-            "sku": "[if(equals(parameters('SharedVmConfig').clientOS, 'windows-10'), 'win10-22h2-entn', 'win11-22h2-entn')]",
+            "offer": "[if(equals(parameters('SharedVmConfig').clientOS, 'W10'), 'windows-10', 'windows-11')]",
+            "sku": "[if(equals(parameters('SharedVmConfig').clientOS, 'W10'), 'win10-22h2-entn', 'win11-22h2-entn')]",
             "version": "latest"
           },
           "osDisk": {
