@@ -35,7 +35,7 @@
           "imageReference": {
             "publisher": "MicrosoftWindowsDesktop",
             "offer": "[if(equals(parameters('SharedVmConfig').clientOS, 'windows-10'), parameters('SharedVmConfig').clientOS, parameters('SharedVmConfig').clientOS)]",
-            "sku": "[if(equals(parameters('SharedVmConfig').clientOS, 'windows-10'), variables('windows10Sku'), variables('windows11Sku'))]",
+            "sku": "[if(equals(parameters('SharedVmConfig').clientOS, 'windows-10'), 'win10-22h2-entn', 'win11-22h2-entn')]",
             "version": "latest"
           },
           "osDisk": {
