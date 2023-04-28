@@ -16,7 +16,7 @@
   "resources": [
     {
       "apiVersion": "2023-03-01",
-      "condition": "[equals(parameters('SharedVmConfig').clientOS,'windows-10')]",
+      "condition": "[equals(parameters('SharedVmConfig').clientOS,'windows-11')]",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
       "location": "[parameters('SharedVmConfig').location]",
@@ -33,7 +33,7 @@
           "imageReference": {
             "publisher": "MicrosoftWindowsDesktop",
             "offer": "[parameters('SharedVmConfig').clientOS]",
-            "sku": "win10-22h2-entn",
+            "sku": "win11-22h2-entn",
             "version": "latest"
           },
           "osDisk": {
@@ -57,7 +57,7 @@
     },
     {
       "apiVersion": "2023-03-01",
-      "condition": "[equals(parameters('SharedVmConfig').clientOS,'windows-11')]",
+      "condition": "[equals(parameters('SharedVmConfig').clientOS,'windows-10')]",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
       "location": "[parameters('SharedVmConfig').location]",
@@ -74,7 +74,7 @@
           "imageReference": {
             "publisher": "MicrosoftWindowsDesktop",
             "offer": "[parameters('SharedVmConfig').clientOS]",
-            "sku": "win11-22h2-entn",
+            "sku": "win10-22h2-entn",
             "version": "latest"
           },
           "osDisk": {
