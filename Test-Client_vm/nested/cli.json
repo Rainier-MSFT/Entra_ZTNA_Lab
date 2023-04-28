@@ -1,5 +1,5 @@
 ﻿{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "SharedVmConfig": {
@@ -13,11 +13,7 @@
     }
   },
   "variables": {
-    "windows10Publisher": "MicrosoftWindowsDesktop",
-    "windows10Offer": "[parameters('SharedVmConfig').clientOS]",
     "windows10Sku": "win10-22h2-entn",
-    "windows11Publisher": "MicrosoftWindowsDesktop",
-    "windows11Offer": "[parameters('SharedVmConfig').clientOS]",
     "windows11Sku": "win11-22h2-entn"
   },
   "resources": [
@@ -38,7 +34,7 @@
         "storageProfile": {
           "imageReference": {
             "publisher": "MicrosoftWindowsDesktop",
-            "offer": "[if(equals(parameters('SharedVmConfig').clientOS, 'windows-10'), variables('windows10Offer'), variables('windows11Offer'))]",
+            "offer": "[if(equals(parameters('SharedVmConfig').clientOS, 'windows-10'), parameters('SharedVmConfig').clientOS, parameters('SharedVmConfig').clientOS)]",
             "sku": "[if(equals(parameters('SharedVmConfig').clientOS, 'windows-10'), variables('windows10Sku'), variables('windows11Sku'))]",
             "version": "latest"
           },
@@ -76,7 +72,6 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "Name": "[parameters('SharedVmConfig').domainName]",
-          "OUPath": null,
           "Options": "3",
           "Restart": "true",
           "User": "[parameters('SharedVmConfig').domainAdmin]"
@@ -135,8 +130,7 @@
             "day": "7",
             "time": "120"
           }
-        },
-        "protectedSettings": null
+        }
       }
     }
   ],

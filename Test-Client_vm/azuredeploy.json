@@ -54,8 +54,7 @@
       "type": "string",
       "metadata": {
         "description": "DNS label prefix to connect to the VMs public IP via DNS. Leave bkank if no public IP, otherwise must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
-      },
-      "defaultValue": ""
+      }
     },
     "_artifactsLocation": {
       "type": "string",
@@ -68,8 +67,7 @@
       "type": "securestring",
       "metadata": {
         "description": "Auto-generated token to access _artifactsLocation"
-      },
-      "defaultValue": ""
+      }
     },
     "privateIPAddress": {
       "type": "string",
@@ -115,7 +113,6 @@
 
     "shortDomainName": "[first(split(parameters('domainName'),'.'))]",
     "domainAdmin": "[concat(variables('shortDomainName'),'\\',parameters('domainAdmin'))]",
-    "assetLocation": "[concat(parameters('_artifactsLocation'),'/DSC')]",
     "templates": "[concat(parameters('_artifactsLocation'),'/nested')]",
     "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
     "clientOS": "[if(equals(parameters('clientOS'), 'windows-10'), variables('W10'), variables('W11'))]",
@@ -151,7 +148,7 @@
 
   "resources": [
     {
-      "apiVersion": "2017-06-01",
+      "apiVersion": "2022-07-01",
       "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').cliPublicIpName]",
@@ -168,7 +165,7 @@
       "name": "[variables('VMs').cliNicName]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[resourceGroup().location]",
-      "apiVersion": "2018-04-01",
+      "apiVersion": "2022-07-01",
       "comments": "This is the network interface for the client VM.",
       "dependsOn": [
         "[resourceId ('Microsoft.Network/publicIPAddresses/',variables('VMs').cliPublicIpName)]"
