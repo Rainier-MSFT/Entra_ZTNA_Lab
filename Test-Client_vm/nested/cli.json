@@ -12,11 +12,17 @@
       "type": "string"
     }
   },
-  "variables": {},
+  "variables": {
+    "windows10Publisher": "MicrosoftWindowsDesktop",
+    "windows10Offer": "[parameters('SharedVmConfig').clientOS]",
+    "windows10Sku": "win10-22h2-entn",
+    "windows11Publisher": "MicrosoftWindowsDesktop",
+    "windows11Offer": "[parameters('SharedVmConfig').clientOS]",
+    "windows11Sku": "win11-22h2-entn"
+  },
   "resources": [
     {
       "apiVersion": "2023-03-01",
-      "condition": "[equals(parameters('SharedVmConfig').clientOS,'windows-11')]",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
       "location": "[parameters('SharedVmConfig').location]",
@@ -32,49 +38,8 @@
         "storageProfile": {
           "imageReference": {
             "publisher": "MicrosoftWindowsDesktop",
-            "offer": "[parameters('SharedVmConfig').clientOS]",
-            "sku": "win11-22h2-entn",
-            "version": "latest"
-          },
-          "osDisk": {
-            "createOption": "FromImage"
-          }
-        },
-        "networkProfile": {
-          "networkInterfaces": [
-            {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces',parameters('nicName'))]"
-            }
-          ]
-        },
-        "diagnosticsProfile": {
-          "bootDiagnostics": {
-            "enabled": true,
-            "storageUri": "[reference(concat('Microsoft.Storage/storageAccounts/',parameters('SharedVmConfig').storageAccountNamePrefix),'2017-06-01').primaryEndpoints.blob]"
-          }
-        }
-      }
-    },
-    {
-      "apiVersion": "2023-03-01",
-      "condition": "[equals(parameters('SharedVmConfig').clientOS,'windows-10')]",
-      "type": "Microsoft.Compute/virtualMachines",
-      "name": "[parameters('vmName')]",
-      "location": "[parameters('SharedVmConfig').location]",
-      "properties": {
-        "hardwareProfile": {
-          "vmSize": "[parameters('SharedVmConfig').vmSize]"
-        },
-        "osProfile": {
-          "computerName": "[parameters('vmName')]",
-          "adminUsername": "[parameters('SharedVmConfig').localAdmin]",
-          "adminPassword": "[parameters('SharedVmConfig').adminPassword]"
-        },
-        "storageProfile": {
-          "imageReference": {
-            "publisher": "MicrosoftWindowsDesktop",
-            "offer": "[parameters('SharedVmConfig').clientOS]",
-            "sku": "win10-22h2-entn",
+            "offer": "[if(equals(parameters('SharedVmConfig').clientOS, 'windows-10'), variables('windows10Offer'), variables('windows11Offer'))]",
+            "sku": "[if(equals(parameters('SharedVmConfig').clientOS, 'windows-10'), variables('windows10Sku'), variables('windows11Sku'))]",
             "version": "latest"
           },
           "osDisk": {
