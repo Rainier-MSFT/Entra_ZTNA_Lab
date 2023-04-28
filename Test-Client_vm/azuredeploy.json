@@ -23,8 +23,7 @@
       ],
       "metadata": {
         "description": "OS version of client for this deployment"
-      },
-      "defaultValue": "windows-10"
+      }
     },
     "domainAdmin": {
       "type": "string",
