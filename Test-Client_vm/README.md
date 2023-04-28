@@ -2,7 +2,7 @@
 
 # Entra ZTNA Lab - Test Client VM                                                                                                       
 
-**Time to deploy**: Approx. 10 minutes
+**Time to deploy**: Approx. 4 minutes
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2FEntra_ZTNA_Lab%2Fmain%2FTest-Client_vm%2Fazuredeploy.json" target="_blank">
 <img src="https://aka.ms/deploytoazurebutton"/>
@@ -20,7 +20,7 @@ This Azure automation deploys a **Test Client VM** for testing various authentic
 The following ARM resources are deployed as part of the solution:
 
 ### VMs
-+ **Client VM**: Windows 10 or 11 that can be joined to any Windows Active Diretory (AD) domain
++ **Client VM**: Windows 10 or 11 joined to any Windows Active Diretory (AD) domain
 
 ### Networking
 + **Network interfaces**: 1 NIC and a prefered private IP address can be specified during deployment 
