@@ -27,10 +27,10 @@ The following ARM resources are deployed as part of the solution:
 + **Public IP addresses**: 1 static public IP if chenabled during deployment
 
 ### Extensions
-+ **JoinDomain** used to join a specified domain
++ **JoinDomain** is used to join a specified domain
 + **BGInfo** displays session info on desktop wallpaper on all VMs, but only displays over direct RDP sessions and not over Azure Bastion
 + **iaaSAntimalware** is applied with basic scheduled scan and exclusion settings
-+ A **CustomExtension** is used to apply a set of common configs such as enabling TLS1.2 for .Net, disabling IE ESC, relaxing UAC, and deploying the test services
++ **CustomExtension** is used to apply a set of common configs such as enabling TLS1.2 for .Net, disabling IE ESC, relaxing UAC, and deploying the test services
 
 ### Management
 Once deployed, the VM can be administered thru either of the following:

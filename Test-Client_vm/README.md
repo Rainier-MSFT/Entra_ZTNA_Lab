@@ -20,17 +20,17 @@ This Azure automation deploys a **Test Client VM** for testing various authentic
 The following ARM resources are deployed as part of the solution:
 
 ### VMs
-+ **Client VM**: Windows 10 or 11 joined to any Windows Active Diretory (AD) domain
++ **Client VM**: Windows 10 or 11 joined to any Windows Active Diretory (AD) domain. Leave blank to remain in workgroup mode
 
 ### Networking
 + **Network interfaces**: 1 NIC and a prefered private IP address can be specified during deployment 
 + **Public IP addresses**: 1 static public IP if enabled during deployment
 
 ### Extensions
-+ **JoinDomain** used to join a specified domain
++ **JoinDomain** is used to join a specified domain
 + **BGInfo** displays session info on desktop wallpaper on all VMs, but only displays over direct RDP sessions and not over Azure Bastion
 + **iaaSAntimalware** is applied with basic scheduled scan and exclusion settings
-+ A **CustomExtension** is used to apply a set of common configs such as enabling TLS1.2 for .Net, disabling IE ESC, relaxing UAC
++ **CustomExtension** iss used to apply a set of common configs such as enabling TLS1.2 for .Net, disabling IE ESC, relaxing UAC
 
 ### Management
 Once deployed, the VM can be administered thru either of the following:
