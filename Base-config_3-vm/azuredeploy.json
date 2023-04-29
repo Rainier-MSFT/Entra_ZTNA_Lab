@@ -26,6 +26,14 @@
       },
       "defaultValue": "2016-Datacenter"
     },
+    "clientOS": {
+      "type": "string",
+      "allowedValues": [
+        "windows-10", "windows-11"
+      ],
+      "metadata": {
+        "description": "OS version of client for this deployment"
+      },
     "adminUsername": {
       "type": "string",
       "metadata": {
@@ -112,6 +120,9 @@
     "assetLocation": "[concat(parameters('_artifactsLocation'),'/DSC')]",
     "templates": "[concat(parameters('_artifactsLocation'),'/nested')]",
     "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
+    "W10": "W10",
+    "W11": "W11",
+    "clientOS": "[if(equals(parameters('clientOS'), 'windows-10'), variables('W10'), variables('W11'))]",
 
     "network": {
       "vnetName": "[concat(parameters('configName'),'-VNET')]",
@@ -154,6 +165,7 @@
       "location": "[resourceGroup().location]",
       "vmSize": "[parameters('vmSize')]",
       "serverOS": "[parameters('serverOS')]",
+      "clientOS": "[parameters('clientOS')]",
       "domainUsername": "[variables('domainUsername')]",
       "adminUsername": "[parameters('adminUsername')]",
       "adminPassword": "[parameters('adminPassword')]",
