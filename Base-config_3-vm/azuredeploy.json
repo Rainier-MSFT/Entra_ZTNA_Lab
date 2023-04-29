@@ -33,7 +33,8 @@
       ],
       "metadata": {
         "description": "OS version of client for this deployment"
-      },
+      }
+    },
     "adminUsername": {
       "type": "string",
       "metadata": {
@@ -69,13 +70,6 @@
         "description": "Choose 'Yes' if you want to deploy a client VM and from a custom generalized VHD that you have uploaded to an accessible storage account."
       },
       "defaultValue": "No"
-    },
-    "clientVhdUri": {
-      "type": "string",
-      "metadata": {
-        "description": "The URI of the storage account containing the client VHD. Leave blank if you are not deploying a client VM."
-      },
-      "defaultValue": ""
     },
     "_artifactsLocation": {
       "type": "string",
@@ -493,9 +487,6 @@
           },
           "nicName": {
             "value": "[concat(parameters('configName'),'-CLI_NIC')]"
-          },
-          "vhdUri": {
-            "value": "[parameters('clientVhdUri')]"
           }
         }
       }
