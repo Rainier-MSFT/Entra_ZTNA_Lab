@@ -236,7 +236,7 @@
       "apiVersion": "2017-06-01",
       "location": "[resourceGroup().location]",
       "kind": "Storage",
-      "comments": "The storage account for holding the VHD, if client is dpeloyed",
+      "comments": "Storage account for storing diagnostic logs, and the client VHD if required",
       "sku": {
         "name": "Standard_LRS"
       }
@@ -400,7 +400,7 @@
       "name": "[concat(parameters('configName'),'-ADDC')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
-      "comments": "This is the deployment resource for the AD DC VM.",
+      "comments": "This is the deployment resource for the AD DC VM",
       "dependsOn": [
         "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-DC_NIC')]"
       ],
