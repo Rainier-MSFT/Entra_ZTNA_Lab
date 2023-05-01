@@ -397,7 +397,7 @@
       }
     },
     {
-      "name": "ADDC",
+      "name": "[concat(parameters('configName'),'-ADDC')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "comments": "This is the deployment resource for the AD DC VM",
@@ -430,13 +430,13 @@
       }
     },
     {
-      "name": "APPS",
+      "name": "[concat(parameters('configName'),'-APPS')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "comments": "This is the deployment resource for the app server VM.",
       "dependsOn": [
         "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-APP_NIC')]",
-        "[concat('Microsoft.Resources/deployments/','ADDC')]"
+        "[concat('Microsoft.Resources/deployments/','-ADDC')]"
       ],
       "properties": {
         "mode": "Incremental",
