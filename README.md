@@ -1,6 +1,6 @@
 # Rapid Labs - Identity & Network Access
 
-![TL logo](https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_3-vm/images/tlg.png "Rainier-MSFT")
+![1](https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/assets/6311098/47a893d3-e254-4a65-be16-176ae90be6e0)
 
 This repository offers a variety of Azure Resource Manager (ARM) based resources for quickly deploying test lab environments for testing & learning about Microsoft Identity & Network Access capabilities.
 
