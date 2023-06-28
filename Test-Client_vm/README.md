@@ -1,6 +1,6 @@
 <p dir='rtl' align='right'>Last updated 21/03/2023</p>
 
-# Entra ZTNA Lab - Test Client VM                                                                                                       
+# <img align="left" src="https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/assets/6311098/47a893d3-e254-4a65-be16-176ae90be6e0" width=8%> Entra ZTNA Lab - Test Client VM
 
 **Time to deploy**: Approx. 4 minutes
 
