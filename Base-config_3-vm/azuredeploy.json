@@ -102,7 +102,7 @@
     "dnsLabelPrefix": {
       "type": "string",
       "metadata": {
-        "description": "DNS label prefix to enable connecting to VMs directly via a public Azure DNS record. Leaving the pre-defined string ensures the record is unique Azure wide, otherwise must be specified using lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
+        "description": "Setting a DNS prefix creates an Azure DNS record for managing VMs directly via a public FQDN. Leave this field blank to create a record that is unique, Azure wide. If specifying this manualy, must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
       },
       "defaultValue": ""
     }
