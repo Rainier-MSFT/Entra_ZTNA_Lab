@@ -117,7 +117,9 @@
     "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
     "W10": "W10",
     "W11": "W11",
+    "empty": [],
     "clientOS": "[if(equals(parameters('clientOS'), 'windows-10'), variables('W10'), variables('W11'))]",
+    "dnsLabelPrefix": "[if(empty(parameters('dnsLabelPrefix'), concat(uniqueString(resourceGroup().id))))]",
 
     "network": {
       "vnetName": "[concat(parameters('configName'),'-VNET')]",
@@ -251,7 +253,7 @@
       "properties": {
         "publicIPAllocationMethod": "Static",
         "dnsSettings": {
-          "domainNameLabel": "[toLower(concat(parameters('dnsLabelPrefix'),'ad'))]"
+          "domainNameLabel": "[toLower(concat(variables('dnsLabelPrefix'),'ad'))]"
         }
       }
     },
@@ -265,7 +267,7 @@
       "properties": {
         "publicIPAllocationMethod": "Static",
         "dnsSettings": {
-          "domainNameLabel": "[toLower(concat(parameters('dnsLabelPrefix'),'app'))]"
+          "domainNameLabel": "[toLower(concat(variables('dnsLabelPrefix'),'app'))]"
         }
       }
     },
@@ -279,7 +281,7 @@
       "properties": {
         "publicIPAllocationMethod": "Static",
         "dnsSettings": {
-          "domainNameLabel": "[toLower(concat(parameters('dnsLabelPrefix'),'cli'))]"
+          "domainNameLabel": "[toLower(concat(variables('dnsLabelPrefix'),'cli'))]"
         }
       }
     },
@@ -514,6 +516,16 @@
       "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
       "type": "string",
       "value": "[reference(variables('VMs').appPublicIpName).dnsSettings.fqdn]"
+    },
+    "CliPublicIpAddress": {
+      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
+      "type": "string",
+      "value": "[reference(variables('VMs').cliPublicIpName).ipAddress]"
+    },
+    "CliFqdn": {
+      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
+      "type": "string",
+      "value": "[reference(variables('VMs').cliPublicIpName).dnsSettings.fqdn]"
     }
   }
 }
