@@ -127,7 +127,7 @@
     },
 
     "VMs": {
-      "adVmName": "DC1",
+      "adVmName": "DC",
       "adConfigurationFunction": {
         "CreateADPDC": "CreateADPDC.ps1\\CreateADPDC"
       },
