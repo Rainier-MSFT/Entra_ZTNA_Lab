@@ -58,7 +58,7 @@
     "dnsLabelPrefix": {
       "type": "string",
       "metadata": {
-        "description": "DNS label prefix to connect to the VMs public IP via DNS. Leave bkank if no public IP, otherwise must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
+        "description": "DNS label prefix to enable connecting to VMs via their public IP. Leave blank if not using public IPs, otherwise must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
       },
       "defaultValue": ""
     },
