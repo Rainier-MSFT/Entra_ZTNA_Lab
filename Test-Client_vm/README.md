@@ -14,8 +14,10 @@
 
 This Azure automation deploys a **Test Client VM** for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources. The template provisions a single VM with your prefered version of Windows, to an existing Azure VNet.
 
-### VMs
-+ **Client VM**: Windows 10 or 11 joined to any Windows Active Diretory (AD) domain. Leave blank to remain in workgroup mode
+The following ARM resources are deployed as part of the solution:
+
+### VM
++ **Client**: Windows 10 or 11 joined to any Windows Active Diretory (AD) domain, or leave blank to remain in workgroup mode
 
 ### Networking
 + **Network interfaces**: 1 NIC and a prefered private IP address can be specified during deployment 
@@ -34,13 +36,13 @@ Once deployed, the VM can be administered thru either of the following:
 + **Azure Bastion** basic is also offered as an alternative to managing the VMs via a direct RDP connection
 
 ## Deployment
-The environment can be deployed through either of the following:
+The VM can be deployed through one of two ways:
 
 + Click the "Deploy to Azure" button to launch the deployment UI in Azure
 + From any computer, execute the powershell "Test-Client_vm.ps1" script located in the 'Resources folder
 
 ### Pre-requisites
-Prior to deploying the template, have the following information ready:
+Prior to deploying the template, have the following ready:
 
 + Access to an Azure subscription with sufficient resources to deploy the VM
 + An existing Azure VNet & SubNet for deploying the the VM into
@@ -52,10 +54,10 @@ Prior to deploying the template, have the following information ready:
   <summary>Expand</summary>
 
 <p><p>
-<li> Guest OS configuration is executed using DSC & custom extensions thru CliConfig.ps1.zip & XConfigs.ps1 resources</li>
+<li> Guest OS configuration is executed using combination of DSC, custom extensions, and thru XConfigs.ps1</li>
 <li> A localadmin account is created on the VM, with the same password specified for the domain admin account during deployment
 <li> Deployment outputs include VMs public IP address and FQDN, if enabled
 <li> The default VM size for the VM in the deployment is Standard_B2s, but can be changed
-<li> When the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected, and then may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
+<li> If the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected and may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
 
 </details>

@@ -45,7 +45,7 @@ Once deployed, VMs can be administered thru either of the following:
 <br>
 
 ## Deployment
-The environment can be deploy'd in one of two ways:
+The environment can be deployed through one of two ways:
 
 + Click the "Deploy to Azure" button to launch the deployment UI in Azure
 + From any computer, execute the Base-config_3-vm.ps1 powershell script located in the 'Resources folder
@@ -76,13 +76,13 @@ In either case, the client machine must be either Hybrid Azure AD joined (HAADJ)
 <summary><b><u><font size="+4">Additional Notes</font></u></b></summary>
 
 <p><p>
-<li> Guest OS configuration is executed using DSC & custom extensions thru AppConfig.ps1.zip & Common_Configs.ps1 resources</li>
+<li> Guest OS configuration is executed using combination of DSC, custom extensions, and thru XConfigs.ps1</li>
 <li> A *User1* domain account is created and added to the Domain Admins group. The password is the same as provided in the *adminPassword* parameter during deployment
-<li> The *App server* and *Client* VM resources depend on the **ADDC** resource deployment in order to ensure that the AD domain exists prior to execution of 
+<li> The *App server* and *Client* VM resources depend on the **AD DC** resource deployment in order to ensure that the AD domain exists prior to execution of 
 the JoinDomain extensions for the member VMs. This asymmetric VM deployment process adds several extra minutes to the overall deployment time
-<li> The private IP address of the **ADDC** VM is always *10.0.0.10*. This IP is set as the DNS IP for the virtual network and all member NICs
+<li> The private IP address of the **AD DC** is always *10.0.0.10*. This IP is set as the DNS IP for the virtual network and all member NICs
 <li> Deployment outputs include public IP address and FQDN for each VM
 <li> The default VM size for the VM in the deployment is Standard_B2s, but can be changed
-<li> When the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected, and then may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
+<li> If the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected and may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
 
 </details>

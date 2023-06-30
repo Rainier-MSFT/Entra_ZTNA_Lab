@@ -39,10 +39,10 @@ Once deployed, the VM can be administered thru either of the following:
 **Note:** Don't forget to log into the VM with the domain admin account, not the local admin. I.e. Use <domain_admin>@<your_domain>
 
 ## Deployment
-You can deploy the VM in one of two ways:
+The VM can be deployed through one of two ways:
 
-+ Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
-+ From any computer, execute the "Test-Apps_vm.ps1" powershell script found in the 'Resources folder
++ Click the "Deploy to Azure" button to launch the deployment UI in Azure
++ From any computer, execute the powershell "Test-Apps_vm.ps1" script located in the 'Resources folder
 
 ### Pre-requisites
 Prior to deploying the template, have the following information ready:
@@ -57,10 +57,10 @@ Prior to deploying the template, have the following information ready:
   <summary>Expand</summary>
 
 <p><p>
-<li> Guest OS configuration is executed using DSC & custom extensions thru AppConfig.ps1.zip & XConfigs.ps1 resources</li>
+<li> Guest OS configuration is executed using combination of DSC, custom extensions, and thru XConfigs.ps1</li>
 <li> A localadmin account is created on the VM, with the same password specified for the domain admin account during deployment
 <li> Deployment outputs include VMS public IP address and FQDN, if enabled
 <li> The default VM size for the VM in the deployment is Standard_B2s, but can be changed
-<li> When the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected, and then may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
+<li> If the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected and may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
 
 </details>
