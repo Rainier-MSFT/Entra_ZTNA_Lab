@@ -1,8 +1,6 @@
-<p dir='rtl' align='right'>21/03/2023</p>
-
 # <img align="left" src="https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/assets/6311098/47a893d3-e254-4a65-be16-176ae90be6e0" width=8%> Entra ZTNA Lab - 3 VM Topology 
 
-**Time to deploy**: Approx. 40 minutes
+**Time to deploy**: Approx. 40 minutes <p dir='rtl' align='right'>21/03/2023</p>
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2FEntra_ZTNA_Lab%2Fmain%2FBase-config_3-vm%2Fazuredeploy.json" target="_blank">
 <img src="images/deploytoazure.svg"/>
