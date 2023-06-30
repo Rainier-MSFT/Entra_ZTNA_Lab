@@ -117,8 +117,6 @@
     "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
     "W10": "W10",
     "W11": "W11",
-    "empty": [],
-    "resourceID": "[concat(uniqueString(resourceGroup().id))]",
     "clientOS": "[if(equals(parameters('clientOS'), 'windows-10'), variables('W10'), variables('W11'))]",
     "resID": "[concat(uniqueString(resourceGroup().id))]",
     "dnsLabelPrefix": "[if(empty(parameters('dnsLabelPrefix')), variables('resID'), parameters('dnsLabelPrefix'))]",
