@@ -1,8 +1,6 @@
-<p dir='rtl' align='right'>Last updated 21/03/2023</p>
-
 # <img align="left" src="https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/assets/6311098/47a893d3-e254-4a65-be16-176ae90be6e0" width=8%> Entra ZTNA Lab - Test Client VM
 
-**Time to deploy**: Approx. 4 minutes
+**Time to deploy**: Approx. 4 minutes <p dir='rtl' align='right'>21/03/2023</p>
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2FEntra_ZTNA_Lab%2Fmain%2FTest-Client_vm%2Fazuredeploy.json" target="_blank">
 <img src="https://aka.ms/deploytoazurebutton"/>
@@ -36,23 +34,21 @@ The following ARM resources are deployed as part of the solution:
 Once deployed, the VM can be administered thru either of the following:
 
 + **RDP** is enabled, but can only be used for direct remote management if VM is provisioned with a public IP either during or after deployment
-+ **Azure Bastion** basic is also offered as an alternative to managing the VMs via a direct RDP connection 
-
-**Note:** Don't forget to log into the VM using the domain admin account, not the local admin. I.e. <domain_admin>@<your_domain>
++ **Azure Bastion** basic is also offered as an alternative to managing the VMs via a direct RDP connection
 
 ## Deployment
-You can deploy the VM in one of two ways:
+The environment can be deployed through either of the following:
 
 + Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
-+ From any computer, execute the "Test-Client_vm.ps1" powershell script found in the 'Resources folder
++ From any computer, execute the powershell "Test-Client_vm.ps1" script located in the 'Resources folder
 
 ### Pre-requisites
 Prior to deploying the template, have the following information ready:
 
 + Access to an Azure subscription with sufficient resources to deploy the VM
-+ A DNS label prefix for the URL of the public IP addresse of your virtual machine. The FQDN will be formated as _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. You'll enter this in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button
 + An existing Azure VNet & SubNet for deploying the the VM into
 + An existing Active Directory Domain to join the VM to
++ If enabling a public IP, you'll also need to specify a DNS hostname prefix for public FQDN of the VM. The FQDN will be formated as _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. You'll enter this in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button and can be used to connect to the VM directly via RDP
 
 ## Additional notes
 <details>

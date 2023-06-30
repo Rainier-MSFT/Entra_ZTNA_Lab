@@ -1,8 +1,6 @@
-<p dir='rtl' align='right'>Last updated 21/03/2023</p>
-  
 # <img align="left" src="https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/assets/6311098/47a893d3-e254-4a65-be16-176ae90be6e0" width=8%> Entra ZTNA Lab - Test Apps VM 
 
-**Time to deploy**: Approx. 20 minutes
+**Time to deploy**: Approx. 20 minutes <p dir='rtl' align='right'>21/03/2023</p>
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FRainier-MSFT%2FEntra_ZTNA_Lab%2Fmain%2FTest-Apps_vm%2Fazuredeploy.json" target="_blank">
 <img src="https://aka.ms/deploytoazurebutton"/>
@@ -38,7 +36,7 @@ Once deployed, the VM can be administered thru either of the following:
 + **RDP** is enabled, but can only be used for direct remote management if VM is provisioned with a public IP either during or after deployment
 + **Azure Bastion** basic is also offered as an alternative to managing the VMs via a direct RDP connection 
 
-**Note:** Don't forget to log into the VM using the domain admin account, not the local admin. I.e. <domain_admin>@<your_domain>
+**Note:** Don't forget to log into the VM with the domain admin account, not the local admin. I.e. Use <domain_admin>@<your_domain>
 
 ## Deployment
 You can deploy the VM in one of two ways:
@@ -50,9 +48,9 @@ You can deploy the VM in one of two ways:
 Prior to deploying the template, have the following information ready:
 
 + Access to an Azure subscription with sufficient resources to deploy the VM
-+ A DNS label prefix for the URL of the public IP addresse of your virtual machine. The FQDN will be formated as _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. You'll enter this in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button
 + An existing Azure VNet & SubNet for deploying the the VM into
 + An existing Active Directory Domain to join the VM to
++ If enabling a public IP, you'll also need to specify a DNS hostname prefix for public FQDN of the VM. The FQDN will be formated as _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. You'll enter this in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button and can be used to connect to the VM directly via RDP
 
 ## Additional notes
 <details>
