@@ -6,7 +6,7 @@ ARM templates are pre-configured deployment packages that enable provisioning co
 
 They're great for situations where you need to evaluate a solution or config before deploying to production, and having that "_I built it myself and it works_" hands-on experience helps validate the requirements, before running a pilot or rolling out at scale. 
 
-These templates are exclusively available thru this repository, but older ones can be obtained via sources such as our [TLGs](http://aka.ms/catlgs).
+These templates are exclusively available thru this repository, but older ones can still be obtained via our [TLGs](http://aka.ms/catlgs).
 
 ## Azure Templates
 
