@@ -1,10 +1,10 @@
 # <img align="left" src="https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/assets/6311098/47a893d3-e254-4a65-be16-176ae90be6e0" width=8%> Rapid Labs - Identity & Network Access
 
-This repository offers a variety of Azure Resource Manager (ARM) based resources for quickly deploying test lab environments for testing & learning about Microsoft Identity & Network Access capabilities.
+This repository offers a variety of Azure Resource Manager (ARM) based resources for quickly deploying lab environments for testing & learning about Microsoft Identity & Network Access capabilities.
 
-ARM templates are pre-configured deployment packages that enable provisioning complex test environments in minutes, without requiring extensive PowerShell scripting or many hours of manual configuration. With little or no Azure experience, you can provision a whole VM environment or individual components.
+ARM templates are pre-configured deployment packages that enable provisioning complex test environments in minutes, without requiring extensive PowerShell scripting or many hours of manual configuration. With little or no Azure experience, you can provision a whole virtual environment or individual VMs.
 
-They're great for situations where you need to evaluate a solution or config before deploying to production, and having that "_I built it myself and it works_" hands-on experience helps validate the requirements, before running a pilot or rolling out at scale. 
+They're great for situations where you need to evaluate a solution or scenario before deploying to production, and having that "_I built it myself and it works_" hands-on experience also helps validate the requirements, before running a pilot or rolling out at scale. 
 
 These templates are exclusively available thru this repository, but older ones can still be obtained via our [TLGs](http://aka.ms/catlgs).
 
