@@ -55,6 +55,7 @@ Prior to deploying the template, have the following ready:
 
 + Access to an Azure subscription with sufficient resources to deploy the VM and associated resources
 + A DNS label prefix for the URL of the public IP addresse of your virtual machine. The FQDN will be formated as _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. You'll enter this in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button
++ Azure AD Premium licences to test with Entra Conditional Access and Global Secure Access
 
 ### Client machine
 Test clients can be deployed thru either of the following options of options, providing the machine is Hybrid Azure AD joined (HAADJ) or Azure AD Joined (AADJ) to the test Azure AD tenant:  
