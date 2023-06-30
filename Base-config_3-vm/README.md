@@ -21,7 +21,7 @@
 + **Client VM**: Optional Windows 10 or 11 client joined to the AD domain
 
 ### Storage
-+ **Storage account**: AD DC and App Server VMs use managed disks, so only used for diagnostics and storing your own client image if necessary 
++ **Storage account**: AD DC and App Server use managed disks, so only used for diags and storing your own client image if necessary 
 
 ### Networking
 + **NSG**: Network security group is configured to deny all inbound connectivity with the exception of RDP 3389, but allows outbound Internet connectivity without restrictions
