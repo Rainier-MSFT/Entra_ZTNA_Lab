@@ -34,9 +34,7 @@ The following ARM resources are deployed as part of the solution:
 Once deployed, the VM can be administered thru either of the following:
 
 + **RDP** is enabled, but can only be used for direct remote management if VM is provisioned with a public IP either during or after deployment
-+ **Azure Bastion** basic is also offered as an alternative to managing the VMs via a direct RDP connection 
-
-**Note:** Don't forget to log into the VM with the domain admin account, not the local admin. I.e. Use <domain_admin>@<your_domain>
++ **Azure Bastion** basic is also offered as an alternative to managing the VMs via a direct RDP connection
 
 ## Deployment
 The environment can be deployed through either of the following:
