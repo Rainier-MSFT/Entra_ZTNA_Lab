@@ -19,7 +19,8 @@
 The following ARM resources are deployed as part of the solution:
 
 ### VMs
-<img align="right" src="../Base-config_3-vm/images/base-config_3-vmII.png" width=32%> + **AD DC VM**: Windows Server 2016, 2019, or 2022 VM configured as a domain controller with DNS & Certificate services. Choice of Azure AD Connect sync or Cloud sync installers are placed on the desktop to setup a sync to an Azure AD tenant, and so is a link to download an Azure AD Application proxy connector
+<img align="right" src="../Base-config_3-vm/images/base-config_3-vmII.png" width=32%> 
++ **AD DC VM**: Windows Server 2016, 2019, or 2022 VM configured as a domain controller with DNS & Certificate services. Choice of Azure AD Connect sync or Cloud sync installers are placed on the desktop to setup a sync to an Azure AD tenant, and so is a link to download an Azure AD Application proxy connector
 + **App Server VM**: Windows Server 2016, 2019, or 2022 VM that can be joined to any Windows Active Diretory (AD) domain. IIS 10 and .NET 4.5 are installed and several test apps are pre-configured for IWA, forms, and header based authentication. The directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for domain accounts. iPerf is also installed for network performance testing.
 + **Client VM**: Optional Windows 10 or 11 client joined to the AD domain
 
