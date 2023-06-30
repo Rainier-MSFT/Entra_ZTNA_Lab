@@ -55,7 +55,7 @@ Prior to deploying the template, have the following ready:
 
 + Access to an Azure subscription with sufficient resources to deploy VMs and associated resources
 + Azure AD Premium licences to test with Entra Conditional Access and Global Secure Access
-+ If using public IPs, you'll also need to specify a DNS hostname prefix for public FQDN of each virtual machines. The FQDN will be formated as _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. You'll enter this in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button and can be used to connect VMs diretctly via RDP
++ If enabling public IPs, you'll also need to specify a DNS hostname prefix for public FQDN of each virtual machine. The FQDN will be formated as _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. You'll enter this in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button and can be used to connect to VMs directly via RDP
 
 ### Client machine
 A Windows 10/11 test client VM is also offered through the template, but other options do also exist:
