@@ -120,7 +120,8 @@
     "empty": [],
     "resourceID": "[concat(uniqueString(resourceGroup().id))]",
     "clientOS": "[if(equals(parameters('clientOS'), 'windows-10'), variables('W10'), variables('W11'))]",
-    "dnsLabelPrefix": "[if(empty(parameters('dnsLabelPrefix')), variables('resourceID'), parameters('dnsLabelPrefix'))]",
+    "resID": "[concat(uniqueString(resourceGroup().id))]",
+    "dnsLabelPrefix": "[if(empty(parameters('dnsLabelPrefix')), variables('resID'), parameters('dnsLabelPrefix'))]",
 
     "network": {
       "vnetName": "[concat(parameters('configName'),'-VNET')]",
@@ -527,10 +528,6 @@
       "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
       "type": "string",
       "value": "[reference(variables('VMs').cliPublicIpName).dnsSettings.fqdn]"
-    },
-    "resourceID": {
-      "type": "string",
-      "value": "[reference(variables('resourceID'))]"
     }
   }
 }
