@@ -16,7 +16,6 @@
 
 The following ARM resources are deployed as part of the solution:
 
-### VMs
 <img align="right" src="../Base-config_3-vm/images/base-config_3-vmII.png" width=36%>
 
 + **AD DC VM**: Windows Server 2016, 2019, or 2022 VM configured as a domain controller with DNS & Certificate services. Choice of Azure AD Connect sync or Cloud sync installers are placed on the desktop to setup a sync to an Azure AD tenant, and so is a link to download an Azure AD Application proxy connector
