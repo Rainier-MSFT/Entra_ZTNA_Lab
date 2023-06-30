@@ -14,8 +14,7 @@
 <img src="images/visualizebutton.svg"/>
 </a><p>
 
-### <img align="right" src="../Base-config_3-vm/images/base-config_3-vmII.png" width=40%> This template deploys a 3 VM environment that can be used for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources. The template provisions an Active Directory domain controller and application server on your preferred version of Windows Server, both on an Azure VNet with optional Bastion capability for secure remote management. This provides a baseline on-prem environment that an Azure AD tenant will synchronize users to and from. An optional domain joined Windows 10 or 11 VM can also be provisioned too, before being moved to a separate VNet to simulate remote client connectivity.
-
+### <img align="right" src="../Base-config_3-vm/images/base-config_3-vmII.png" width=40%> <p align="justify">This template deploys a 3 VM environment that can be used for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources. The template provisions an Active Directory domain controller and application server on your preferred version of Windows Server, both on an Azure VNet with optional Bastion capability for secure remote management. This provides a baseline on-prem environment that an Azure AD tenant will synchronize users to and from. An optional domain joined Windows 10 or 11 VM can also be provisioned too, before being moved to a separate VNet to simulate remote client connectivity</p>
 
 The following ARM resources are deployed as part of the solution:
 
