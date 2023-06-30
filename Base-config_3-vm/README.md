@@ -14,8 +14,6 @@
 
 ### <p align="justify">This template deploys a 3 VM environment that can be used for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources. The template provisions an Active Directory domain controller and application server on your preferred version of Windows Server, both on an Azure VNet with optional Bastion capability for secure remote management. This provides a baseline on-prem environment that an Azure AD tenant will synchronize users to and from. An optional domain joined Windows 10 or 11 VM can also be provisioned too, before being moved to a separate VNet to simulate remote client connectivity</p>
 
-The following ARM resources are deployed as part of the solution:
-
 <img align="right" src="../Base-config_3-vm/images/base-config_3-vmII.png" width=36%>
 
 + **AD DC VM**: Windows Server 2016, 2019, or 2022 VM configured as a domain controller with DNS & Certificate services. Choice of Azure AD Connect sync or Cloud sync installers are placed on the desktop to setup a sync to an Azure AD tenant, and so is a link to download an Azure AD Application proxy connector
