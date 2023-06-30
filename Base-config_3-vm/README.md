@@ -58,19 +58,19 @@ Prior to deploying the template, have the following ready:
 + If using public IPs, you'll also need to specify a DNS hostname prefix for public FQDN of each virtual machines. The FQDN will be formated as _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. You'll enter this in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button and can be used to connect VMs diretctly via RDP
 
 ### Client machine
-Test clients can be deployed thru either of the following options of options, providing the machine is Hybrid Azure AD joined (HAADJ) or Azure AD Joined (AADJ) to the test Azure AD tenant:  
+A Windows 10/11 test client VM is also offered through the template, but other options do also exist:
      
-+ Physical computer - On a personal computers, install Windows 10 or 11 Enterprise
-+ Virtual machine - Use your prefered hypervisor to create a Windows 10/11 Enterprise VM
-+ Virtual machine in Azure - To create a Windows 10/11 virtual machine in Microsoft Azure, you must have a Visual Studio-based subscription, which has access to the images for Windows 10/11 Enterprise. Other types of Azure subscriptions, such as trial and paid subscriptions, do not have access to this image. For the latest information, see Use Windows client in Azure for dev/test scenarios. For more information about eligible subscriptions, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/client-images#subscription-eligibility
++ Physical computer - Install Windows 10 or 11 Enterprise
++ On-prem VM - Use your prefered hypervisor to create a Windows 10/11 Enterprise VM
++ Cloud VM - Create a Windows 10/11 VM in any vendor cloud. If in Azure, you must have a full Azure subscription or else a Visual Studio-based subscription with access to the Windows 10/11 Enterprise images. Azure trial subscriptions and some paid subscriptions may not have access to these images. For the latest information see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/client-images#subscription-eligibility
 + Virtual Machine in Azure Virtual Desktop (AVD) or Windows365 - See our docs https://learn.microsoft.com/en-us/windows-365/overview
      
-**Note:** Enabling the option to deploy a client VM via this template requires that you upload a generalized Windows 10/11 VHD to an Azure storage account and provide the account name in the _clientVhdUri_ parameter. Note that SAS tokens are not supported, and the blob container must be configured for public read access. The path to the VHD should resemble the following example:
+**Note:** Uploading a generalized Windows 10/11 VHD to an Azure storage account and provide the account name in the _clientVhdUri_ parameter. Note that SAS tokens are unsupported and the blob container must be configured for public read access. The path to the VHD should resemble the following example: https://<storage account name>.blob.core.windows.net/vhds/<vhdName>.vhd
 
-https://<storage account name>.blob.core.windows.net/vhds/<vhdName>.vhd
-
-For more information about how to prepare a generalized VHD, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/prepare-for-upload-vhd-image.
 <p><p>
+
+In either case, the client machine must be either Hybrid Azure AD joined (HAADJ) or Azure AD Joined (AADJ) to the test Azure AD tenant.
+
      
 <details>
 <summary><b><u><font size="+4">Additional Notes</font></u></b></summary>
