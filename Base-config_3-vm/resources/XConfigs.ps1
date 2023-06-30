@@ -218,7 +218,7 @@ If ( -not [string]::IsNullOrEmpty($domainAdmin)){
 }
 
 ## Disable Internet Explorer (Disabled only to retain IE legacy mode in Edge)
-dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
+## dism /online /NoRestart /Disable-Feature /FeatureName:Internet-Explorer-Optional-amd64
 
 #Clean-up
 Set-PSDebug -Trace 0
