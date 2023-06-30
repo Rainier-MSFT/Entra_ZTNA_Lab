@@ -47,8 +47,8 @@ Once deployed, VMs can be administered thru either of the following:
 ## Deployment
 The environment can be deploy'd in one of two ways:
 
-+ Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
-+ From any computer, execute the Base-config_3-vm.ps1 powershell script found in the 'Resources
++ Click the "Deploy to Azure" button to launch the deployment UI in Azure
++ From any computer, execute the Base-config_3-vm.ps1 powershell script located in the 'Resources folder
 
 ### Pre-requisites
 Prior to deploying the template, have the following ready:

@@ -14,9 +14,6 @@
 
 This Azure automation deploys a **Test Client VM** for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources. The template provisions a single VM with your prefered version of Windows, to an existing Azure VNet.
 
-## Azure Resources
-The following ARM resources are deployed as part of the solution:
-
 ### VMs
 + **Client VM**: Windows 10 or 11 joined to any Windows Active Diretory (AD) domain. Leave blank to remain in workgroup mode
 
@@ -39,7 +36,7 @@ Once deployed, the VM can be administered thru either of the following:
 ## Deployment
 The environment can be deployed through either of the following:
 
-+ Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
++ Click the "Deploy to Azure" button to launch the deployment UI in Azure
 + From any computer, execute the powershell "Test-Client_vm.ps1" script located in the 'Resources folder
 
 ### Pre-requisites
