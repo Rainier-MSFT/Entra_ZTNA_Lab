@@ -50,6 +50,8 @@ The environment can be deployed through one of two ways:
 + Click the "Deploy to Azure" button to launch the deployment UI in Azure
 + From any computer, execute the Base-config_3-vm.ps1 powershell script located in the 'Resources folder
 
+Any manual steps to complete configuring the environment are in the Finalise.txt file on the desktop of each VM 
+
 ### Pre-requisites
 Prior to deploying the template, have the following ready:
 
