@@ -14,12 +14,12 @@
 <img src="images/visualizebutton.svg"/>
 </a><p>
 
-### <img align="right" src="../Base-config_3-vm/images/base-config_3-vmII.png" width=40%> <p align="justify">This template deploys a 3 VM environment that can be used for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources. The template provisions an Active Directory domain controller and application server on your preferred version of Windows Server, both on an Azure VNet with optional Bastion capability for secure remote management. This provides a baseline on-prem environment that an Azure AD tenant will synchronize users to and from. An optional domain joined Windows 10 or 11 VM can also be provisioned too, before being moved to a separate VNet to simulate remote client connectivity</p>
+### <p align="justify">This template deploys a 3 VM environment that can be used for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources. The template provisions an Active Directory domain controller and application server on your preferred version of Windows Server, both on an Azure VNet with optional Bastion capability for secure remote management. This provides a baseline on-prem environment that an Azure AD tenant will synchronize users to and from. An optional domain joined Windows 10 or 11 VM can also be provisioned too, before being moved to a separate VNet to simulate remote client connectivity</p>
 
 The following ARM resources are deployed as part of the solution:
 
 ### VMs
-+ **AD DC VM**: Windows Server 2016, 2019, or 2022 VM configured as a domain controller with DNS & Certificate services. Choice of Azure AD Connect sync or Cloud sync installers are placed on the desktop to setup a sync to an Azure AD tenant, and so is a link to download an Azure AD Application proxy connector
+<img align="right" src="../Base-config_3-vm/images/base-config_3-vmII.png" width=30%> + **AD DC VM**: Windows Server 2016, 2019, or 2022 VM configured as a domain controller with DNS & Certificate services. Choice of Azure AD Connect sync or Cloud sync installers are placed on the desktop to setup a sync to an Azure AD tenant, and so is a link to download an Azure AD Application proxy connector
 + **App Server VM**: Windows Server 2016, 2019, or 2022 VM that can be joined to any Windows Active Diretory (AD) domain. IIS 10 and .NET 4.5 are installed and several test apps are pre-configured for IWA, forms, and header based authentication. The directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for domain accounts. iPerf is also installed for network performance testing.
 + **Client VM**: Optional Windows 10 or 11 client joined to the AD domain
 
