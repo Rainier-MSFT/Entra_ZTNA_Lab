@@ -16,7 +16,7 @@
 
 <img align="right" src="../Base-config_3-vm/images/base-config_3-vmII.png" width=38%>
 
-+ **AD DC VM**: Windows 2016, 2019, or 2022 VM configured as a domain controller with DNS & Certificate services. Choice of Azure AD Connect sync or Cloud sync installers are placed on the desktop to setup a sync to an Azure AD tenant, plus a link to download an Azure AD Application proxy connector
++ **AD DC VM**: Windows 2016, 2019, or 2022 VM configured as a domain controller with DNS & Certificate services. Cloud sync is installed to sync to an Azure AD, plus a link to download an Azure AD Application proxy connector is on the desktop
 + **App Server VM**: Windows 2016, 2019, or 2022 VM joined to the AD domain. IIS 10 and .NET 4.5 are installed, with several test apps pre-configured for IWA, forms, and header based authentication. The directory C:\Files contains an example.txt file, shared as "\\APP1\Files" with full control for domain accounts. iPerf is also installed for net perf testing.
 + **Client VM**: Optional Windows 10 or 11 client joined to the AD domain
 
@@ -50,7 +50,9 @@ The environment can be deployed through one of two ways:
 + Click the "Deploy to Azure" button to launch the deployment UI in Azure
 + From any computer, execute the Base-config_3-vm.ps1 powershell script located in the 'Resources folder
 
-Any manual steps to complete configuring the environment are in the Finalise.txt file on the desktop of each VM 
+Entra Cloud Sync is pre-installed on the DC and just needs running through to point to your Azure AD tenant.
+
+Any remaining manual steps to complete configuring the environment are in the Finalise.txt file on the desktop of each VM
 
 ### Pre-requisites
 Prior to deploying the template, have the following ready:

@@ -71,6 +71,11 @@ If ($env:computername -like "DC*") {
     Install-AdcsCertificationAuthority -CAType EnterpriseRootCa -CryptoProviderName "RSA#Microsoft Software Key Storage Provider" -KeyLength 2048 -HashAlgorithmName SHA256 -ValidityPeriod Years -ValidityPeriodUnits 3 -DatabaseDirectory "C:\windows\system32\certLog" -LogDirectory "c:\windows\system32\CertLog" -Force
     Certutiul -vroot
 
+    # Install Entra Cloud Sync
+    Write-Host "Installing Cloud Sync..."
+    Invoke-WebRequest -Uri "https://download.msappproxy.net/Subscription/d3c8b69d-6bf7-42be-a529-3fe9c2e70c90/Connector/previewProvisioningAgentInstaller" -OutFile "$TmpDirectory\CloudSync.exe"
+    Start-Process "$TmpDirectory\CloudSync.exe" /q
+
     ## Provision icons
     Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
     Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
