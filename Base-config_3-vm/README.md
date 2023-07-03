@@ -51,6 +51,7 @@ The environment can be deployed through one of two ways:
 + From any computer, execute the Base-config_3-vm.ps1 powershell script located in the 'Resources folder
 
 Entra Cloud Sync is pre-installed on the DC and just needs pointing to your Azure AD tenant.
+Ensure you are authoritative for the domain being specified for the enviroment, as it will need registering with your Azure AD tenant. 
 
 ### Pre-requisites
 Prior to deploying the template, have the following ready:
