@@ -544,9 +544,6 @@
           },
           "modulesURL": {
             "value": "[variables('assetLocation')]"
-          },
-          "configurationFunction": {
-            "value": "[variables('VMs').connectorConfigurationFunction]"
           }
         }
       }
