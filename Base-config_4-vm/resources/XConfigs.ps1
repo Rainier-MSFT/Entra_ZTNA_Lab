@@ -84,6 +84,13 @@ If ($env:computername -like "DC*") {
     Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "*.lnk","Cert Management*")) {move-Item $file $AllDesktop}
 }
 
+If ($env:computername -like "Connector*") {
+    ## Provision icons
+    Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_4-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
+    Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
+    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "Install App Proxy.*")) {move-Item $file $AllDesktop}
+}
+
 ## Execute on APP VM (If called from app template)
 If ( -not [string]::IsNullOrEmpty($domainAdmin)){
     $SadminPassword = ConvertTo-SecureString $adminPassword -AsPlainText -Force
