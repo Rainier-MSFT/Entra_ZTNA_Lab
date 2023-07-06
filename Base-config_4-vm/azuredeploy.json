@@ -145,7 +145,7 @@
 
       "connectorVmName": "Connector",
       "connectorConfigurationFunction": {
-        "CwapConfig": "ConnectorConfig.ps1\\ConnectorConfig"
+        "ConnectorConfig": "ConnectorConfig.ps1\\ConnectorConfig"
       },
       "connectorNicIP": "10.0.0.12",
       "connectorPublicIpName": "[concat(parameters('configName'),'-CONNECTOR_IP')]",
