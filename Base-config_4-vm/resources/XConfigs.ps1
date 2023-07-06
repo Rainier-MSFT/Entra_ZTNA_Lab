@@ -65,6 +65,10 @@ $Name = "DefaultAssociationsConfiguration"
 $value = 'C:\Windows\System32\defaultapplication.xml'
 New-ItemProperty -Path $registryPath -Name $name -Value $value -PropertyType String -Force | Out-Null
 
+## Provision icons
+Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_4-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
+Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
+
 If ($env:computername -like "DC*") {
     # Install AD Certificate Services
     Install-WindowsFeature AD-Certificate,ADCS-Cert-Authority,ADCS-Web-Enrollment -IncludeManagementTools
@@ -72,23 +76,22 @@ If ($env:computername -like "DC*") {
     Certutiul -vroot
 
     # Install Entra Cloud Sync
-    Write-Host "Installing Cloud Sync..."
     Invoke-WebRequest -Uri "https://download.msappproxy.net/Subscription/d3c8b69d-6bf7-42be-a529-3fe9c2e70c90/Connector/previewProvisioningAgentInstaller" -OutFile "$TmpDirectory\CloudSync.exe"
     Start-Process "$TmpDirectory\CloudSync.exe" /q
 
-    ## Provision icons
-    Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_4-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
-    Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
-    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "*.ico","*.msc")) {move-Item $file "C:\Windows\System32\"}
+    ## Provision shortcuts
+    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "connector*","*.msc")) {move-Item $file "C:\Windows\System32\"}
     Sleep (2)
-    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "*.lnk","Cert Management*")) {move-Item $file $AllDesktop}
+    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "Cert Management.*","AD Users and Computers*","DNS*","Cert Management*")) {move-Item $file $AllDesktop}
 }
 
 If ($env:computername -like "Connector*") {
-    ## Provision icons
-    Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_4-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
-    Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
-    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "Install App Proxy.*")) {move-Item $file $AllDesktop}
+    ## Download Entra Private Accesss Connector
+    Invoke-WebRequest -Uri "https://download.msappproxy.net/Subscription/d3c8b69d-6bf7-42be-a529-3fe9c2e70c90/Connector/DownloadConnectorInstaller" -OutFile "$TmpDirectory\Connector.exe"
+    ## Provision shortcuts
+    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "Connector*")) {move-Item $file "C:\Windows\System32\"}
+    Sleep (2)
+    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "Install Private Access*")) {move-Item $file $AllDesktop}
 }
 
 ## Execute on APP VM (If called from app template)
