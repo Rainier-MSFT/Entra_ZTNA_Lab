@@ -95,33 +95,6 @@
       ]
     },
     {
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'/ConnectorConfig')]",
-      "apiVersion": "2022-11-01",
-      "location": "[parameters('SharedVmConfig').location]",
-      "dependsOn": [
-        "[parameters('vmName')]"
-      ],
-      "properties": {
-        "publisher": "Microsoft.Powershell",
-        "type": "DSC",
-        "typeHandlerVersion": "2.9",
-        "autoUpgradeMinorVersion": true,
-        "protectedSettings": {
-          "Items": {}
-        },
-        "settings": {
-          "modulesUrl": "[concat(parameters('modulesURL'),'/ConnectorConfig.ps1.zip')]",
-          "sasToken": "[parameters('SharedVmConfig').SasToken]",
-          "wmfVersion": "latest",
-          "configurationFunction": "[parameters('configurationFunction').ConnectorConfig]",
-          "Properties": {
-            "DomainName": "[parameters('SharedVmConfig').domainName]"
-          }
-        }
-      }
-    },
-    {
 
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('vmName'),'/BGInfo')]",
@@ -180,8 +153,7 @@
       "apiVersion": "2022-11-01",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'), '/extensions/joindomain')]",
-        "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'), '/extensions/ConnectorConfig')]"
+        "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'), '/extensions/joindomain')]"
       ],
       "properties": {
         "publisher": "Microsoft.Compute",
