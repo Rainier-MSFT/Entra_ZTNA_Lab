@@ -102,7 +102,7 @@
     "dnsLabelPrefix": {
       "type": "string",
       "metadata": {
-        "description": "Setting a DNS prefix creates an Azure DNS record for managing VMs directly via a public FQDN. Leave this field blank to create a record that is unique, Azure wide. If specifying this manualy, must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
+        "description": "Setting a DNS prefix creates an Azure DNS record for managing VMs directly via a public FQDN. Leave this field blank to create a record that is unique, Azure wide. If specifying this manualy, must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$, and again must be unique, Azure wide."
       },
       "defaultValue": ""
     }
