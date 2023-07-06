@@ -13,9 +13,6 @@
     },
     "modulesURL": {
       "type": "string"
-    },
-    "configurationFunction": {
-      "type": "object"
     }
   },
   "resources": [
