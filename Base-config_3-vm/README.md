@@ -1,4 +1,4 @@
-# <img align="left" src="https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/assets/6311098/47a893d3-e254-4a65-be16-176ae90be6e0" width=8%> Entra ZTNA Lab - 3 VM Topology 
+# <img align="left" src="https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/assets/6311098/47a893d3-e254-4a65-be16-176ae90be6e0" width=8%> Entra ZTNA Lab - 4 VM Topology 
 
 **Time to deploy**: Approx. 40 minutes <p dir='rtl' align='right'>21/03/2023</p>
 
@@ -12,12 +12,13 @@
 <img src="images/visualizebutton.svg"/>
 </a><p>
 
-#### <p align="justify">This template deploys a 3 VM hybrid environment that can be used for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources. The template provisions an Active Directory domain controller and application server on your preferred version of Windows Server, both on an Azure VNet with optional Bastion capability for secure remote management. This provides a baseline on-prem environment that an Azure AD tenant will synchronize users to and from. An optional domain joined Windows 10 or 11 VM can also be provisioned too, before being moved to a separate VNet to simulate remote client connectivity</p>
+#### <p align="justify">This template deploys a 4 VM hybrid environment that can be used for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources. The template provisions an Active Directory domain controller and application server on your preferred version of Windows Server, both on an Azure VNet with optional Bastion capability for secure remote management. This provides a baseline on-prem environment that an Azure AD tenant will synchronize users to and from. An optional domain joined Windows 10 or 11 VM can also be provisioned too, before being moved to a separate VNet to simulate remote client connectivity</p>
 
 <img align="right" src="../Base-config_3-vm/images/base-config_3-vmII.png" width=38%>
 
 + **AD DC VM**: Windows 2016, 2019, or 2022 VM configured as a domain controller with DNS & Certificate services. Cloud sync is installed to sync to an Azure AD, plus a link to download an Azure AD Application proxy connector is on the desktop
 + **App Server VM**: Windows 2016, 2019, or 2022 VM joined to the AD domain. IIS 10 and .NET 4.5 are installed, with several test apps pre-configured for IWA, forms, and header based authentication. The directory C:\Files contains an example.txt file, shared as "\\APP1\Files" with full control for domain accounts. iPerf is also installed for net perf testing.
++ **App Proxy Connector VM**: Windows 2016, 2019, or 2022 VM joined to the AD domain and ready to deploy an App Proxy connector agent
 + **Client VM**: Optional Windows 10 or 11 client joined to the AD domain
 
 ### Storage
