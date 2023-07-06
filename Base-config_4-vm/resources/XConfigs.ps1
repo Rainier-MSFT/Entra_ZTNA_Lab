@@ -1,5 +1,5 @@
 <#  XConfigs.ps1
-    Rainier Amara 8/1/23
+    Rainier Amara 6/7/23
     This script applies a bunch of additional configurations to a deployed VM
 DISCLAIMER
 	THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
@@ -77,7 +77,7 @@ If ($env:computername -like "DC*") {
     Start-Process "$TmpDirectory\CloudSync.exe" /q
 
     ## Provision icons
-    Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_3-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
+    Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_4-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
     Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
     Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "*.ico","*.msc")) {move-Item $file "C:\Windows\System32\"}
     Sleep (2)
