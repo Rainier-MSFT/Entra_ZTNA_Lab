@@ -1,4 +1,4 @@
-# <img align="left" src="Base-config_4-vm/images/base-config_4.png" width=8%> Entra ZTNA Lab - 4 VM Topology 
+# <img align="left" src="images/base-config_4.png" width=8%> Entra ZTNA Lab - 4 VM Topology 
 
 **Time to deploy**: Approx. 40 minutes <p dir='rtl' align='right'>21/03/2023</p>
 
