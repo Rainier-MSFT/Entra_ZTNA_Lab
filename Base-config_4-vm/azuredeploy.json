@@ -144,9 +144,6 @@
       "appPublicIpName": "[concat(parameters('configName'),'-APP_IP')]",
 
       "connectorVmName": "Connector",
-      "connectorConfigurationFunction": {
-        "ConnectorConfig": "ConnectorConfig.ps1\\ConnectorConfig"
-      },
       "connectorNicIP": "10.0.0.12",
       "connectorPublicIpName": "[concat(parameters('configName'),'-CONNECTOR_IP')]",
       
