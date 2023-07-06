@@ -136,15 +136,22 @@
       "adNicIP": "10.0.0.10",
       "adPublicIpName": "[concat(parameters('configName'),'-DC_IP')]",
 
-      "appVmName": "APP1",
+      "appVmName": "APP",
       "appConfigurationFunction": {
         "AppConfig": "AppConfig.ps1\\AppConfig"
       },
       "appNicIP": "10.0.0.11",
       "appPublicIpName": "[concat(parameters('configName'),'-APP_IP')]",
 
-      "cliVmName": "CLIENT1",
-      "clientNicIP": "10.0.0.12",
+      "connectorVmName": "Connector",
+      "connectorConfigurationFunction": {
+        "CwapConfig": "ConnectorConfig.ps1\\ConnectorConfig"
+      },
+      "connectorNicIP": "10.0.0.12",
+      "connectorPublicIpName": "[concat(parameters('configName'),'-CONNECTOR_IP')]",
+      
+      "cliVmName": "CLIENT",
+      "clientNicIP": "10.0.0.20",
       "cliPublicIpName": "[concat(parameters('configName'),'-CLI_IP')]"
     },
 
@@ -154,6 +161,9 @@
     "apppipObject": {
       "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').appPublicIpName)]"
       },
+    "connectoripObject": {
+        "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').appPublicIpName)]"
+        },
     "clipipObject": {
       "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').cliPublicIpName)]"
       },
@@ -263,11 +273,25 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').appPublicIpName]",
       "location": "[resourceGroup().location]",
-      "comments": "The public IP address for the app server VM.",
+      "comments": "The public IP address for the app VM.",
       "properties": {
         "publicIPAllocationMethod": "Static",
         "dnsSettings": {
           "domainNameLabel": "[toLower(concat(variables('dnsLabelPrefix'),'app'))]"
+        }
+      }
+    },
+    {
+      "apiVersion": "2018-04-01",
+      "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[variables('VMs').appPublicIpName]",
+      "location": "[resourceGroup().location]",
+      "comments": "The public IP address for the connector VM.",
+      "properties": {
+        "publicIPAllocationMethod": "Static",
+        "dnsSettings": {
+          "domainNameLabel": "[toLower(concat(variables('dnsLabelPrefix'),'connector'))]"
         }
       }
     },
@@ -327,6 +351,37 @@
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[variables('VMs').appNicIP]",
               "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('apppipObject'), json('null'))]",
+              "subnet": {
+                "id": "[variables('network').subnetRef]"
+              }
+            }
+          }
+        ],
+        "dnsSettings": {
+          "dnsServers": [
+            "[variables('VMs').adNicIP]"
+          ],
+          "internalDomainNameSuffix": "[parameters('domainName')]"
+        }
+      }
+    },
+    {
+      "name": "[concat(parameters('configName'),'-CONNECTOR_NIC')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
+      ],
+      "apiVersion": "2018-04-01",
+      "comments": "This is the network interface for the connector server VM.",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[variables('VMs').connectorNicIP]",
+              "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('connectorpipObject'), json('null'))]",
               "subnet": {
                 "id": "[variables('network').subnetRef]"
               }
@@ -466,6 +521,40 @@
       }
     },
     {
+      "name": "[concat(parameters('configName'),'-CONNECTOR')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "comments": "This is the deployment resource for the connector VM.",
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-CONNECTOR_NIC')]",
+        "[concat('Microsoft.Resources/deployments/',parameters('configName'),'-DC')]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('templates'),'/connector.json',parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "SharedVmConfig": { 
+            "value": "[variables('SharedVmConfig')]" 
+          },
+          "vmName": {
+            "value": "[variables('VMs').connectorVmName]"
+          },
+          "nicName": {
+            "value": "[concat(parameters('configName'),'-CONNECTOR_NIC')]"
+          },
+          "modulesURL": {
+            "value": "[variables('assetLocation')]"
+          },
+          "configurationFunction": {
+            "value": "[variables('VMs').connectorConfigurationFunction]"
+          }
+        }
+      }
+    },
+    {
       "name": "Client",
       "condition": "[equals(parameters('deployClientVm'),'Yes')]",
       "type": "Microsoft.Resources/deployments",
@@ -516,6 +605,16 @@
       "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
       "type": "string",
       "value": "[reference(variables('VMs').appPublicIpName).dnsSettings.fqdn]"
+    },
+    "ConnectorPublicIpAddress": {
+      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
+      "type": "string",
+      "value": "[reference(variables('VMs').connectorPublicIpName).ipAddress]"
+    },
+    "ConnectorFqdn": {
+      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
+      "type": "string",
+      "value": "[reference(variables('VMs').connectorPublicIpName).dnsSettings.fqdn]"
     },
     "CliPublicIpAddress": {
       "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
