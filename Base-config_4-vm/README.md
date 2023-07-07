@@ -26,7 +26,7 @@
 
 ### Networking
 + **NSG**: Network security group is configured to deny all inbound connectivity with the exception of RDP 3389, but allows outbound Internet connectivity without restrictions
-+ **Virtual network**: Azure VNet for internal traffic, configured as 10.0.0.0/22 and with custom DNS pointing to the AD DC's private IP address. Internal Subnet is defined as 10.0.0.0/24 for a total of 249 available IP addresses and Bastion subnet as 10.0.1.0/26
++ **Virtual network**: Azure VNet for internal traffic, configured as 10.0.0.0/22 and with custom DNS pointing to the AD DC's private IP address. Internal Subnet is defined as 10.0.0.0/24 for a total of 249 available IP addresses. If enabled, a Bastion subnet will be defined as 10.0.1.0/26
 + **Network interfaces**: 1 NIC per VM, all with static private IPs
 + **Public IP addresses**: VMs are only provisioned with an optional static public IP for remote management, if chosen during deployment
 
@@ -45,6 +45,15 @@ Once deployed, VMs can be administered thru either of the following:
 **Note:** Don't forget to log into the VM with the domain admin account, not the local admin. I.e. Use <domain_admin>@<your_domain>
 <br>
 
+### Pre-requisites
+Before deploying the template, you'll need the following:
+
++ Access to an Azure subscription with sufficient resources to deploy VMs and other resources
++ The namespace for the internal AD domain should be publically routable. I.e. Not .local, etc  
++ An Entra ID Tenant (Azure AD) setup with the AD domain namespace specified during VM deployment
++ Azure AD Premium licences are required to test Entra Private Access and other capabilities such as Conditional Access
++ If choosing Bastion over direct RDP, you'll also need to specify a hostname prefix for the public FQDN of each virtual machine. The FQDN will be formated as _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_.
+
 ## Deployment
 The environment can be deployed through one of two ways:
 
@@ -54,14 +63,7 @@ The environment can be deployed through one of two ways:
 Entra Cloud Sync is pre-installed on the DC and just needs pointing to your Azure AD tenant.
 Ensure you are authoritative for the domain being specified for the VM enviroment, as it will need registering with your Azure AD tenant. 
 
-### Pre-requisites
-Prior to deploying the template, have the following ready:
-
-+ Access to an Azure subscription with sufficient resources to deploy VMs and associated resources
-+ Azure AD Premium licences to test with Entra Conditional Access and Global Secure Access
-+ If enabling public IPs, you'll also need to specify a DNS hostname prefix for public FQDN of each virtual machine. The FQDN will be formated as _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. You'll enter this in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button and can be used to connect to VMs directly via RDP
-
-### Client machine
+### Client VM options
 A Windows 10/11 test client VM is also offered through the template, but other options do also exist:
      
 + Physical computer - Install Windows 10 or 11 Enterprise
