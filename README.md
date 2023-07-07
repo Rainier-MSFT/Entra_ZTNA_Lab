@@ -18,17 +18,10 @@ These templates are exclusively available thru this repository, but older ones c
 
 
 ## Prerequisites
-Before you deploy an ARM template in this repository, you need to have:
+Before deploying an ARM template, you'll need the following:
 
-+ Access to an Azure subscription with sufficient resources to deploy the template. Most templates in this repository require the following available resources:
-
-  + 4 cores per VM
-  + 1 storage account
-
-+ Access to the Azure and Entra management portals (https://entra.microsoft.com  /  https://portal.azure.com)
-+ A public domain name and administrative access to the domain's DNS records
-
-Some templates may have additional requirements specified in the template's README.
++ An Azure subscription and sufficient rights to deploy the given resources and specs for each template
++ Access to the Azure and Entra management portals https://entra.microsoft.com and https://portal.azure.com
 
 ___
 
