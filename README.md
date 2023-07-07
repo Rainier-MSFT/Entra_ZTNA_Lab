@@ -12,7 +12,7 @@ These templates are exclusively available thru this repository, but older ones c
 
 | Template                     | Name                                                    | Description
 | :-------------------         | :-------------------                                    | :-------------------
-| [](https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/tree/main/Base-config_4-vm) [<img src="https://aka.ms/deploytoazurebutton">](https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/tree/main/Base-config_4-vm)        | 4 VM Base Configuration | Deploys a 4 VM server & client environment that can be used for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources including remote access thru Azure AD Application Proxy or other technologies
+| [](https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/tree/main/Base-config_4-vm) [<img src="https://aka.ms/deploytoazurebutton">](https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/tree/main/Base-config_4-vm)        | 4 VM Base Configuration | Deploys a 4 VM environment for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to private resources including remote access thru Azure AD Application Proxy or other technologies
 | [](https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/tree/main/Test-Apps_vm) [<img src="https://aka.ms/deploytoazurebutton">](https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/tree/main/Test-Apps_vm)        | Test Apps VM | Deploys a Windows Server VM pre-configured with several test applications & services for testing a variety of authN, authZ and SSO scenarios. Useful for scenarios where you already have an AD enviroment and require a bunch of pre-configured services for testing remote & local access thru Azure AD application Proxy or other technologies
 | [](https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/tree/main/Test-Client_vm) [<img src="https://aka.ms/deploytoazurebutton">](https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/tree/main/Test-Client_vm)        | Test Client VM | Deploys a Windows client VM for testing various authentication & authorization scenarios for Zero Trust Network Access (ZTNA) to protected resources. The template provisions a single VM with your prefered version of Windows, to an existing Azure VNet
 
@@ -25,7 +25,7 @@ Before you deploy an ARM template in this repository, you need to have:
   + 4 cores per VM
   + 1 storage account
 
-+ A supported browser for access to the Entra or Azure portals (https://entra.microsoft.com  /  https://portal.azure.com). See [Supported browsers and devices](https://docs.microsoft.com/en-us/azure/azure-preview-portal-supported-browsers-devices)
++ Access to the Azure and Entra management portals (https://entra.microsoft.com  /  https://portal.azure.com)
 + A public domain name and administrative access to the domain's DNS records
 
 Some templates may have additional requirements specified in the template's README.
