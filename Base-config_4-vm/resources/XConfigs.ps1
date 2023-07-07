@@ -80,7 +80,7 @@ If ($env:computername -like "DC*") {
     Start-Process "$TmpDirectory\CloudSync.exe" /q
 
     ## Provision shortcuts
-    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "connector*","*.msc")) {move-Item $file "C:\Windows\System32\"}
+    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "certificate*","connector*","*.msc")) {move-Item $file "C:\Windows\System32\"}
     Sleep (2)
     Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "Cert Management.*","AD Users and Computers*","DNS*","Cert Management*")) {move-Item $file $AllDesktop}
 }
