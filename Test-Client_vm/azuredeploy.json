@@ -79,7 +79,7 @@
       "metadata": {
         "description": "Static IP Address to allocate VM. Must fall within Subnet range"
       },
-      "defaultValue": "10.0.0.14"
+      "defaultValue": "10.0.0.20"
     },
 	  "VnetName": {
       "type": "string",

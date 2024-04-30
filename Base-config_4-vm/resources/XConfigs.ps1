@@ -90,8 +90,6 @@ If ($env:computername -like "Connector*") {
     Invoke-WebRequest -Uri "https://download.msappproxy.net/Subscription/d3c8b69d-6bf7-42be-a529-3fe9c2e70c90/Connector/DownloadConnectorInstaller" -OutFile "$TmpDirectory\Connector.exe"
     ## Provision shortcuts
     Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "Connector*")) {move-Item $file "C:\Windows\System32\"}
-    Sleep (2)
-    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "Install Private Access*")) {move-Item $file $AllDesktop}
 }
 
 If ($env:computername -like "Client*") {
