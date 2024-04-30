@@ -69,7 +69,7 @@ New-ItemProperty -Path $registryPath -Name $name -Value $value -PropertyType Str
 Start-BitsTransfer -Source "https://github.com/Rainier-MSFT/Entra_ZTNA_Lab/blob/main/Base-config_4-vm/resources/Icons.zip?raw=true" -Destination "$TmpDirectory\Icons.zip"
 Expand-Archive "$TmpDirectory\Icons.zip" -DestinationPath $TmpDirectory -Force
 
-If ($env:computername -like "DC*") {
+If ($env:computername -like "*DC*") {
     # Install AD Certificate Services
     Install-WindowsFeature AD-Certificate,ADCS-Cert-Authority,ADCS-Web-Enrollment -IncludeManagementTools
     Install-AdcsCertificationAuthority -CAType EnterpriseRootCa -CryptoProviderName "RSA#Microsoft Software Key Storage Provider" -KeyLength 2048 -HashAlgorithmName SHA256 -ValidityPeriod Years -ValidityPeriodUnits 3 -DatabaseDirectory "C:\windows\system32\certLog" -LogDirectory "c:\windows\system32\CertLog" -Force
@@ -85,14 +85,14 @@ If ($env:computername -like "DC*") {
     Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "Cert Management.*","AD Users and Computers*","DNS*","Cert Management*")) {move-Item $file $AllDesktop}
 }
 
-If ($env:computername -like "Connector*") {
+If ($env:computername -like "*Connector*") {
     ## Download Entra Private Accesss Connector
     Invoke-WebRequest -Uri "https://download.msappproxy.net/Subscription/d3c8b69d-6bf7-42be-a529-3fe9c2e70c90/Connector/DownloadConnectorInstaller" -OutFile "$TmpDirectory\Connector.exe"
     ## Provision shortcuts
     Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "Connector*")) {move-Item $file "C:\Windows\System32\"}
 }
 
-If ($env:computername -like "Client*") {
+If ($env:computername -like "*Client*") {
     ## Download Entra Private Accesss client
     Invoke-WebRequest -Uri "https://download.msappproxy.net/Subscription/b8795d5c-2a52-4259-9dc9-bff6eb3e15d7/Connector/GlobalSecureAccessClientInstaller" -OutFile "$TmpDirectory\GlobalSecureAccessClient.exe"
     ## Provision shortcuts
