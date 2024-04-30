@@ -20,7 +20,6 @@ These templates are exclusively available thru this repository, but older ones c
 ## Prerequisites
 Before deploying an ARM template, you'll need the following:
 
-+ ~40 mins to deploy the 4 VM enviroment 
 + An Azure subscription and sufficient rights to deploy the given resources and specs for each template
 + Access to the Azure and Entra management portals https://entra.microsoft.com and https://portal.azure.com
 
