@@ -96,7 +96,9 @@ If ($env:computername -like "Client*") {
     ## Download Entra Private Accesss client
     Invoke-WebRequest -Uri "https://download.msappproxy.net/Subscription/b8795d5c-2a52-4259-9dc9-bff6eb3e15d7/Connector/GlobalSecureAccessClientInstaller" -OutFile "$TmpDirectory\GlobalSecureAccessClient.exe"
     ## Provision shortcuts
-    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "Install Global*")) {move-Item $file $AllDesktop}
+    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "certificate*","*.msc","GlobalSecureAccessClient.ico")) {move-Item $file "C:\Windows\System32\"}
+    Sleep (2)
+    Foreach($file in (Get-ChildItem "$TmpDirectory\Icons\*" -Include "Install Global*","Cert Management*")) {move-Item $file $AllDesktop}
 }
 
 ## Execute on APP VM (If called from app template)

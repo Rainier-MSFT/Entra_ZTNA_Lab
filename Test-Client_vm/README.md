@@ -41,6 +41,8 @@ The VM can be deployed through one of two ways:
 + Click the "Deploy to Azure" button to launch the deployment UI in Azure
 + From any computer, execute the powershell "Test-Client_vm.ps1" script located in the 'Resources folder
 
+Be patient and wait for the VM to finalise configs otherwise login will be slow.
+
 ### Pre-requisites
 Prior to deploying the template, have the following ready:
 
