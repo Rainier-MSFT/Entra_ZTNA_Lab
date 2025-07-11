@@ -128,7 +128,7 @@
             "defaultValue": "TLS1_2"
         },
         "supportsHttpsTrafficOnly": {
-            "type": "string",
+            "type": "bool",
             "defaultValue": "True"
         }
     },
