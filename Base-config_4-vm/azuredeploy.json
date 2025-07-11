@@ -5,8 +5,9 @@
         "resourceTags": {
             "type": "object",
             "defaultValue": {
-                "module": "foundation",
-                "team": "security"
+                "module": "Security",
+                "Team": "Security",
+                "Product": "Security"
             },
             "metadata": {
                 "description": "Resource tags to be applied to all resources."
