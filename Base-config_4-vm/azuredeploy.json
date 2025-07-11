@@ -1,645 +1,643 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "resourceTags": {
-         "type": "object",
-         "defaultValue": {
-           "module": "foundation",
-           "team": "security"
-         },
-         "metadata": {
-           "description": "Resource tags to be applied to all resources."
-         }
-       },
-    "configName": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the deployment, for concatenating certain resource names. E.g. BaseConfig-01. Do not use spaces or special characters other than _ or -"
-      },
-      "defaultValue": "BaseConfig-01"
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceTags": {
+            "type": "object",
+            "defaultValue": {
+                "module": "foundation",
+                "team": "security"
+            },
+            "metadata": {
+                "description": "Resource tags to be applied to all resources."
+            }
+        },
+        "configName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the deployment, for concatenating certain resource names. E.g. BaseConfig-01. Do not use spaces or special characters other than _ or -"
+            },
+            "defaultValue": "BaseConfig-01"
+        },
+        "domainName": {
+            "type": "string",
+            "metadata": {
+                "description": "FQDN of the new AD domain"
+            },
+            "defaultValue": "corp.contoso.com"
+        },
+        "serverOS": {
+            "type": "string",
+            "allowedValues": [
+                "2016-Datacenter",
+                "2019-Datacenter",
+                "2022-Datacenter"
+            ],
+            "metadata": {
+                "description": "OS version of application servers in your deployment"
+            },
+            "defaultValue": "2016-Datacenter"
+        },
+        "clientOS": {
+            "type": "string",
+            "allowedValues": [
+                "windows-10",
+                "windows-11"
+            ],
+            "metadata": {
+                "description": "OS version of client for this deployment"
+            },
+            "defaultValue": "windows-10"
+        },
+        "adminUsername": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the local admin account that will be created on the VMs and subsequently used to create a domain admin account"
+            }
+        },
+        "adminPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "The admin account password"
+            }
+        },
+        "vmSize": {
+            "type": "string",
+            "metadata": {
+                "description": "Select a VM size for all VMs in your deployment"
+            },
+            "defaultValue": "Standard_B2s"
+        },
+        "deployClientVm": {
+            "type": "string",
+            "allowedValues": [
+                "No",
+                "Yes"
+            ],
+            "metadata": {
+                "description": "Choose 'Yes' if you want to deploy a client VM and from a custom generalized VHD that you have uploaded to an accessible storage account."
+            },
+            "defaultValue": "No"
+        },
+        "_artifactsLocation": {
+            "type": "string",
+            "metadata": {
+                "description": "Auto-generated container in staging storage account to receive post-build staging folder upload"
+            },
+            "defaultValue": "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_4-vm/"
+        },
+        "_artifactsLocationSasToken": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Auto-generated token to access _artifactsLocation"
+            },
+            "defaultValue": ""
+        },
+        "enableBastion": {
+            "type": "string",
+            "allowedValues": [
+                "No",
+                "Yes"
+            ],
+            "metadata": {
+                "description": "Deploys Azure Bastion for VM management via a jumphost browser based RDP connection instead of exposing RDP directly to the WWW"
+            },
+            "defaultValue": "Yes"
+        },
+        "EnablePublicIP": {
+            "type": "string",
+            "allowedValues": [
+                "Yes",
+                "No"
+            ],
+            "metadata": {
+                "description": "Provisions VMs with a public IP for managing them directly from the Internet. Use when Azure Bastion cannot be used"
+            },
+            "defaultValue": "No"
+        },
+        "dnsLabelPrefix": {
+            "type": "string",
+            "metadata": {
+                "description": "Setting a DNS prefix creates an Azure DNS record for managing VMs directly via a public FQDN. Leave this field blank to create a record that is unique, Azure wide. If specifying this manualy, must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$, and again must be unique, Azure wide."
+            },
+            "defaultValue": ""
+        },
+        "minimumTlsVersion": {
+            "type": "string"
+        }
     },
-    "domainName": {
-      "type": "string",
-      "metadata": {
-        "description": "FQDN of the new AD domain"
-      },
-      "defaultValue": "corp.contoso.com"
+    "variables": {
+        "shortDomainName": "[first(split(parameters('domainName'),'.'))]",
+        "domainUserName": "[concat(variables('shortDomainName'),'\\',parameters('adminUsername'))]",
+        "assetLocation": "[concat(parameters('_artifactsLocation'),'/DSC')]",
+        "templates": "[concat(parameters('_artifactsLocation'),'/nested')]",
+        "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
+        "W10": "W10",
+        "W11": "W11",
+        "clientOS": "[if(equals(parameters('clientOS'), 'windows-10'), variables('W10'), variables('W11'))]",
+        "resID": "[concat(uniqueString(resourceGroup().id))]",
+        "dnsLabelPrefix": "[if(empty(parameters('dnsLabelPrefix')), variables('resID'), parameters('dnsLabelPrefix'))]",
+        "network": {
+            "vnetName": "[concat(parameters('configName'),'-VNET')]",
+            "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', concat(parameters('configName'),'-VNET'), 'subnet-01')]",
+            "vnet": "10.0.0.0/22",
+            "nsgName": "[concat(parameters('configName'),'-NSG')]"
+        },
+        "VMs": {
+            "adVmName": "DC",
+            "adConfigurationFunction": {
+                "CreateADPDC": "CreateADPDC.ps1\\CreateADPDC"
+            },
+            "adNicIP": "10.0.0.10",
+            "adPublicIpName": "[concat(parameters('configName'),'-DC_IP')]",
+            "appVmName": "APP",
+            "appConfigurationFunction": {
+                "AppConfig": "AppConfig.ps1\\AppConfig"
+            },
+            "appNicIP": "10.0.0.11",
+            "appPublicIpName": "[concat(parameters('configName'),'-APP_IP')]",
+            "connectorVmName": "Connector",
+            "connectorNicIP": "10.0.0.12",
+            "connectorPublicIpName": "[concat(parameters('configName'),'-CONNECTOR_IP')]",
+            "cliVmName": "CLIENT",
+            "clientNicIP": "10.0.0.20",
+            "cliPublicIpName": "[concat(parameters('configName'),'-CLI_IP')]"
+        },
+        "adpipObject": {
+            "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').adPublicIpName)]"
+        },
+        "apppipObject": {
+            "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').appPublicIpName)]"
+        },
+        "connectoripObject": {
+            "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').appPublicIpName)]"
+        },
+        "clipipObject": {
+            "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').cliPublicIpName)]"
+        },
+        "SharedVmConfig": {
+            "location": "[resourceGroup().location]",
+            "vmSize": "[parameters('vmSize')]",
+            "serverOS": "[parameters('serverOS')]",
+            "clientOS": "[parameters('clientOS')]",
+            "domainUsername": "[variables('domainUsername')]",
+            "adminUsername": "[parameters('adminUsername')]",
+            "adminPassword": "[parameters('adminPassword')]",
+            "storageAccountNamePrefix": "[variables('storageAccountName')]",
+            "sasToken": "[parameters('_artifactsLocationSasToken')]",
+            "domainName": "[parameters('domainName')]"
+        }
     },
-    "serverOS": {
-      "type": "string",
-      "allowedValues": [
-        "2016-Datacenter", "2019-Datacenter", "2022-Datacenter"
-      ],
-      "metadata": {
-        "description": "OS version of application servers in your deployment"
-      },
-      "defaultValue": "2016-Datacenter"
-    },
-    "clientOS": {
-      "type": "string",
-      "allowedValues": [
-        "windows-10", "windows-11"
-      ],
-      "metadata": {
-        "description": "OS version of client for this deployment"
-      },
-      "defaultValue": "windows-10"
-    },
-    "adminUsername": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of the local admin account that will be created on the VMs and subsequently used to create a domain admin account"
-      }
-    },
-    "adminPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "The admin account password"
-      }
-    },
-    "vmSize": {
-      "type": "string",
-      "metadata": {
-        "description": "Select a VM size for all VMs in your deployment"
-      },
-      "defaultValue": "Standard_B2s"
-    },
-    "deployClientVm": {
-      "type": "string",
-      "allowedValues": [
-        "No", "Yes"
-      ],
-      "metadata": {
-        "description": "Choose 'Yes' if you want to deploy a client VM and from a custom generalized VHD that you have uploaded to an accessible storage account."
-      },
-      "defaultValue": "No"
-    },
-    "_artifactsLocation": {
-      "type": "string",
-      "metadata": {
-        "description": "Auto-generated container in staging storage account to receive post-build staging folder upload"
-      },
-      "defaultValue": "https://raw.githubusercontent.com/Rainier-MSFT/Entra_ZTNA_Lab/main/Base-config_4-vm/"
-    },
-    "_artifactsLocationSasToken": {
-      "type": "securestring",
-      "metadata": {
-        "description": "Auto-generated token to access _artifactsLocation"
-      },
-      "defaultValue": ""
-    },
-    "enableBastion": {
-      "type": "string",
-      "allowedValues": [
-        "No", "Yes"
-      ],
-      "metadata": {
-        "description": "Deploys Azure Bastion for VM management via a jumphost browser based RDP connection instead of exposing RDP directly to the WWW"
-      },
-      "defaultValue": "Yes"
-    },
-    "EnablePublicIP": {
-      "type": "string",
-      "allowedValues": [
-        "Yes", "No"
-      ],
-      "metadata": {
-        "description": "Provisions VMs with a public IP for managing them directly from the Internet. Use when Azure Bastion cannot be used"
-      },
-      "defaultValue": "No"
-    },
-    "dnsLabelPrefix": {
-      "type": "string",
-      "metadata": {
-        "description": "Setting a DNS prefix creates an Azure DNS record for managing VMs directly via a public FQDN. Leave this field blank to create a record that is unique, Azure wide. If specifying this manualy, must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$, and again must be unique, Azure wide."
-      },
-      "defaultValue": ""
+    "resources": [
+        {
+            "apiVersion": "2018-01-01",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[variables('network').nsgName]",
+            "location": "[resourceGroup().location]",
+            "tags": "[parameters('resourceTags')]",
+            "comments": "This network security group enables RDP on port 3389.",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "rdp-rule",
+                        "properties": {
+                            "description": "Allow RDP",
+                            "protocol": "Tcp",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "Internet",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 100,
+                            "direction": "Inbound"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "[variables('network').vnetName]",
+            "type": "Microsoft.Network/virtualNetworks",
+            "dependsOn": [
+                "[concat('Microsoft.Network/networkSecurityGroups/',variables('network').nsgName)]"
+            ],
+            "location": "[resourceGroup().location]",
+            "tags": "[parameters('resourceTags')]",
+            "apiVersion": "2018-01-01",
+            "comments": "This is the virtual network for the deployment.",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[variables('network').vnet]"
+                    ]
+                },
+                "dhcpOptions": {
+                    "dnsServers": "[variables('VMs').adNicIP]"
+                },
+                "subnets": [
+                    {
+                        "name": "subnet-01",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/24",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('network').nsgName)]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[variables('storageAccountName')]",
+            "apiVersion": "2017-06-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "minimumTlsVersion": "[parameters('minimumTlsVersion')]"
+            },
+            "tags": "[parameters('resourceTags')]",
+            "kind": "Storage",
+            "comments": "Storage account for storing diagnostic logs, and the client VHD if required",
+            "sku": {
+                "name": "Standard_LRS"
+            }
+        },
+        {
+            "apiVersion": "2018-04-01",
+            "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[variables('VMs').adPublicIpName]",
+            "location": "[resourceGroup().location]",
+            "tags": "[parameters('resourceTags')]",
+            "comments": "The public IP address for the AD DC VM.",
+            "properties": {
+                "publicIPAllocationMethod": "Static",
+                "dnsSettings": {
+                    "domainNameLabel": "[toLower(concat(variables('dnsLabelPrefix'),'ad'))]"
+                }
+            }
+        },
+        {
+            "apiVersion": "2018-04-01",
+            "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[variables('VMs').appPublicIpName]",
+            "location": "[resourceGroup().location]",
+            "tags": "[parameters('resourceTags')]",
+            "comments": "The public IP address for the app VM.",
+            "properties": {
+                "publicIPAllocationMethod": "Static",
+                "dnsSettings": {
+                    "domainNameLabel": "[toLower(concat(variables('dnsLabelPrefix'),'app'))]"
+                }
+            }
+        },
+        {
+            "apiVersion": "2018-04-01",
+            "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[variables('VMs').appPublicIpName]",
+            "location": "[resourceGroup().location]",
+            "tags": "[parameters('resourceTags')]",
+            "comments": "The public IP address for the connector VM.",
+            "properties": {
+                "publicIPAllocationMethod": "Static",
+                "dnsSettings": {
+                    "domainNameLabel": "[toLower(concat(variables('dnsLabelPrefix'),'connector'))]"
+                }
+            }
+        },
+        {
+            "apiVersion": "2017-06-01",
+            "condition": "[equals(parameters('deployClientVm'),'Yes')]",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[variables('VMs').cliPublicIpName]",
+            "location": "[resourceGroup().location]",
+            "tags": "[parameters('resourceTags')]",
+            "comments": "The public IP address for the client VM.",
+            "properties": {
+                "publicIPAllocationMethod": "Static",
+                "dnsSettings": {
+                    "domainNameLabel": "[toLower(concat(variables('dnsLabelPrefix'),'cli'))]"
+                }
+            }
+        },
+        {
+            "name": "[concat(parameters('configName'),'-DC_NIC')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "location": "[resourceGroup().location]",
+            "tags": "[parameters('resourceTags')]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
+            ],
+            "apiVersion": "2018-01-01",
+            "comments": "The network interface for the AD DC VM.",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[variables('VMs').adNicIP]",
+                            "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('adpipObject'), json('null'))]",
+                            "subnet": {
+                                "id": "[variables('network').subnetRef]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "[concat(parameters('configName'),'-APP_NIC')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "location": "[resourceGroup().location]",
+            "tags": "[parameters('resourceTags')]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
+            ],
+            "apiVersion": "2018-04-01",
+            "comments": "This is the network interface for the app server VM.",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[variables('VMs').appNicIP]",
+                            "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('apppipObject'), json('null'))]",
+                            "subnet": {
+                                "id": "[variables('network').subnetRef]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": [
+                        "[variables('VMs').adNicIP]"
+                    ],
+                    "internalDomainNameSuffix": "[parameters('domainName')]"
+                }
+            }
+        },
+        {
+            "name": "[concat(parameters('configName'),'-CONNECTOR_NIC')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "location": "[resourceGroup().location]",
+            "tags": "[parameters('resourceTags')]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
+            ],
+            "apiVersion": "2018-04-01",
+            "comments": "This is the network interface for the connector server VM.",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[variables('VMs').connectorNicIP]",
+                            "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('connectorpipObject'), json('null'))]",
+                            "subnet": {
+                                "id": "[variables('network').subnetRef]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": [
+                        "[variables('VMs').adNicIP]"
+                    ],
+                    "internalDomainNameSuffix": "[parameters('domainName')]"
+                }
+            }
+        },
+        {
+            "name": "[concat(parameters('configName'),'-CLI_NIC')]",
+            "condition": "[equals(parameters('deployClientVm'),'Yes')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "location": "[resourceGroup().location]",
+            "tags": "[parameters('resourceTags')]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
+            ],
+            "apiVersion": "2018-01-01",
+            "comments": "This is the network interface for the client VM.",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[variables('VMs').clientNicIP]",
+                            "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('clipipObject'), json('null'))]",
+                            "subnet": {
+                                "id": "[variables('network').subnetRef]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": [
+                        "[variables('VMs').adNicIP]"
+                    ],
+                    "internalDomainNameSuffix": "[parameters('domainName')]"
+                }
+            }
+        },
+        {
+            "name": "Bastion",
+            "condition": "[equals(parameters('enableBastion'),'Yes')]",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "comments": "This is the deployment resource for the Bastion",
+            "dependsOn": [
+                "[concat('Microsoft.Resources/deployments/',parameters('configName'),'-DC')]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('templates'),'/bastion.json',parameters('_artifactsLocationSasToken'))]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "configName": {
+                        "value": "[parameters('configName')]"
+                    },
+                    "vnetName": {
+                        "value": "[variables('network').vnetName]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "[concat(parameters('configName'),'-DC')]",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2022-09-01",
+            "comments": "This is the deployment resource for the AD DC VM",
+            "dependsOn": [
+                "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-DC_NIC')]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('templates'),'/addc.json',parameters('_artifactsLocationSasToken'))]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "SharedVmConfig": {
+                        "value": "[variables('SharedVmConfig')]"
+                    },
+                    "vmName": {
+                        "value": "[variables('VMs').adVmName]"
+                    },
+                    "nicName": {
+                        "value": "[concat(parameters('configName'),'-DC_NIC')]"
+                    },
+                    "modulesURL": {
+                        "value": "[variables('assetLocation')]"
+                    },
+                    "configurationFunction": {
+                        "value": "[variables('VMs').adConfigurationFunction]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "[concat(parameters('configName'),'-APPS')]",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2022-09-01",
+            "comments": "This is the deployment resource for the app server VM.",
+            "dependsOn": [
+                "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-APP_NIC')]",
+                "[concat('Microsoft.Resources/deployments/',parameters('configName'),'-DC')]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('templates'),'/app.json',parameters('_artifactsLocationSasToken'))]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "SharedVmConfig": {
+                        "value": "[variables('SharedVmConfig')]"
+                    },
+                    "vmName": {
+                        "value": "[variables('VMs').appVmName]"
+                    },
+                    "nicName": {
+                        "value": "[concat(parameters('configName'),'-APP_NIC')]"
+                    },
+                    "modulesURL": {
+                        "value": "[variables('assetLocation')]"
+                    },
+                    "configurationFunction": {
+                        "value": "[variables('VMs').appConfigurationFunction]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "[concat(parameters('configName'),'-CONNECTOR')]",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2022-09-01",
+            "comments": "This is the deployment resource for the connector VM.",
+            "dependsOn": [
+                "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-CONNECTOR_NIC')]",
+                "[concat('Microsoft.Resources/deployments/',parameters('configName'),'-DC')]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('templates'),'/connector.json',parameters('_artifactsLocationSasToken'))]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "SharedVmConfig": {
+                        "value": "[variables('SharedVmConfig')]"
+                    },
+                    "vmName": {
+                        "value": "[variables('VMs').connectorVmName]"
+                    },
+                    "nicName": {
+                        "value": "[concat(parameters('configName'),'-CONNECTOR_NIC')]"
+                    },
+                    "modulesURL": {
+                        "value": "[variables('assetLocation')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Client",
+            "condition": "[equals(parameters('deployClientVm'),'Yes')]",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2022-09-01",
+            "comments": "This is the deployment resource for the client VM.",
+            "dependsOn": [
+                "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-CLI_NIC')]",
+                "[concat('Microsoft.Resources/deployments/',parameters('configName'),'-DC')]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('templates'),'/client.json',parameters('_artifactsLocationSasToken'))]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "SharedVmConfig": {
+                        "value": "[variables('SharedVmConfig')]"
+                    },
+                    "vmName": {
+                        "value": "[variables('VMs').cliVmName]"
+                    },
+                    "nicName": {
+                        "value": "[concat(parameters('configName'),'-CLI_NIC')]"
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": {
+        "DcPublicIpAddress": {
+            "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
+            "type": "string",
+            "value": "[reference(variables('VMs').adPublicIpName).ipAddress]"
+        },
+        "DcFqdn": {
+            "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
+            "type": "string",
+            "value": "[reference(variables('VMs').adPublicIpName).dnsSettings.fqdn]"
+        },
+        "AppPublicIpAddress": {
+            "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
+            "type": "string",
+            "value": "[reference(variables('VMs').appPublicIpName).ipAddress]"
+        },
+        "AppFqdn": {
+            "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
+            "type": "string",
+            "value": "[reference(variables('VMs').appPublicIpName).dnsSettings.fqdn]"
+        },
+        "ConnectorPublicIpAddress": {
+            "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
+            "type": "string",
+            "value": "[reference(variables('VMs').connectorPublicIpName).ipAddress]"
+        },
+        "ConnectorFqdn": {
+            "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
+            "type": "string",
+            "value": "[reference(variables('VMs').connectorPublicIpName).dnsSettings.fqdn]"
+        },
+        "CliPublicIpAddress": {
+            "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
+            "type": "string",
+            "value": "[reference(variables('VMs').cliPublicIpName).ipAddress]"
+        },
+        "CliFqdn": {
+            "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
+            "type": "string",
+            "value": "[reference(variables('VMs').cliPublicIpName).dnsSettings.fqdn]"
+        }
     }
-  },
-
-  "variables": {
-
-    "shortDomainName": "[first(split(parameters('domainName'),'.'))]",
-    "domainUserName": "[concat(variables('shortDomainName'),'\\',parameters('adminUsername'))]",
-    "assetLocation": "[concat(parameters('_artifactsLocation'),'/DSC')]",
-    "templates": "[concat(parameters('_artifactsLocation'),'/nested')]",
-    "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
-    "W10": "W10",
-    "W11": "W11",
-    "clientOS": "[if(equals(parameters('clientOS'), 'windows-10'), variables('W10'), variables('W11'))]",
-    "resID": "[concat(uniqueString(resourceGroup().id))]",
-    "dnsLabelPrefix": "[if(empty(parameters('dnsLabelPrefix')), variables('resID'), parameters('dnsLabelPrefix'))]",
-
-    "network": {
-      "vnetName": "[concat(parameters('configName'),'-VNET')]",
-      "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', concat(parameters('configName'),'-VNET'), 'subnet-01')]",
-      "vnet": "10.0.0.0/22",
-      "nsgName": "[concat(parameters('configName'),'-NSG')]"
-    },
-
-    "VMs": {
-      "adVmName": "DC",
-      "adConfigurationFunction": {
-        "CreateADPDC": "CreateADPDC.ps1\\CreateADPDC"
-      },
-      "adNicIP": "10.0.0.10",
-      "adPublicIpName": "[concat(parameters('configName'),'-DC_IP')]",
-
-      "appVmName": "APP",
-      "appConfigurationFunction": {
-        "AppConfig": "AppConfig.ps1\\AppConfig"
-      },
-      "appNicIP": "10.0.0.11",
-      "appPublicIpName": "[concat(parameters('configName'),'-APP_IP')]",
-
-      "connectorVmName": "Connector",
-      "connectorNicIP": "10.0.0.12",
-      "connectorPublicIpName": "[concat(parameters('configName'),'-CONNECTOR_IP')]",
-      
-      "cliVmName": "CLIENT",
-      "clientNicIP": "10.0.0.20",
-      "cliPublicIpName": "[concat(parameters('configName'),'-CLI_IP')]"
-    },
-
-    "adpipObject": {
-      "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').adPublicIpName)]"
-      },
-    "apppipObject": {
-      "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').appPublicIpName)]"
-      },
-    "connectoripObject": {
-        "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').appPublicIpName)]"
-        },
-    "clipipObject": {
-      "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VMs').cliPublicIpName)]"
-      },
-
-    "SharedVmConfig": {
-      "location": "[resourceGroup().location]",
-      "vmSize": "[parameters('vmSize')]",
-      "serverOS": "[parameters('serverOS')]",
-      "clientOS": "[parameters('clientOS')]",
-      "domainUsername": "[variables('domainUsername')]",
-      "adminUsername": "[parameters('adminUsername')]",
-      "adminPassword": "[parameters('adminPassword')]",
-      "storageAccountNamePrefix": "[variables('storageAccountName')]",
-      "sasToken": "[parameters('_artifactsLocationSasToken')]",
-      "domainName": "[parameters('domainName')]"
-    }
-  },
-
-  "resources": [
-    {
-      "apiVersion": "2018-01-01",
-      "type": "Microsoft.Network/networkSecurityGroups",
-      "name": "[variables('network').nsgName]",
-      "location": "[resourceGroup().location]",
-      "tags": "[parameters('resourceTags')]",
-      "comments": "This network security group enables RDP on port 3389.",
-      "properties": {
-        "securityRules": [
-          {
-            "name": "rdp-rule",
-            "properties": {
-              "description": "Allow RDP",
-              "protocol": "Tcp",
-              "sourcePortRange": "*",
-              "destinationPortRange": "3389",
-              "sourceAddressPrefix": "Internet",
-              "destinationAddressPrefix": "*",
-              "access": "Allow",
-              "priority": 100,
-              "direction": "Inbound"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "[variables('network').vnetName]",
-      "type": "Microsoft.Network/virtualNetworks",
-      "dependsOn": [
-        "[concat('Microsoft.Network/networkSecurityGroups/',variables('network').nsgName)]"
-      ],
-      "location": "[resourceGroup().location]",
-      "tags": "[parameters('resourceTags')]",
-      "apiVersion": "2018-01-01",
-      "comments": "This is the virtual network for the deployment.",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "[variables('network').vnet]"
-          ]
-        },
-        "dhcpOptions": {
-          "dnsServers": "[variables('VMs').adNicIP]"
-        },
-        "subnets": [
-          {
-            "name": "subnet-01",
-            "properties": {
-              "addressPrefix": "10.0.0.0/24",
-              "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('network').nsgName)]"
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[variables('storageAccountName')]",
-      "apiVersion": "2017-06-01",
-      "location": "[resourceGroup().location]",
-        "properties": {
-            "minimumTlsVersion": "[parameters('minimumTlsVersion')]",
-        },
-      "tags": "[parameters('resourceTags')]",
-      "kind": "Storage",
-      "comments": "Storage account for storing diagnostic logs, and the client VHD if required",
-      "sku": {
-        "name": "Standard_LRS"
-      }
-    },
-    {
-      "apiVersion": "2018-04-01",
-      "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[variables('VMs').adPublicIpName]",
-      "location": "[resourceGroup().location]",
-      "tags": "[parameters('resourceTags')]",
-      "comments": "The public IP address for the AD DC VM.",
-      "properties": {
-        "publicIPAllocationMethod": "Static",
-        "dnsSettings": {
-          "domainNameLabel": "[toLower(concat(variables('dnsLabelPrefix'),'ad'))]"
-        }
-      }
-    },
-    {
-      "apiVersion": "2018-04-01",
-      "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[variables('VMs').appPublicIpName]",
-      "location": "[resourceGroup().location]",
-      "tags": "[parameters('resourceTags')]",
-      "comments": "The public IP address for the app VM.",
-      "properties": {
-        "publicIPAllocationMethod": "Static",
-        "dnsSettings": {
-          "domainNameLabel": "[toLower(concat(variables('dnsLabelPrefix'),'app'))]"
-        }
-      }
-    },
-    {
-      "apiVersion": "2018-04-01",
-      "condition": "[equals(parameters('EnablePublicIP'),'Yes')]",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[variables('VMs').appPublicIpName]",
-      "location": "[resourceGroup().location]",
-      "tags": "[parameters('resourceTags')]",
-      "comments": "The public IP address for the connector VM.",
-      "properties": {
-        "publicIPAllocationMethod": "Static",
-        "dnsSettings": {
-          "domainNameLabel": "[toLower(concat(variables('dnsLabelPrefix'),'connector'))]"
-        }
-      }
-    },
-    {
-      "apiVersion": "2017-06-01",
-      "condition": "[equals(parameters('deployClientVm'),'Yes')]",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[variables('VMs').cliPublicIpName]",
-      "location": "[resourceGroup().location]",
-      "tags": "[parameters('resourceTags')]",
-      "comments": "The public IP address for the client VM.",
-      "properties": {
-        "publicIPAllocationMethod": "Static",
-        "dnsSettings": {
-          "domainNameLabel": "[toLower(concat(variables('dnsLabelPrefix'),'cli'))]"
-        }
-      }
-    },
-    {
-      "name": "[concat(parameters('configName'),'-DC_NIC')]",
-      "type": "Microsoft.Network/networkInterfaces",
-      "location": "[resourceGroup().location]",
-      "tags": "[parameters('resourceTags')]",
-      "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
-      ],
-      "apiVersion": "2018-01-01",
-      "comments": "The network interface for the AD DC VM.",
-      "properties": {
-        "ipConfigurations": [
-          {
-            "name": "ipconfig1",
-            "properties": {
-              "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[variables('VMs').adNicIP]",
-              "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('adpipObject'), json('null'))]",
-              "subnet": {
-                "id": "[variables('network').subnetRef]"
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "[concat(parameters('configName'),'-APP_NIC')]",
-      "type": "Microsoft.Network/networkInterfaces",
-      "location": "[resourceGroup().location]",
-      "tags": "[parameters('resourceTags')]",
-      "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
-      ],
-      "apiVersion": "2018-04-01",
-      "comments": "This is the network interface for the app server VM.",
-      "properties": {
-        "ipConfigurations": [
-          {
-            "name": "ipconfig1",
-            "properties": {
-              "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[variables('VMs').appNicIP]",
-              "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('apppipObject'), json('null'))]",
-              "subnet": {
-                "id": "[variables('network').subnetRef]"
-              }
-            }
-          }
-        ],
-        "dnsSettings": {
-          "dnsServers": [
-            "[variables('VMs').adNicIP]"
-          ],
-          "internalDomainNameSuffix": "[parameters('domainName')]"
-        }
-      }
-    },
-    {
-      "name": "[concat(parameters('configName'),'-CONNECTOR_NIC')]",
-      "type": "Microsoft.Network/networkInterfaces",
-      "location": "[resourceGroup().location]",
-      "tags": "[parameters('resourceTags')]",
-      "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
-      ],
-      "apiVersion": "2018-04-01",
-      "comments": "This is the network interface for the connector server VM.",
-      "properties": {
-        "ipConfigurations": [
-          {
-            "name": "ipconfig1",
-            "properties": {
-              "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[variables('VMs').connectorNicIP]",
-              "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('connectorpipObject'), json('null'))]",
-              "subnet": {
-                "id": "[variables('network').subnetRef]"
-              }
-            }
-          }
-        ],
-        "dnsSettings": {
-          "dnsServers": [
-            "[variables('VMs').adNicIP]"
-          ],
-          "internalDomainNameSuffix": "[parameters('domainName')]"
-        }
-      }
-    },
-    {
-      "name": "[concat(parameters('configName'),'-CLI_NIC')]",
-      "condition": "[equals(parameters('deployClientVm'),'Yes')]",
-      "type": "Microsoft.Network/networkInterfaces",
-      "location": "[resourceGroup().location]",
-      "tags": "[parameters('resourceTags')]",
-      "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
-      ],
-      "apiVersion": "2018-01-01",
-      "comments": "This is the network interface for the client VM.",
-      "properties": {
-        "ipConfigurations": [
-          {
-            "name": "ipconfig1",
-            "properties": {
-              "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[variables('VMs').clientNicIP]",
-              "publicIPAddress": "[if(equals(parameters('EnablePublicIP'), 'Yes'), variables('clipipObject'), json('null'))]",
-              "subnet": {
-                "id": "[variables('network').subnetRef]"
-              }
-            }
-          }
-        ],
-        "dnsSettings": {
-          "dnsServers": [
-            "[variables('VMs').adNicIP]"
-          ],
-          "internalDomainNameSuffix": "[parameters('domainName')]"
-        }
-      }
-    },
-    {
-      "name": "Bastion",
-      "condition": "[equals(parameters('enableBastion'),'Yes')]",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
-      "comments": "This is the deployment resource for the Bastion",
-      "dependsOn": [
-        "[concat('Microsoft.Resources/deployments/',parameters('configName'),'-DC')]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(variables('templates'),'/bastion.json',parameters('_artifactsLocationSasToken'))]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "configName": {
-            "value": "[parameters('configName')]"
-          },
-          "vnetName": {
-            "value": "[variables('network').vnetName]"
-          }
-        }
-      }
-    },
-    {
-      "name": "[concat(parameters('configName'),'-DC')]",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2022-09-01",
-      "comments": "This is the deployment resource for the AD DC VM",
-      "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-DC_NIC')]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(variables('templates'),'/addc.json',parameters('_artifactsLocationSasToken'))]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "SharedVmConfig": { 
-            "value": "[variables('SharedVmConfig')]" 
-          },
-          "vmName": {
-            "value": "[variables('VMs').adVmName]"
-          },
-          "nicName": {
-            "value": "[concat(parameters('configName'),'-DC_NIC')]"
-          },
-          "modulesURL": {
-            "value": "[variables('assetLocation')]"
-          },
-          "configurationFunction": {
-            "value": "[variables('VMs').adConfigurationFunction]"
-          }
-        }
-      }
-    },
-    {
-      "name": "[concat(parameters('configName'),'-APPS')]",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2022-09-01",
-      "comments": "This is the deployment resource for the app server VM.",
-      "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-APP_NIC')]",
-        "[concat('Microsoft.Resources/deployments/',parameters('configName'),'-DC')]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(variables('templates'),'/app.json',parameters('_artifactsLocationSasToken'))]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "SharedVmConfig": { 
-            "value": "[variables('SharedVmConfig')]" 
-          },
-          "vmName": {
-            "value": "[variables('VMs').appVmName]"
-          },
-          "nicName": {
-            "value": "[concat(parameters('configName'),'-APP_NIC')]"
-          },
-          "modulesURL": {
-            "value": "[variables('assetLocation')]"
-          },
-          "configurationFunction": {
-            "value": "[variables('VMs').appConfigurationFunction]"
-          }
-        }
-      }
-    },
-    {
-      "name": "[concat(parameters('configName'),'-CONNECTOR')]",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2022-09-01",
-      "comments": "This is the deployment resource for the connector VM.",
-      "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-CONNECTOR_NIC')]",
-        "[concat('Microsoft.Resources/deployments/',parameters('configName'),'-DC')]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(variables('templates'),'/connector.json',parameters('_artifactsLocationSasToken'))]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "SharedVmConfig": { 
-            "value": "[variables('SharedVmConfig')]" 
-          },
-          "vmName": {
-            "value": "[variables('VMs').connectorVmName]"
-          },
-          "nicName": {
-            "value": "[concat(parameters('configName'),'-CONNECTOR_NIC')]"
-          },
-          "modulesURL": {
-            "value": "[variables('assetLocation')]"
-          }
-        }
-      }
-    },
-    {
-      "name": "Client",
-      "condition": "[equals(parameters('deployClientVm'),'Yes')]",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2022-09-01",
-      "comments": "This is the deployment resource for the client VM.",
-      "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/',parameters('configName'),'-CLI_NIC')]",
-        "[concat('Microsoft.Resources/deployments/',parameters('configName'),'-DC')]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(variables('templates'),'/client.json',parameters('_artifactsLocationSasToken'))]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "SharedVmConfig": { 
-            "value": "[variables('SharedVmConfig')]" 
-          },
-          "vmName": {
-            "value": "[variables('VMs').cliVmName]"
-          },
-          "nicName": {
-            "value": "[concat(parameters('configName'),'-CLI_NIC')]"
-          }
-        }
-      }
-    }
-  ],
-
-  "outputs": {
-    "DcPublicIpAddress": {
-      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
-      "type": "string",
-      "value": "[reference(variables('VMs').adPublicIpName).ipAddress]"
-    },
-    "DcFqdn": {
-      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
-      "type": "string",
-      "value": "[reference(variables('VMs').adPublicIpName).dnsSettings.fqdn]"
-    },
-    "AppPublicIpAddress": {
-      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
-      "type": "string",
-      "value": "[reference(variables('VMs').appPublicIpName).ipAddress]"
-    },
-    "AppFqdn": {
-      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
-      "type": "string",
-      "value": "[reference(variables('VMs').appPublicIpName).dnsSettings.fqdn]"
-    },
-    "ConnectorPublicIpAddress": {
-      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
-      "type": "string",
-      "value": "[reference(variables('VMs').connectorPublicIpName).ipAddress]"
-    },
-    "ConnectorFqdn": {
-      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
-      "type": "string",
-      "value": "[reference(variables('VMs').connectorPublicIpName).dnsSettings.fqdn]"
-    },
-    "CliPublicIpAddress": {
-      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
-      "type": "string",
-      "value": "[reference(variables('VMs').cliPublicIpName).ipAddress]"
-    },
-    "CliFqdn": {
-      "condition": "[equals(parameters('EnablePublicIP'), 'Yes')]",
-      "type": "string",
-      "value": "[reference(variables('VMs').cliPublicIpName).dnsSettings.fqdn]"
-    }
-  }
 }
