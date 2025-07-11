@@ -2,6 +2,16 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "resourceTags": {
+         "type": "object",
+         "defaultValue": {
+           "module": "foundation",
+           "team": "security"
+         },
+         "metadata": {
+           "description": "Resource tags to be applied to all resources."
+         }
+       }
     "configName": {
       "type": "string",
       "metadata": {
