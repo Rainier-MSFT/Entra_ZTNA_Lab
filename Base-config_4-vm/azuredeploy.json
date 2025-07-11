@@ -11,7 +11,7 @@
          "metadata": {
            "description": "Resource tags to be applied to all resources."
          }
-       }
+       },
     "configName": {
       "type": "string",
       "metadata": {
