@@ -253,6 +253,9 @@
       "name": "[variables('storageAccountName')]",
       "apiVersion": "2017-06-01",
       "location": "[resourceGroup().location]",
+        "properties": {
+            "minimumTlsVersion": "[parameters('minimumTlsVersion')]",
+        },
       "tags": "[parameters('resourceTags')]",
       "kind": "Storage",
       "comments": "Storage account for storing diagnostic logs, and the client VHD if required",
