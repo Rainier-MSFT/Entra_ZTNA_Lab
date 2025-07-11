@@ -128,7 +128,7 @@
             "defaultValue": "Tls_1.2"
         },
         "supportsHttpsTrafficOnly": {
-            "type": "string,
+            "type": "string",
             "defaultValue": "true"
         }
     },
