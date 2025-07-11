@@ -125,11 +125,11 @@
         },
         "minimumTlsVersion": {
             "type": "string",
-            "defaultValue": "Tls_1.2"
+            "defaultValue": "TLS1_2"
         },
         "supportsHttpsTrafficOnly": {
             "type": "string",
-            "defaultValue": "true"
+            "defaultValue": "True"
         }
     },
     "variables": {
