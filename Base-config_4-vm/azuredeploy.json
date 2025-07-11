@@ -124,6 +124,9 @@
         },
         "minimumTlsVersion": {
             "type": "string"
+        },
+        "supportsHttpsTrafficOnly": {
+            "type": "string"
         }
     },
     "variables": {
@@ -253,7 +256,8 @@
             "apiVersion": "2017-06-01",
             "location": "[resourceGroup().location]",
             "properties": {
-                "minimumTlsVersion": "[parameters('minimumTlsVersion')]"
+                "minimumTlsVersion": "[parameters('minimumTlsVersion')]",
+                "supportsHttpsTrafficOnly": "[parameters('supportsHttpsTrafficOnly')]"
             },
             "tags": "[parameters('resourceTags')]",
             "kind": "Storage",
