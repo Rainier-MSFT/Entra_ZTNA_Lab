@@ -195,9 +195,7 @@
       "type": "Microsoft.Network/networkSecurityGroups",
       "name": "[variables('network').nsgName]",
       "location": "[resourceGroup().location]",
-      "tags": {
-     "tags": "[parameters('resourceTags')]"
-      },
+      "tags": "[parameters('resourceTags')]",
       "comments": "This network security group enables RDP on port 3389.",
       "properties": {
         "securityRules": [
@@ -225,9 +223,7 @@
         "[concat('Microsoft.Network/networkSecurityGroups/',variables('network').nsgName)]"
       ],
       "location": "[resourceGroup().location]",
-     "tags": {
-     "tags": "[parameters('resourceTags')]"
-      },
+      "tags": "[parameters('resourceTags')]",
       "apiVersion": "2018-01-01",
       "comments": "This is the virtual network for the deployment.",
       "properties": {
@@ -257,9 +253,7 @@
       "name": "[variables('storageAccountName')]",
       "apiVersion": "2017-06-01",
       "location": "[resourceGroup().location]",
-     "tags": {
-     "tags": "[parameters('resourceTags')]"
-      },
+      "tags": "[parameters('resourceTags')]",
       "kind": "Storage",
       "comments": "Storage account for storing diagnostic logs, and the client VHD if required",
       "sku": {
@@ -272,9 +266,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').adPublicIpName]",
       "location": "[resourceGroup().location]",
-      "tags": {
-     "tags": "[parameters('resourceTags')]"
-      },
+      "tags": "[parameters('resourceTags')]",
       "comments": "The public IP address for the AD DC VM.",
       "properties": {
         "publicIPAllocationMethod": "Static",
@@ -289,9 +281,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').appPublicIpName]",
       "location": "[resourceGroup().location]",
-      "tags": {
-      "tags": "[parameters('resourceTags')]"
-       },
+      "tags": "[parameters('resourceTags')]",
       "comments": "The public IP address for the app VM.",
       "properties": {
         "publicIPAllocationMethod": "Static",
@@ -306,9 +296,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').appPublicIpName]",
       "location": "[resourceGroup().location]",
-      "tags": {
-      "tags": "[parameters('resourceTags')]"
-       },
+      "tags": "[parameters('resourceTags')]",
       "comments": "The public IP address for the connector VM.",
       "properties": {
         "publicIPAllocationMethod": "Static",
@@ -323,9 +311,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').cliPublicIpName]",
       "location": "[resourceGroup().location]",
-      "tags": {
-      "tags": "[parameters('resourceTags')]"
-       },
+      "tags": "[parameters('resourceTags')]",
       "comments": "The public IP address for the client VM.",
       "properties": {
         "publicIPAllocationMethod": "Static",
@@ -338,9 +324,7 @@
       "name": "[concat(parameters('configName'),'-DC_NIC')]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[resourceGroup().location]",
-      "tags": {
-      "tags": "[parameters('resourceTags')]"
-       },
+      "tags": "[parameters('resourceTags')]",
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
       ],
@@ -366,9 +350,7 @@
       "name": "[concat(parameters('configName'),'-APP_NIC')]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[resourceGroup().location]",
-      "tags": {
-      "tags": "[parameters('resourceTags')]"
-       },
+      "tags": "[parameters('resourceTags')]",
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
       ],
@@ -400,9 +382,7 @@
       "name": "[concat(parameters('configName'),'-CONNECTOR_NIC')]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[resourceGroup().location]",
-      "tags": {
-      "tags": "[parameters('resourceTags')]"
-       },
+      "tags": "[parameters('resourceTags')]",
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
       ],
@@ -435,9 +415,7 @@
       "condition": "[equals(parameters('deployClientVm'),'Yes')]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[resourceGroup().location]",
-      "tags": {
-      "tags": "[parameters('resourceTags')]"
-       },
+      "tags": "[parameters('resourceTags')]",
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworks/',parameters('configName'),'-vnet')]"
       ],
